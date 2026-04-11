@@ -1,0 +1,1246 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.env.example
+.gitignore
+context.md
+index.html
+metadata.json
+package.json
+README.md
+src/App.tsx
+src/components/CategoryCard.tsx
+src/components/CourseCard.tsx
+src/components/Navbar.tsx
+src/constants.ts
+src/index.css
+src/main.tsx
+src/pages/CategoriesPage.tsx
+src/pages/CategoryDetailPage.tsx
+src/pages/HomePage.tsx
+src/pages/Questionaire.tsx
+src/types.ts
+TODO.md
+tsconfig.json
+vite.config.ts
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="context.md">
+# Project Context: EduFinder (Full Specification)
+
+## 1. Project Overview
+[cite_start]**EduFinder** is a web-based platform designed to centralize and personalize the discovery of free online courses[cite: 2, 30]. [cite_start]It targets high school and early college learners, helping them navigate information overload by providing structured learning paths[cite: 39, 52].
+
+## 2. Core Features
+* [cite_start]**Questionnaire-Based Recommendations:** A user-friendly questionnaire to identify interests, skill levels, and goals[cite: 55, 98].
+* [cite_start]**Searchable Catalog:** A filtered course library aggregating data from Coursera, edX, Udemy, and Khan Academy[cite: 46, 53].
+* [cite_start]**External Redirection:** Users are redirected to original providers for enrollment; no internal hosting[cite: 47, 57].
+* [cite_start]**User Management:** Profiles to save preferred courses and manage learning preferences[cite: 48, 102].
+
+## 3. Technical Stack (The "Source of Truth")
+* [cite_start]**Frontend:** ReactJS with Tailwind CSS for responsive design[cite: 69, 79, 80].
+* [cite_start]**State Management:** Redux Toolkit[cite: 70].
+* [cite_start]**Backend:** Node.js and ExpressJS handling API requests and recommendation logic[cite: 71, 82].
+* [cite_start]**Database:** MongoDB for storing user metadata, preferences, and course interaction history[cite: 72, 83].
+* [cite_start]**Authentication:** Firebase Authentication[cite: 74, 94].
+* [cite_start]**Deployment:** Netlify (Frontend) and Render (Backend)[cite: 76, 94].
+
+## 4. System Logic & Architecture
+* [cite_start]**Recommendation Engine:** * *Current Phase:* Rule-based filtering (Topic + Level + Goal) using structured JSON[cite: 92].
+    * [cite_start]*Future Phase:* Python Flask microservice or ML-based scoring for higher accuracy[cite: 92, 107].
+* [cite_start]**Data Integration:** Consumes external APIs (Coursera, edX, etc.) to keep course metadata updated[cite: 85, 86, 87, 88, 89].
+
+## 5. Development Constraints (MVP)
+* [cite_start]**No Internal Content:** Strictly a discovery and redirection engine[cite: 57].
+* [cite_start]**Free-Only:** The platform exclusively focuses on free resources and courses offering free certificates[cite: 49, 52, 57].
+* [cite_start]**Focus Areas:** High school and early college educational content[cite: 52].
+
+## 6. Implementation Roadmap
+1.  [cite_start]**Requirement Analysis:** Define functional specs (Done)[cite: 66].
+2.  [cite_start]**UI/UX Design:** Mockups in Figma (In Progress)[cite: 66, 68].
+3.  [cite_start]**Frontend Development:** React components and Tailwind styling[cite: 66].
+4.  [cite_start]**Backend & API Integration:** Node.js/Express setup and MongoDB connection[cite: 66].
+</file>
+
+<file path="src/components/CategoryCard.tsx">
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Category } from '../types';
+
+const CategoryCard = ({ category }: { category: Category }) => {
+  const Icon = category.icon;
+  return (
+    <Link to={`/category/${category.id}`}>
+      <motion.div
+        whileHover={{ scale: 1.05, backgroundColor: 'var(--color-surface-bright)' }}
+        className="bg-surface-container-highest p-8 rounded-2xl ghost-border cursor-pointer text-center group transition-colors h-full"
+      >
+        <div className="w-12 h-12 bg-primary-container/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+          <Icon className="w-6 h-6 text-primary" />
+        </div>
+        <span className="font-medium text-on-surface block mb-2">{category.name}</span>
+        <p className="text-xs text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity line-clamp-2">
+          {category.description}
+        </p>
+      </motion.div>
+    </Link>
+  );
+};
+
+export default CategoryCard;
+</file>
+
+<file path="src/components/CourseCard.tsx">
+import { motion } from 'framer-motion';
+import { Clock } from 'lucide-react';
+import { Course } from '../types';
+
+const CourseCard = ({ course }: { course: Course }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -8 }}
+      className="bg-surface-container-highest rounded-2xl overflow-hidden ghost-border group transition-all duration-300 editorial-shadow"
+    >
+      <div className="aspect-video relative overflow-hidden">
+        <img
+          src={course.image}
+          alt={course.title}
+          referrerPolicy="no-referrer"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div className="absolute top-4 left-4">
+          <span className="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[0.6875rem] uppercase tracking-wider font-bold">
+            {course.level}
+          </span>
+        </div>
+      </div>
+
+      <div className="p-6">
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-[0.6875rem] uppercase tracking-[0.05em] text-primary font-bold">
+            {course.provider}
+          </span>
+          <div className="flex items-center gap-1.5 text-on-surface-variant">
+            <Clock className="w-3.5 h-3.5" />
+            <span className="text-[0.6875rem]">{course.duration}</span>
+          </div>
+        </div>
+
+        <h3 className="text-xl font-bold mb-3 leading-tight text-on-surface group-hover:text-primary transition-colors">
+          {course.title}
+        </h3>
+        <p className="text-sm text-on-surface-variant mb-6 line-clamp-2 leading-relaxed">
+          {course.description}
+        </p>
+
+        <a
+          href={course.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full py-3 rounded-xl bg-surface-container-high border border-outline/20 text-primary font-bold hover:bg-primary hover:text-on-primary transition-all duration-200 block text-center"
+        >
+          View Course
+        </a>
+      </div>
+    </motion.div>
+  );
+};
+
+export default CourseCard;
+</file>
+
+<file path="src/components/Navbar.tsx">
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <header
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'glass-nav py-3 shadow-lg' : 'bg-transparent py-5'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-8 flex items-center justify-between">
+        <Link to="/" className="text-2xl font-bold tracking-tighter text-on-surface">
+          EduFinder
+        </Link>
+
+        <nav className="hidden md:flex items-center gap-10">
+          <Link to="/" className={`font-medium relative group ${location.pathname === '/' ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}>
+            Explore
+            {location.pathname === '/' && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full" />}
+          </Link>
+          <Link to="/categories" className={`font-medium relative group ${location.pathname === '/categories' ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}>
+            Categories
+            {location.pathname === '/categories' && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full" />}
+          </Link>
+          <Link to="/questionnaire" className={`font-medium relative group ${location.pathname === '/questionnaire' ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}>
+            Questionnaire
+            {location.pathname === '/questionnaire' && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full" />}
+          </Link>
+          <a href="#" className="text-on-surface-variant hover:text-on-surface transition-colors font-medium">
+            My Learning
+          </a>
+        </nav>
+
+        <div className="flex items-center gap-4">
+          <button className="px-6 py-2.5 rounded-xl primary-gradient text-on-primary font-bold active:scale-95 transition-all duration-200 editorial-shadow">
+            Sign In
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;
+</file>
+
+<file path="src/constants.ts">
+import { Terminal, Briefcase, FlaskConical, Palette, Languages, Theater, Megaphone, Heart, User, Calculator, Music, Camera } from 'lucide-react';
+import { Category, Course } from './types';
+
+export const CATEGORIES: Category[] = [
+  { id: 'tech', name: 'Tech', icon: Terminal, description: 'Coding, AI, Cybersecurity, and Cloud Computing.' },
+  { id: 'business', name: 'Business', icon: Briefcase, description: 'Entrepreneurship, Finance, and Management.' },
+  { id: 'science', name: 'Science', icon: FlaskConical, description: 'Physics, Biology, Chemistry, and Astronomy.' },
+  { id: 'design', name: 'Design', icon: Palette, description: 'UI/UX, Graphic Design, and Motion Graphics.' },
+  { id: 'languages', name: 'Languages', icon: Languages, description: 'Spanish, French, Mandarin, and more.' },
+  { id: 'arts', name: 'Arts', icon: Theater, description: 'History, Literature, and Philosophy.' },
+  { id: 'marketing', name: 'Marketing', icon: Megaphone, description: 'Digital Marketing, SEO, and Brand Strategy.' },
+  { id: 'health', name: 'Health', icon: Heart, description: 'Nutrition, Fitness, and Mental Wellness.' },
+  { id: 'personal-dev', name: 'Personal Dev', icon: User, description: 'Productivity, Leadership, and Soft Skills.' },
+  { id: 'math', name: 'Math', icon: Calculator, description: 'Calculus, Statistics, and Discrete Math.' },
+  { id: 'music', name: 'Music', icon: Music, description: 'Theory, Production, and Instrument Mastery.' },
+  { id: 'photography', name: 'Photography', icon: Camera, description: 'Composition, Lighting, and Post-Processing.' },
+];
+
+export const POPULAR_COURSES: Course[] = [
+  {
+    id: '1',
+    title: 'Neural Networks 101',
+    provider: 'Coursera',
+    duration: '24h total',
+    level: 'Intermediate',
+    description: 'Master the fundamentals of deep learning and backpropagation from industry experts.',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800',
+    categoryId: 'tech',
+    url: 'https://www.coursera.org/learn/neural-networks-deep-learning',
+  },
+  {
+    id: '2',
+    title: 'UX Design Principles',
+    provider: 'edX',
+    duration: '12h total',
+    level: 'Beginner',
+    description: 'Learn how to create user-centric experiences through research and rapid prototyping.',
+    image: 'https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&q=80&w=800',
+    categoryId: 'design',
+    url: 'https://www.edx.org/learn/user-experience-design',
+  },
+  {
+    id: '3',
+    title: 'Microeconomics Masterclass',
+    provider: 'Khan Academy',
+    duration: '40h total',
+    level: 'Advanced',
+    description: 'A deep dive into supply, demand, and market equilibrium for serious students.',
+    image: 'https://images.unsplash.com/photo-1611974717537-484418a4122a?auto=format&fit=crop&q=80&w=800',
+    categoryId: 'business',
+    url: 'https://www.khanacademy.org/economics-finance-domain/microeconomics',
+  },
+  {
+    id: '4',
+    title: 'Creative Writing 101',
+    provider: 'FutureLearn',
+    duration: '8h total',
+    level: 'Beginner',
+    description: 'Unlock your storytelling potential through guided exercises and peer feedback.',
+    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=800',
+    categoryId: 'arts',
+    url: 'https://www.futurelearn.com/courses/creative-writing',
+  },
+  {
+    id: '5',
+    title: 'Python for Data Science',
+    provider: 'Coursera',
+    duration: '30h total',
+    level: 'Beginner',
+    description: 'Start your journey into data analysis with Python, NumPy, and Pandas.',
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=800',
+    categoryId: 'tech',
+    url: 'https://www.coursera.org/learn/python-for-applied-data-science',
+  },
+  {
+    id: '6',
+    title: 'Digital Marketing Strategy',
+    provider: 'Google',
+    duration: '15h total',
+    level: 'Beginner',
+    description: 'Learn the core pillars of digital marketing: SEO, SEM, and Social Media.',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
+    categoryId: 'marketing',
+    url: 'https://grow.google/certificates/digital-marketing-ecommerce/',
+  },
+  {
+    id: '7',
+    title: 'Introduction to Astronomy',
+    provider: 'edX',
+    duration: '20h total',
+    level: 'Beginner',
+    description: 'Explore the wonders of the universe, from planets to distant galaxies.',
+    image: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=800',
+    categoryId: 'science',
+    url: 'https://www.edx.org/learn/astronomy',
+  },
+  {
+    id: '8',
+    title: 'Financial Markets',
+    provider: 'Yale University',
+    duration: '35h total',
+    level: 'Intermediate',
+    description: 'An overview of the ideas, methods, and institutions that permit human society to manage risks.',
+    image: 'https://images.unsplash.com/photo-1611974717537-484418a4122a?auto=format&fit=crop&q=80&w=800',
+    categoryId: 'business',
+    url: 'https://www.coursera.org/learn/financial-markets-global',
+  },
+  {
+    id: '9',
+    title: 'Cloud Computing Fundamentals',
+    provider: 'AWS',
+    duration: '10h total',
+    level: 'Beginner',
+    description: 'Learn the basics of cloud computing, storage, and networking on AWS.',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800',
+    categoryId: 'tech',
+    url: 'https://aws.amazon.com/training/digital/cloud-practitioner-essentials/',
+  },
+  {
+    id: '10',
+    title: 'Cybersecurity for Everyone',
+    provider: 'IBM',
+    duration: '18h total',
+    level: 'Beginner',
+    description: 'Protect yourself and your organization from cyber threats with this comprehensive guide.',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800',
+    categoryId: 'tech',
+    url: 'https://www.coursera.org/specializations/cybersecurity',
+  },
+  {
+    id:'11',
+    title: 'Computer architecture',
+    provider: 'IBM',
+    duration: '20h total',
+    level: 'Beginner',
+    description: 'indepth understanding of computer systems',
+    image: 'https://images.unsplash.com/photo-1760539165425-f76a6da1e50e?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    categoryId: 'tech',
+    url: ''
+
+  }
+];
+</file>
+
+<file path="src/pages/CategoriesPage.tsx">
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ArrowLeft } from 'lucide-react';
+import { CATEGORIES } from '../constants';
+import CategoryCard from '../components/CategoryCard';
+
+const CategoriesPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="pt-48 pb-32 px-8 max-w-7xl mx-auto"
+    >
+      <div className="mb-16">
+        <Link to="/" className="text-primary hover:underline flex items-center gap-2 mb-6 font-semibold">
+          <ArrowLeft className="w-5 h-5" />
+          Back to Home
+        </Link>
+        <h1 className="text-6xl font-bold tracking-tight mb-4">All Categories</h1>
+        <p className="text-xl text-on-surface-variant max-w-2xl">
+          Explore our complete catalog of free educational resources across every major discipline.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {CATEGORIES.map((cat) => (
+          <CategoryCard key={cat.id} category={cat} />
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
+export default CategoriesPage;
+</file>
+
+<file path="src/pages/CategoryDetailPage.tsx">
+import { useEffect, useMemo } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ArrowLeft, Sparkles } from 'lucide-react';
+import { CATEGORIES, POPULAR_COURSES } from '../constants';
+import CategoryCard from '../components/CategoryCard';
+import CourseCard from '../components/CourseCard';
+
+const CategoryDetailPage = () => {
+  const { id } = useParams<{ id: string }>();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
+  const category = useMemo(() => CATEGORIES.find(c => c.id === id), [id]);
+  const courses = useMemo(() => POPULAR_COURSES.filter(c => c.categoryId === id), [id]);
+
+  if (!category) {
+    return (
+      <div className="pt-48 pb-32 px-8 text-center">
+        <h1 className="text-4xl font-bold mb-4">Category not found</h1>
+        <Link to="/categories" className="text-primary hover:underline">View all categories</Link>
+      </div>
+    );
+  }
+
+  const Icon = category.icon;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="pt-48 pb-32 px-8 max-w-7xl mx-auto"
+    >
+      <div className="mb-16">
+        <Link to="/categories" className="text-primary hover:underline flex items-center gap-2 mb-6 font-semibold">
+          <ArrowLeft className="w-5 h-5" />
+          All Categories
+        </Link>
+        <div className="flex items-center gap-6 mb-6">
+          <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center shrink-0">
+            <Icon className="w-8 h-8 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-6xl font-bold tracking-tight mb-2">{category.name}</h1>
+            <p className="text-xl text-on-surface-variant max-w-2xl">
+              {category.description}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {courses.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {courses.map((course) => (
+            <CourseCard key={course.id} course={course} />
+          ))}
+        </div>
+      ) : (
+        <div className="bg-surface-container-high rounded-3xl p-20 text-center border border-outline/10">
+          <Sparkles className="w-12 h-12 text-primary/40 mx-auto mb-6" />
+          <h3 className="text-2xl font-bold mb-2">More courses coming soon</h3>
+          <p className="text-on-surface-variant mb-8">We're currently indexing the best free {category.name} courses for you.</p>
+          <Link to="/categories" className="px-8 py-3 rounded-xl primary-gradient text-on-primary font-bold inline-block">
+            Explore Other Categories
+          </Link>
+        </div>
+      )}
+    </motion.div>
+  );
+};
+
+export default CategoryDetailPage;
+</file>
+
+<file path="src/pages/HomePage.tsx">
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Search, ShieldCheck, Layout, ChevronRight } from 'lucide-react';
+import { CATEGORIES, POPULAR_COURSES } from '../constants';
+import CategoryCard from '../components/CategoryCard';
+import CourseCard from '../components/CourseCard';
+
+const HomePage = () => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      {/* Hero Section */}
+      <section className="pt-48 pb-32 px-8 max-w-7xl mx-auto text-center">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="text-5xl md:text-8xl font-bold tracking-tight mb-8 max-w-5xl mx-auto leading-[0.95]"
+        >
+          Find the Best Free Courses, Fast
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-lg md:text-2xl text-on-surface-variant max-w-2xl mx-auto mb-12 leading-relaxed"
+        >
+          Discover thousands of free courses from Coursera, edX, Khan Academy, and FutureLearn in one place.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-16 text-left"
+        >
+          <div className="flex gap-4 items-start">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <Search className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h4 className="font-bold text-on-surface text-sm mb-1 uppercase tracking-wider">Aggregated Search</h4>
+              <p className="text-on-surface-variant text-sm leading-relaxed">One query searches all major platforms simultaneously, saving you hours of manual browsing.</p>
+            </div>
+          </div>
+          <div className="flex gap-4 items-start">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <ShieldCheck className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h4 className="font-bold text-on-surface text-sm mb-1 uppercase tracking-wider">Verified Free</h4>
+              <p className="text-on-surface-variant text-sm leading-relaxed">We filter out hidden costs and "audit-only" traps to ensure you only see truly free learning content.</p>
+            </div>
+          </div>
+          <div className="flex gap-4 items-start">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <Layout className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h4 className="font-bold text-on-surface text-sm mb-1 uppercase tracking-wider">Curated Paths</h4>
+              <p className="text-on-surface-variant text-sm leading-relaxed">Expert-picked course sequences designed to take you from zero to job-ready in high-demand fields.</p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3 }}
+          className="max-w-3xl mx-auto relative group"
+        >
+          <div className="flex items-center bg-surface-container-highest rounded-2xl p-2 ghost-border group-focus-within:ring-2 group-focus-within:ring-primary/30 transition-all duration-300 editorial-shadow">
+            <Search className="ml-4 w-6 h-6 text-on-surface-variant" />
+            <input
+              type="text"
+              placeholder="What do you want to learn today?"
+              className="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-on-surface-variant/40 py-5 px-4 text-xl"
+            />
+            <button className="hidden md:block px-10 py-4 rounded-xl primary-gradient text-on-primary font-bold active:scale-95 transition-all duration-200 whitespace-nowrap mr-1">
+              Find Courses
+            </button>
+          </div>
+          <button className="md:hidden w-full mt-4 px-8 py-5 rounded-xl primary-gradient text-on-primary font-bold active:scale-95 transition-all duration-200">
+            Find Courses
+          </button>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.4 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="mt-24 flex flex-wrap justify-center gap-x-16 gap-y-8 grayscale"
+        >
+          <span className="font-bold text-2xl tracking-tighter">Coursera</span>
+          <span className="font-bold text-2xl tracking-tighter">edX</span>
+          <span className="font-bold text-2xl tracking-tighter">Khan Academy</span>
+          <span className="font-bold text-2xl tracking-tighter">FutureLearn</span>
+        </motion.div>
+      </section>
+
+      {/* Categories Section */}
+      <section className="bg-surface-container-low py-32">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="flex items-end justify-between mb-16">
+            <div>
+              <span className="text-[0.75rem] uppercase tracking-[0.1em] text-primary font-bold mb-3 block">
+                Curated Pathways
+              </span>
+              <h2 className="text-4xl font-bold tracking-tight">Explore by Category</h2>
+            </div>
+            <Link to="/categories" className="text-primary hover:underline flex items-center gap-2 group font-semibold">
+              See all categories
+              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {CATEGORIES.slice(0, 6).map((cat) => (
+              <CategoryCard key={cat.id} category={cat} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Popular Courses Section */}
+      <section className="py-32 max-w-7xl mx-auto px-8">
+        <div className="mb-16">
+          <span className="text-[0.75rem] uppercase tracking-[0.1em] text-primary font-bold mb-3 block">
+            Most Popular
+          </span>
+          <h2 className="text-5xl font-bold tracking-tight">Popular Free Courses</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {POPULAR_COURSES.slice(0, 4).map((course) => (
+            <CourseCard key={course.id} course={course} />
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="max-w-7xl mx-auto px-8 pb-32">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="bg-surface-container-high rounded-[3rem] p-12 md:p-24 relative overflow-hidden border border-outline-variant/10 text-center"
+        >
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-tertiary/10 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
+
+          <div className="relative z-10">
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tight">
+              Start your learning journey for $0
+            </h2>
+            <p className="text-on-surface-variant text-xl mb-16 max-w-2xl mx-auto leading-relaxed">
+              Join millions of learners indexing the world's knowledge. No credit card required, ever.
+            </p>
+            <div className="flex flex-col md:flex-row gap-6 justify-center">
+              <button className="px-12 py-5 rounded-2xl primary-gradient text-on-primary font-bold text-lg active:scale-95 transition-all editorial-shadow">
+                Create Free Account
+              </button>
+              <Link to="/categories" className="px-12 py-5 rounded-2xl bg-surface-container-highest border border-outline/20 text-on-surface font-bold text-lg hover:bg-surface-bright transition-all inline-flex items-center justify-center">
+                Browse All Categories
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+    </motion.div>
+  );
+};
+
+export default HomePage;
+</file>
+
+<file path="src/pages/Questionaire.tsx">
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+interface SurveyAnswers {
+  category: string;
+  skillLevel: 'Beginner' | 'Intermediate' | 'Advanced' | '';
+  reason: 'Employment' | 'Supplement' | 'General' | '';
+  weeklyHours: number;
+  goal: string;
+  experience: 'None' | 'Minor' | 'Familiar' | 'Expert' | '';
+}
+
+const STORAGE_KEY = 'edufinder_questionnaire';
+
+const defaultAnswers: SurveyAnswers = {
+  category: '',
+  skillLevel: '',
+  reason: '',
+  weeklyHours: 5,
+  goal: '',
+  experience: '',
+};
+
+const QuestionnairePage = () => {
+  const [answers, setAnswers] = useState<SurveyAnswers>(defaultAnswers);
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      try {
+        setAnswers(JSON.parse(raw));
+      } catch {
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    }
+  }, []);
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
+    setSaved(true);
+  };
+
+  const reset = () => {
+    setAnswers(defaultAnswers);
+    localStorage.removeItem(STORAGE_KEY);
+    setSaved(false);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+      className="pt-48 pb-32 px-8 max-w-4xl mx-auto"
+    >
+      <div className="mb-12">
+        <Link to="/" className="text-primary hover:underline flex items-center gap-2 font-semibold">
+          ← Back to Home
+        </Link>
+        <h1 className="text-5xl md:text-6xl font-bold tracking-tight mt-6 mb-2">Learning Questionnaire</h1>
+        <p className="text-on-surface-variant text-lg max-w-2xl">
+          Answer a few quick questions and we’ll personalize your course recommendations right away.
+        </p>
+      </div>
+
+      <form onSubmit={onSubmit} className="bg-surface-container-high rounded-3xl p-8 shadow-md border border-outline-variant/20 space-y-6">
+        <div>
+          <label className="block text-sm font-bold mb-2" htmlFor="category">Top area of interest</label>
+          <select
+            id="category"
+            value={answers.category}
+            onChange={(e) => setAnswers((prev) => ({ ...prev, category: e.target.value }))}
+            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface"
+            required
+          >
+            <option value="">Select a category</option>
+            <option value="tech">Tech</option>
+            <option value="business">Business</option>
+            <option value="science">Science</option>
+            <option value="design">Design</option>
+            <option value="languages">Languages</option>
+            <option value="marketing">Marketing</option>
+            <option value="health">Health</option>
+            <option value="math">Math</option>
+            <option value="arts">Arts</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-bold mb-2" htmlFor="skillLevel">Current skill level</label>
+          <select
+            id="skillLevel"
+            value={answers.skillLevel}
+            onChange={(e) => setAnswers((prev) => ({ ...prev, skillLevel: e.target.value as SurveyAnswers['skillLevel'] }))}
+            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface"
+            required
+          >
+            <option value="">Select level</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-bold mb-2" htmlFor="weeklyHours">Hours per week</label>
+          <input
+            id="weeklyHours"
+            type="number"
+            value={answers.weeklyHours}
+            onChange={(e) => setAnswers((prev) => ({ ...prev, weeklyHours: Number(e.target.value) }))}
+            min={1}
+            max={40}
+            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface"
+            required
+          />
+        </div>
+          <div>
+          <label className="block text-sm font-bold mb-2" htmlFor="reason">Reason for learning</label>
+          <select
+            id="reason"
+            value={answers.reason}
+            onChange={(e) => setAnswers((prev) => ({ ...prev, reason: e.target.value as SurveyAnswers['reason'] }))}
+            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface"
+            required
+          >
+            <option value="">Select reason</option>
+            <option value="Employment">Employment</option>
+            <option value="Supplement">Supplement another course</option>
+            <option value="General">General interest</option>
+          </select>
+        </div>
+         
+         <div>
+          <label className="block text-sm font-bold mb-2" htmlFor="experience">Experience level</label>
+          <select
+            id="experience"
+            value={answers.experience}
+            onChange={(e) => setAnswers((prev) => ({ ...prev, experience: e.target.value as SurveyAnswers['experience'] }))}
+            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface"
+            required
+          >
+            <option value="">Select experience</option>
+            <option value="None">None</option>
+            <option value="Minor">Minor</option>
+            <option value="Familiar">Familiar</option>
+            <option value="Expert">Expert</option>
+          </select>
+        </div>
+
+
+
+ 
+
+        <div>
+          <label className="block text-sm font-bold mb-2" htmlFor="goal">Learning goal</label>
+          <textarea
+            id="goal"
+            value={answers.goal}
+            onChange={(e) => setAnswers((prev) => ({ ...prev, goal: e.target.value }))}
+            rows={4}
+            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface"
+            placeholder="e.g. build a portfolio project, land a job, improve data analytics"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col md:flex-row gap-3">
+          <button type="submit" className="px-6 py-3 rounded-xl primary-gradient text-on-primary font-bold transition-all hover:opacity-95">
+            Save Answers
+          </button>
+          <button type="button" onClick={reset} className="px-6 py-3 rounded-xl bg-surface-container-high border border-outline/20 text-on-surface font-medium hover:bg-surface-bright">
+            Reset
+          </button>
+        </div>
+
+        {saved && (
+          <p className="text-sm text-primary font-medium">Saved! Your preferences are now stored and ready for recommendations.</p>
+        )}
+      </form>
+      
+
+    </motion.div>
+  );
+};
+
+export default QuestionnairePage;
+</file>
+
+<file path="src/types.ts">
+export interface Course {
+  id: string;
+  title: string;
+  provider: string;
+  duration: string;
+  level: 'Beginner' | 'Intermediate' | 'Advanced';
+  description: string;
+  image: string;
+  categoryId: string;
+  url: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  icon: React.ElementType;
+  description: string;
+}
+</file>
+
+<file path=".env.example">
+# GEMINI_API_KEY: Required for Gemini AI API calls.
+# AI Studio automatically injects this at runtime from user secrets.
+# Users configure this via the Secrets panel in the AI Studio UI.
+GEMINI_API_KEY="MY_GEMINI_API_KEY"
+
+# APP_URL: The URL where this applet is hosted.
+# AI Studio automatically injects this at runtime with the Cloud Run service URL.
+# Used for self-referential links, OAuth callbacks, and API endpoints.
+APP_URL="MY_APP_URL"
+</file>
+
+<file path=".gitignore">
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+</file>
+
+<file path="index.html">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+</file>
+
+<file path="metadata.json">
+{
+  "name": "EduFinder",
+  "description": "Discover thousands of free courses from Coursera, edX, Khan Academy, and FutureLearn in one place.",
+  "requestFramePermissions": []
+}
+</file>
+
+<file path="package.json">
+{
+  "name": "react-example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "clean": "rm -rf dist",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^1.29.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.13.2",
+    "vite": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.2.14",
+    "autoprefixer": "^10.4.21",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}
+</file>
+
+<file path="README.md">
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
+
+# Run and deploy your AI Studio app
+
+This contains everything you need to run your app locally.
+
+View your app in AI Studio: https://ai.studio/apps/4f02ea99-4a29-4d73-93e0-7f430a354365
+
+## Run Locally
+
+**Prerequisites:**  Node.js
+
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
+</file>
+
+<file path="src/App.tsx">
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { Globe, Share2 } from 'lucide-react';
+import Navbar from './components/Navbar';
+import HomePage from './pages/HomePage';
+import CategoriesPage from './pages/CategoriesPage';
+import CategoryDetailPage from './pages/CategoryDetailPage';
+import QuestionnairePage from './pages/Questionaire';
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen">
+        <Navbar />
+
+        <main>
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/categories" element={<CategoriesPage />} />
+              <Route path="/category/:id" element={<CategoryDetailPage />} />
+              <Route path="/questionnaire" element={<QuestionnairePage />} />
+            </Routes>
+          </AnimatePresence>
+        </main>
+
+        {/* Footer */}
+        <footer className="bg-surface-container-low border-t border-outline-variant/10 py-20 px-8">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+            <div className="text-center md:text-left">
+              <Link to="/" className="text-xl font-bold text-on-surface mb-3 tracking-tighter block">EduFinder</Link>
+              <p className="text-on-surface-variant/50 text-[0.75rem] uppercase tracking-[0.1em] font-medium">
+                © 2026 EduFinder • Built with Passion
+              </p>
+            </div>
+
+            <div className="flex gap-16 font-medium text-[0.75rem] uppercase tracking-[0.15em]">
+              <a href="#" className="text-on-surface-variant/60 hover:text-on-surface transition-colors">About</a>
+              <Link to="/categories" className="text-on-surface-variant/60 hover:text-on-surface transition-colors">Categories</Link>
+              <a href="#" className="text-on-surface-variant/60 hover:text-on-surface transition-colors">Privacy</a>
+            </div>
+
+            <div className="flex gap-4">
+              <button className="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-dim hover:bg-primary hover:text-on-primary transition-all duration-300">
+                <Globe className="w-5 h-5" />
+              </button>
+              <button className="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-dim hover:bg-primary hover:text-on-primary transition-all duration-300">
+                <Share2 className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </BrowserRouter>
+  );
+}
+</file>
+
+<file path="src/index.css">
+@import "tailwindcss";
+
+@theme {
+  --color-surface-dim: #060e20;
+  --color-surface-bright: #1f2b49;
+  --color-surface-container-lowest: #000000;
+  --color-surface-container-low: #091328;
+  --color-surface-container: #0f1930;
+  --color-surface-container-high: #141f38;
+  --color-surface-container-highest: #192540;
+  
+  --color-on-surface: #dee5ff;
+  --color-on-surface-variant: #a3aac4;
+  
+  --color-primary: #85adff;
+  --color-primary-dim: #699cff;
+  --color-primary-container: #6e9fff;
+  --color-on-primary: #002c66;
+  
+  --color-secondary: #8097ff;
+  --color-secondary-container: #213da1;
+  --color-on-secondary-container: #c5ceff;
+  
+  --color-tertiary: #fbabff;
+  --color-outline: #6d758c;
+  --color-outline-variant: #40485d;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer utilities {
+  .glass-nav {
+    background: rgba(6, 14, 32, 0.6);
+    backdrop-filter: blur(24px);
+  }
+  
+  .editorial-shadow {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+  
+  .ghost-border {
+    outline: 1px solid rgba(64, 72, 93, 0.15);
+  }
+  
+  .primary-gradient {
+    background: linear-gradient(135deg, #85adff 0%, #6e9fff 100%);
+  }
+}
+
+body {
+  @apply bg-surface-dim text-on-surface font-sans antialiased selection:bg-primary-container selection:text-on-primary;
+}
+
+/* Custom scrollbar for a premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-surface-dim;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-surface-container-highest rounded-full hover:bg-outline/50 transition-colors;
+}
+</file>
+
+<file path="src/main.tsx">
+import {StrictMode} from 'react';
+import {createRoot} from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
+</file>
+
+<file path="TODO.md">
+# EduFinder Project Roadmap
+
+## 🚀 Immediate Tasks
+- [ ] **Tech Category**: Add 5+ more courses to reach a full grid.
+- [ ] **Data Fix**: Update Course ID `11` (Computer architecture) with a valid provider URL.
+- [ ] **Empty Categories**: Add placeholder courses for "Health", "Math", and "Music" to remove the "coming soon" state.
+
+## 🛠️ Feature Backlog
+- [ ] **Search Logic**: Implement the filter function in `HomePage` to make the search bar functional.
+- [ ] **Favorites System**: Allow users to "Heart" a course and save it to `localStorage`.
+- [ ] **Course Sharing**: Use the Web Share API on the `Share2` icon in the footer/cards.
+
+## 🧹 Refactoring & Code Quality
+- [ ] **Data Separation**: Move `POPULAR_COURSES` and `CATEGORIES` from `App.tsx` to `src/data/courses.ts` to keep the main file clean.
+- [ ] **Componentization**: Move `Navbar`, `CourseCard`, and `CategoryCard` into a `src/components/` directory.
+- [ ] **Image Optimization**: Implement lazy loading for course images to improve performance as the list grows.
+
+## 📝 Notes
+- Always use `target="_blank"` and `rel="noopener noreferrer"` for external course links.
+- Maintain consistent image aspect ratios (16:9) for the `CourseCard` thumbnails.
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "module": "ESNext",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  }
+}
+</file>
+
+<file path="vite.config.ts">
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import {defineConfig, loadEnv} from 'vite';
+
+export default defineConfig(({mode}) => {
+  const env = loadEnv(mode, '.', '');
+  return {
+    plugins: [react(), tailwindcss()],
+    define: {
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, '.'),
+      },
+    },
+    server: {
+      // HMR is disabled in AI Studio via DISABLE_HMR env var.
+      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
+      hmr: process.env.DISABLE_HMR !== 'true',
+    },
+  };
+});
+</file>
+
+</files>
