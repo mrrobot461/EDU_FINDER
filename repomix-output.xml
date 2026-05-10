@@ -1,10 +1,10 @@
-This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+This file is a merged representation of a subset of the codebase, containing specifically included files, combined into a single document by Repomix.
 
 <file_summary>
 This section contains a summary of this file.
 
 <purpose>
-This file contains a packed representation of the entire repository's contents.
+This file contains a packed representation of a subset of the repository's contents that is considered the most important context.
 It is designed to be easily consumable by AI systems for analysis, code review,
 or other automated processes.
 </purpose>
@@ -32,6 +32,7 @@ The content is organized as follows:
 <notes>
 - Some files may have been excluded based on .gitignore rules and Repomix's configuration
 - Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Only files matching these patterns are included: Edu_finder
 - Files matching patterns in .gitignore are excluded
 - Files matching default ignore patterns are excluded
 - Files are sorted by Git change count (files with more changes are at the bottom)
@@ -40,180 +41,1237 @@ The content is organized as follows:
 </file_summary>
 
 <directory_structure>
-.env.local
-.gitignore
-context.md
-index.html
-metadata.json
-package.json
-README.md
-src/App.tsx
-src/components/CategoryCard.tsx
-src/components/CourseCard.tsx
-src/components/Navbar.tsx
-src/contexts/AuthContext.tsx
-src/index.css
-src/lib/iconMap.ts
-src/lib/supabase.ts
-src/main.tsx
-src/pages/AuthPage.tsx
-src/pages/CategoriesPage.tsx
-src/pages/CategoryDetailPage.tsx
-src/pages/HomePage.tsx
-src/pages/MyLearningPage.tsx
-src/pages/Questionaire.tsx
-src/types.ts
-tsconfig.json
-vite.config.ts
+Edu_finder/.git/COMMIT_EDITMSG
+Edu_finder/.git/config
+Edu_finder/.git/description
+Edu_finder/.git/FETCH_HEAD
+Edu_finder/.git/gk/config
+Edu_finder/.git/HEAD
+Edu_finder/.git/hooks/applypatch-msg.sample
+Edu_finder/.git/hooks/commit-msg.sample
+Edu_finder/.git/hooks/fsmonitor-watchman.sample
+Edu_finder/.git/hooks/post-update.sample
+Edu_finder/.git/hooks/pre-applypatch.sample
+Edu_finder/.git/hooks/pre-commit.sample
+Edu_finder/.git/hooks/pre-merge-commit.sample
+Edu_finder/.git/hooks/pre-push.sample
+Edu_finder/.git/hooks/pre-rebase.sample
+Edu_finder/.git/hooks/pre-receive.sample
+Edu_finder/.git/hooks/prepare-commit-msg.sample
+Edu_finder/.git/hooks/push-to-checkout.sample
+Edu_finder/.git/hooks/sendemail-validate.sample
+Edu_finder/.git/hooks/update.sample
+Edu_finder/.git/index
+Edu_finder/.git/info/exclude
+Edu_finder/.git/logs/HEAD
+Edu_finder/.git/logs/refs/heads/main
+Edu_finder/.git/logs/refs/remotes/origin/main
+Edu_finder/.git/objects/04/49fa2bccc92cdbd7bcc4e479dc1c6808667490
+Edu_finder/.git/objects/05/06f1b683ccb9cb79b1e1b0e485d18e8926845c
+Edu_finder/.git/objects/06/717485563500a12a7afb7bf89336136d556487
+Edu_finder/.git/objects/06/8b6ba0a04f578a23827cb7c80a2d099be6ee1a
+Edu_finder/.git/objects/07/f474204735202e8facba2904d124b953395b8d
+Edu_finder/.git/objects/08/0dac371e6d8ba952c0c9a6f668e7195d77091e
+Edu_finder/.git/objects/09/f101febaf77124b30042ac54bcdd69d90c8244
+Edu_finder/.git/objects/0b/17631293bd2c1eceb353dc7b154e11d69502f4
+Edu_finder/.git/objects/0b/80fad5d6ec9e513ae6e2681fe6e3cc3178804f
+Edu_finder/.git/objects/0d/32bd48902a5e73e8cf4c37a6a3d5a7e66ede89
+Edu_finder/.git/objects/15/38c3e0a8357bc34a0018ffc3e45e046d0d30a0
+Edu_finder/.git/objects/16/43ea70675619f5105af913e052ab2ff39fcc38
+Edu_finder/.git/objects/18/881f86a29801cd9f0d09ada1fc531467dace4c
+Edu_finder/.git/objects/19/21caa270f0d6d158f1a63924e0241cdd1e4d9f
+Edu_finder/.git/objects/1b/384eac1059a659e6efe677ccb4e10ac363de78
+Edu_finder/.git/objects/1b/904b45bdd23a6e57806d67e100d4fc79d87c77
+Edu_finder/.git/objects/1d/479aa3e279a93afe2d37c8f60b42e96ec4b134
+Edu_finder/.git/objects/20/b6d7df094744c5ca9a928b926cd95bd6d3431e
+Edu_finder/.git/objects/20/c2cf16d74bf1f10dedf745fe081f272da24c2c
+Edu_finder/.git/objects/20/e7f37fdd5a869cab58d7c77c60abe2d9357e8f
+Edu_finder/.git/objects/21/89864038517c4814372874991005f8c13c49a8
+Edu_finder/.git/objects/21/dfe6908a2d8e32a249152161fd31127ba93f7b
+Edu_finder/.git/objects/22/f5f8a6e9da6dad23ffe410ed33898d96f19dc1
+Edu_finder/.git/objects/25/0e65a189816cff1ef27759a02aa04412bdb30b
+Edu_finder/.git/objects/26/2c9d8b7d5c0448878c06043661493e29a9cb72
+Edu_finder/.git/objects/27/cf578f41cc8c964d7234401fa359756cef60c3
+Edu_finder/.git/objects/29/c94b109a625b4cd15656037b6420cf716c14e6
+Edu_finder/.git/objects/2d/750302f430d7f31a676f40acdd53eef0adf3c2
+Edu_finder/.git/objects/32/ce2a2c7937bbe51288bec6b1ef30218264aa02
+Edu_finder/.git/objects/38/41b796dadb6cebe7096f5179c7d33872081823
+Edu_finder/.git/objects/3c/5c284cc936622636cfd48a90d8a783dda9c500
+Edu_finder/.git/objects/3e/566e165ec8afa96406ec8554edbaa4dd516160
+Edu_finder/.git/objects/3f/1b69f8936a1ff504bf4c2fff078e559789d076
+Edu_finder/.git/objects/42/a32e7bccc5ce7be5f69bba3359e80358025fde
+Edu_finder/.git/objects/44/4dd139f22d244684067ba69964f0407b7d01db
+Edu_finder/.git/objects/46/64765783d24d0cee4f3f9039ee434c615504ff
+Edu_finder/.git/objects/47/c7faca6c926a9e349195bbc043730205f7f9c8
+Edu_finder/.git/objects/48/8c2d2316fef6500a5f62fff1556203cc8d22d8
+Edu_finder/.git/objects/49/7ae9db2061da5785a94271bcd22de959872319
+Edu_finder/.git/objects/4a/565e3fbcae666ee7513bda5f05fa9883ae0b63
+Edu_finder/.git/objects/4a/fe5ca6cc5f5e66432f9f424944246092e5cb9f
+Edu_finder/.git/objects/4b/0de89b5d04cc66e8d5799a349ef70e51a4a262
+Edu_finder/.git/objects/4d/3ce1cac3381114da6a43fd590310a10c7d21e4
+Edu_finder/.git/objects/4d/f7e96d5875d12b254a653d6a6c70a8c91944de
+Edu_finder/.git/objects/55/6d1dd9eaf937b991e5c94b0e699f674987431a
+Edu_finder/.git/objects/56/438017c0b036fbef6803399f9731d6dc807ddc
+Edu_finder/.git/objects/56/ece5b3abc1d3a5257bb53c8de9ac0bc858c233
+Edu_finder/.git/objects/5a/86d2a8aeff6b6a27008e3e5f15000b27897f78
+Edu_finder/.git/objects/5b/446a8cd846b2505f8abd7db0629add1ce8e00d
+Edu_finder/.git/objects/5c/047d16425be1d3c9add9ecce07f4e68da57775
+Edu_finder/.git/objects/5c/1ae50e623c6dda04052af7bbf1f86f74585aa9
+Edu_finder/.git/objects/5e/7ea9ecf0ae07a6ec76fa64f27d540efdecf7a6
+Edu_finder/.git/objects/5f/22e95c56f8c838028a885fad6b13efa220864d
+Edu_finder/.git/objects/61/64920bbf94abb68093db8f84a2480e5fc1ea42
+Edu_finder/.git/objects/62/ed0a848cb147c5c01738460eaf294fb969e50d
+Edu_finder/.git/objects/62/f5eaa228834afe7ece56271c9127cf9b1118fe
+Edu_finder/.git/objects/63/7f31804cc3857808bc67440875414d3bd0fafb
+Edu_finder/.git/objects/66/e23bcecbeff4afebfd9ce30d9e77057154c3c9
+Edu_finder/.git/objects/6b/ff3a6d1f4a76762831264866c400af3affa6dc
+Edu_finder/.git/objects/70/851d5c2b6dda5dafd4ffd3ef8c43989b055bd8
+Edu_finder/.git/objects/73/32da854554ff7b9ac9deee0d8212155cc935c4
+Edu_finder/.git/objects/73/49920606b91a9e97830ced8930366513d35110
+Edu_finder/.git/objects/75/0c0aade26dc3c50aba02512044f8cce88129bd
+Edu_finder/.git/objects/77/9e8d7275d08da078c0878aeb15313040bc24ba
+Edu_finder/.git/objects/7a/550fe79a56f6953f6afc76b0a10864d8956e25
+Edu_finder/.git/objects/7a/e09083a0073dfae9c9c59e2e4aba638d5231f6
+Edu_finder/.git/objects/7b/5c49ced7882dd40325b4978c91612aef0c7686
+Edu_finder/.git/objects/7e/9057cf744a29b54a587b45a1c7be38d3538465
+Edu_finder/.git/objects/7e/9d9eab70571b8f974afaf9baa8fd6e3c0c319d
+Edu_finder/.git/objects/7f/71f3b6919be698dce227a63f6ad0b7ce73ef96
+Edu_finder/.git/objects/80/ffce4de1f4924fd31e29c2a430d1799441f3a2
+Edu_finder/.git/objects/83/dde77323dd84f0c54c39ab8fdbf1a2d0670fa2
+Edu_finder/.git/objects/87/9bbb22567b4777e237ee972851ab59eedb6caa
+Edu_finder/.git/objects/8b/137891791fe96927ad78e64b0aad7bded08bdc
+Edu_finder/.git/objects/8b/1511d64400954f7cc8e1c2cf2af40ff321f72a
+Edu_finder/.git/objects/8e/6743d8cdab1a0bf75669f1a4f4729658516a7c
+Edu_finder/.git/objects/91/1579fe0ca971114cd45755427065d3bdd40f78
+Edu_finder/.git/objects/92/28fca72469c70b035345eea18b6b8106bfc62d
+Edu_finder/.git/objects/92/a2539d8c958105787e394d934b1b76ab6f4a82
+Edu_finder/.git/objects/93/e6db054dbe67705ad2194bd21acfe06106e39f
+Edu_finder/.git/objects/95/362a9264902adb11c528d11b0a56c5ee94da0a
+Edu_finder/.git/objects/95/f84e12dc4f426c2400387f5eed5571df418237
+Edu_finder/.git/objects/97/9f9c1b6ddf3e28d2f5849a2886684da6362bdf
+Edu_finder/.git/objects/97/f1d51563f9724161e795b59b5540465ab3586e
+Edu_finder/.git/objects/9a/0a80167eddf0bc4ea3bf431446fcbe6e0e2213
+Edu_finder/.git/objects/9b/3e0e09b237d31ec2e8038464d93d9b7381a870
+Edu_finder/.git/objects/9c/e8ceeaaeedadb42bf7b341288cb1b184a8f609
+Edu_finder/.git/objects/9e/ef9816382b1878e85710c3620dceb6fe9df69b
+Edu_finder/.git/objects/9f/6958895e9c159ca472cfd9e5e6d60b86c5140c
+Edu_finder/.git/objects/a0/98edf1b5018626f570ad9b5f0dbd24aba4397d
+Edu_finder/.git/objects/a0/e4f32d9a1e5bbf673b60014b2e0341861dd58f
+Edu_finder/.git/objects/a3/4f467419c883fc197e515b27333cc610fb3dde
+Edu_finder/.git/objects/a3/a5ee127802a47a19b44b999748878fc6a288f1
+Edu_finder/.git/objects/a4/2edce37ba6fbe1e45147274fb64c188f4cefe3
+Edu_finder/.git/objects/a4/947134860640d5228ec8166827a612e1a1c8ca
+Edu_finder/.git/objects/a8/1ac870d97dade2c46ec491c19da40370471e1e
+Edu_finder/.git/objects/a9/04c9b3c4191d5d0d8b3bf4020c3af5e19f48b5
+Edu_finder/.git/objects/a9/c5a2698096b5aaaf31df1e52bde414782fa707
+Edu_finder/.git/objects/ab/2ea860dc399188c29e91a2e1859e278764838f
+Edu_finder/.git/objects/ad/4d513f36f240d33930857a84ec6998011c5961
+Edu_finder/.git/objects/ad/a13a294ba857d6b094b673cbffb55cc3e42c48
+Edu_finder/.git/objects/ad/c9d56b9db89aabe240925fa2c1b6f9421a1266
+Edu_finder/.git/objects/b2/58ac2671588cc6eca461dac34ec58a3025ad26
+Edu_finder/.git/objects/b3/b07e4fd3993e57c945fe3596e2f3a888f3cbbd
+Edu_finder/.git/objects/b6/a203c4ae393730b2cabfa241ca21bac8698d58
+Edu_finder/.git/objects/b7/137bc5929a2a192226f5b3306ee718b7fe977b
+Edu_finder/.git/objects/b7/4f5f0c34554ce21e57eb1de7b282f386d69d36
+Edu_finder/.git/objects/ba/8d520814fb1ebd558bdf357a552742a2990dd8
+Edu_finder/.git/objects/ba/bb9e9b1716650c965c65010ee82c88a8cdfc6e
+Edu_finder/.git/objects/bb/ca72a68a1ef1a9a4168d5b9692a1719e6bc4e7
+Edu_finder/.git/objects/be/57736ad26c70e9eefd1d90c0140835e83ad3e7
+Edu_finder/.git/objects/c3/b0f39e322a09542de233c713023874dc2d839a
+Edu_finder/.git/objects/c4/7b905a11361386547f53757a659ea85a7037f9
+Edu_finder/.git/objects/c4/c91d42f01bc1fc3d7a588c789c80329978a1a3
+Edu_finder/.git/objects/cc/39a7a61cbb153963782c3a5a15d8f887b57554
+Edu_finder/.git/objects/cf/ee91232e62dc76aa93ff7b7f997e4893a9d3bc
+Edu_finder/.git/objects/d2/9584c63e719dd4583a77734c951a8031c5fd46
+Edu_finder/.git/objects/d5/676a916bc6a5d2dadca22b188e8ffbd41a8e73
+Edu_finder/.git/objects/d5/b1857e88cf5d5d541bcbabb2caff5fd3d678ec
+Edu_finder/.git/objects/d8/4246f429a72dc3b34d7f441d7a88cb3b0e0dae
+Edu_finder/.git/objects/d8/8f175b08822f946e8333471fd7fec70ffffff2
+Edu_finder/.git/objects/da/f289294e07d37f49dd2e2eeb7ac6b85f6e66a4
+Edu_finder/.git/objects/dc/68cdcdcac71dbe529849cad20c129123c7f64e
+Edu_finder/.git/objects/df/203d8b6b9e367f4f69e72e06722ee7afb4df0e
+Edu_finder/.git/objects/df/5445ee7cca09472637bb854368d7d435b96d87
+Edu_finder/.git/objects/e2/695740e03b39c304e3abe76c4a692ac0d1326d
+Edu_finder/.git/objects/e3/9e96bf9b7af9a686235a46f43955fd0c9775d6
+Edu_finder/.git/objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+Edu_finder/.git/objects/e7/911d20ad17f9ca3a59b01697b464502731ae01
+Edu_finder/.git/objects/e9/16bd2e562bfa98a160d113b43491a53af7f785
+Edu_finder/.git/objects/ee/7debef96f7d0cfc2a2287fb2d486666e81f338
+Edu_finder/.git/objects/ef/aa07383a27c168841f3e8ac165e194a539ec51
+Edu_finder/.git/objects/ef/d8a2dccac9fecf46be3fc48efe9deec125389a
+Edu_finder/.git/objects/f2/87affd064eedd44a5633e1e45a67758b49e42a
+Edu_finder/.git/objects/f2/948645e5a54c7da2025cf7b5a05f50a78e512b
+Edu_finder/.git/objects/f3/5ba250f08a010cb85bc9417012fec93fc5bbb1
+Edu_finder/.git/objects/f3/8ae035d7263fc46a40435959253cfb11bc2104
+Edu_finder/.git/objects/f3/ce1bfe17a5368a8c7fb428180e17ee0f20a1fc
+Edu_finder/.git/objects/f9/3c45bfbf033cb95dcedd97dbd64a3bc4d3f296
+Edu_finder/.git/objects/fb/408e182cbbecfb49a96f7cf2c11649492de82c
+Edu_finder/.git/objects/fb/8efa23b2676ed741378352a4384b290a94ed09
+Edu_finder/.git/ORIG_HEAD
+Edu_finder/.git/refs/heads/main
+Edu_finder/.git/refs/remotes/origin/main
+Edu_finder/.gitignore
+Edu_finder/context.md
+Edu_finder/Documentation.md
+Edu_finder/index.html
+Edu_finder/metadata.json
+Edu_finder/package.json
+Edu_finder/README.md
+Edu_finder/src/App.tsx
+Edu_finder/src/components/CategoryCard.tsx
+Edu_finder/src/components/CourseCard.tsx
+Edu_finder/src/components/Navbar.tsx
+Edu_finder/src/contexts/AuthContext.tsx
+Edu_finder/src/index.css
+Edu_finder/src/lib/iconMap.ts
+Edu_finder/src/lib/supabase.ts
+Edu_finder/src/main.tsx
+Edu_finder/src/pages/AuthPage.tsx
+Edu_finder/src/pages/CategoriesPage.tsx
+Edu_finder/src/pages/CategoryDetailPage.tsx
+Edu_finder/src/pages/HomePage.tsx
+Edu_finder/src/pages/MyLearningPage.tsx
+Edu_finder/src/pages/Questionaire.tsx
+Edu_finder/src/types.ts
+Edu_finder/tsconfig.json
+Edu_finder/vite.config.ts
 </directory_structure>
 
 <files>
 This section contains the contents of the repository's files.
 
-<file path="src/lib/iconMap.ts">
-// src/lib/iconMap.ts
-import { 
-  Terminal, 
-  Briefcase, 
-  FlaskConical, 
-  Palette, 
-  Languages, 
-  Theater, 
-  Megaphone, 
-  Heart, 
-  User, 
-  Calculator, 
-  Music, 
-  Camera, 
-  HelpCircle,
-  Code,
-  Activity,
-  Globe,
-  TrendingUp,
-  Type
-} from 'lucide-react';
-
-const icons: Record<string, React.ComponentType<any>> = {
-  terminal: Terminal,
-  tech: Code,
-  business: Briefcase,
-  science: FlaskConical,
-  design: Palette,
-  languages: Languages,
-  marketing: TrendingUp,
-  health: Activity,
-  math: Calculator,
-  arts: Type,
-  default: HelpCircle
-};
-
-export const getIconComponent = (iconName: string | null | undefined) => {
-  if (!iconName) return HelpCircle;
-  return icons[iconName.toLowerCase()] || HelpCircle;
-};
-
-export default getIconComponent;
+<file path="Edu_finder/.git/COMMIT_EDITMSG">
+Complete working auth with session persistence
 </file>
 
-<file path="src/pages/MyLearningPage.tsx">
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Loader2, Bookmark, Lock } from 'lucide-react';
-import { supabase } from '../lib/supabase';
-import { useAuth } from '../contexts/AuthContext';
-import { Course } from '../types';
-import CourseCard from '../components/CourseCard';
-
-const MyLearningPage = () => {
-  const { user } = useAuth();
-  const [savedCourses, setSavedCourses] = useState<Course[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-
-    const fetchSavedCourses = async () => {
-      if (!user) {
-        setLoading(false);
-        return;
-      }
-
-      // Pro-trick: We query the 'saved_courses' table, but ask Supabase to 
-      // automatically bring along the actual course data from the 'courses' table!
-      const { data, error } = await supabase
-        .from('saved_courses')
-        .select(`
-          course_id,
-          courses (*)
-        `)
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false });
-
-      if (data) {
-        // Extract just the course objects from the joined data
-        const courses = data.map((row: any) => row.courses);
-        setSavedCourses(courses);
-      }
-      
-      setLoading(false);
-    };
-
-    fetchSavedCourses();
-  }, [user]);
-
-  if (loading) return <div className="pt-48 min-h-screen flex justify-center"><Loader2 className="animate-spin w-10 h-10 text-primary" /></div>;
-
-  // Protect the route!
-  if (!user) {
-    return (
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-48 pb-32 px-8 max-w-2xl mx-auto text-center min-h-screen">
-        <div className="bg-surface-container-high rounded-3xl p-12 shadow-xl border border-outline-variant/20">
-          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Lock className="w-8 h-8 text-primary" />
-          </div>
-          <h2 className="text-3xl font-bold mb-4 text-on-surface">Sign in to view saved courses</h2>
-          <Link to="/auth" className="px-8 py-4 rounded-xl primary-gradient text-on-primary font-bold active:scale-95 transition-all inline-block mt-4">
-            Sign In / Sign Up
-          </Link>
-        </div>
-      </motion.div>
-    );
-  }
-
-  return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-48 pb-32 px-8 max-w-7xl mx-auto min-h-screen">
-      <div className="mb-16">
-        <h1 className="text-5xl font-bold tracking-tight mb-4">My Learning</h1>
-        <p className="text-xl text-on-surface-variant max-w-2xl">
-          Your personal library of saved courses and learning paths.
-        </p>
-      </div>
-
-      {savedCourses.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {savedCourses.map((course) => (
-            <CourseCard key={course.id} course={course} />
-          ))}
-        </div>
-      ) : (
-        <div className="bg-surface-container-high rounded-3xl p-20 text-center border border-outline/10 mt-8">
-          <Bookmark className="w-12 h-12 text-primary/40 mx-auto mb-6" />
-          <h3 className="text-2xl font-bold mb-2">No saved courses yet</h3>
-          <p className="text-on-surface-variant mb-8">Start exploring and click the heart icon on any course to save it here.</p>
-          <Link to="/categories" className="px-8 py-3 rounded-xl primary-gradient text-on-primary font-bold inline-block">
-            Explore Courses
-          </Link>
-        </div>
-      )}
-    </motion.div>
-  );
-};
-
-export default MyLearningPage;
+<file path="Edu_finder/.git/config">
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://github.com/mrrobot461/EDU_FINDER.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main
 </file>
 
-<file path="context.md">
+<file path="Edu_finder/.git/description">
+Unnamed repository; edit this file 'description' to name the repository.
+</file>
+
+<file path="Edu_finder/.git/FETCH_HEAD">
+0d32bd48902a5e73e8cf4c37a6a3d5a7e66ede89		branch 'main' of https://github.com/mrrobot461/EDU_FINDER
+</file>
+
+<file path="Edu_finder/.git/gk/config">
+[branch "main"]
+	gk-last-accessed = 2026-05-10T13:23:46.523Z
+	gk-last-modified = 2026-05-10T13:23:46.523Z
+</file>
+
+<file path="Edu_finder/.git/HEAD">
+ref: refs/heads/main
+</file>
+
+<file path="Edu_finder/.git/hooks/applypatch-msg.sample">
+#!/bin/sh
+#
+# An example hook script to check the commit log message taken by
+# applypatch from an e-mail message.
+#
+# The hook should exit with non-zero status after issuing an
+# appropriate message if it wants to stop the commit.  The hook is
+# allowed to edit the commit message file.
+#
+# To enable this hook, rename this file to "applypatch-msg".
+
+. git-sh-setup
+commitmsg="$(git rev-parse --git-path hooks/commit-msg)"
+test -x "$commitmsg" && exec "$commitmsg" ${1+"$@"}
+:
+</file>
+
+<file path="Edu_finder/.git/hooks/commit-msg.sample">
+#!/bin/sh
+#
+# An example hook script to check the commit log message.
+# Called by "git commit" with one argument, the name of the file
+# that has the commit message.  The hook should exit with non-zero
+# status after issuing an appropriate message if it wants to stop the
+# commit.  The hook is allowed to edit the commit message file.
+#
+# To enable this hook, rename this file to "commit-msg".
+
+# Uncomment the below to add a Signed-off-by line to the message.
+# Doing this in a hook is a bad idea in general, but the prepare-commit-msg
+# hook is more suited to it.
+#
+# SOB=$(git var GIT_AUTHOR_IDENT | sed -n 's/^\(.*>\).*$/Signed-off-by: \1/p')
+# grep -qs "^$SOB" "$1" || echo "$SOB" >> "$1"
+
+# This example catches duplicate Signed-off-by lines.
+
+test "" = "$(grep '^Signed-off-by: ' "$1" |
+	 sort | uniq -c | sed -e '/^[ 	]*1[ 	]/d')" || {
+	echo >&2 Duplicate Signed-off-by lines.
+	exit 1
+}
+</file>
+
+<file path="Edu_finder/.git/hooks/fsmonitor-watchman.sample">
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use IPC::Open2;
+
+# An example hook script to integrate Watchman
+# (https://facebook.github.io/watchman/) with git to speed up detecting
+# new and modified files.
+#
+# The hook is passed a version (currently 2) and last update token
+# formatted as a string and outputs to stdout a new update token and
+# all files that have been modified since the update token. Paths must
+# be relative to the root of the working tree and separated by a single NUL.
+#
+# To enable this hook, rename this file to "query-watchman" and set
+# 'git config core.fsmonitor .git/hooks/query-watchman'
+#
+my ($version, $last_update_token) = @ARGV;
+
+# Uncomment for debugging
+# print STDERR "$0 $version $last_update_token\n";
+
+# Check the hook interface version
+if ($version ne 2) {
+	die "Unsupported query-fsmonitor hook version '$version'.\n" .
+	    "Falling back to scanning...\n";
+}
+
+my $git_work_tree = get_working_dir();
+
+my $retry = 1;
+
+my $json_pkg;
+eval {
+	require JSON::XS;
+	$json_pkg = "JSON::XS";
+	1;
+} or do {
+	require JSON::PP;
+	$json_pkg = "JSON::PP";
+};
+
+launch_watchman();
+
+sub launch_watchman {
+	my $o = watchman_query();
+	if (is_work_tree_watched($o)) {
+		output_result($o->{clock}, @{$o->{files}});
+	}
+}
+
+sub output_result {
+	my ($clockid, @files) = @_;
+
+	# Uncomment for debugging watchman output
+	# open (my $fh, ">", ".git/watchman-output.out");
+	# binmode $fh, ":utf8";
+	# print $fh "$clockid\n@files\n";
+	# close $fh;
+
+	binmode STDOUT, ":utf8";
+	print $clockid;
+	print "\0";
+	local $, = "\0";
+	print @files;
+}
+
+sub watchman_clock {
+	my $response = qx/watchman clock "$git_work_tree"/;
+	die "Failed to get clock id on '$git_work_tree'.\n" .
+		"Falling back to scanning...\n" if $? != 0;
+
+	return $json_pkg->new->utf8->decode($response);
+}
+
+sub watchman_query {
+	my $pid = open2(\*CHLD_OUT, \*CHLD_IN, 'watchman -j --no-pretty')
+	or die "open2() failed: $!\n" .
+	"Falling back to scanning...\n";
+
+	# In the query expression below we're asking for names of files that
+	# changed since $last_update_token but not from the .git folder.
+	#
+	# To accomplish this, we're using the "since" generator to use the
+	# recency index to select candidate nodes and "fields" to limit the
+	# output to file names only. Then we're using the "expression" term to
+	# further constrain the results.
+	my $last_update_line = "";
+	if (substr($last_update_token, 0, 1) eq "c") {
+		$last_update_token = "\"$last_update_token\"";
+		$last_update_line = qq[\n"since": $last_update_token,];
+	}
+	my $query = <<"	END";
+		["query", "$git_work_tree", {$last_update_line
+			"fields": ["name"],
+			"expression": ["not", ["dirname", ".git"]]
+		}]
+	END
+
+	# Uncomment for debugging the watchman query
+	# open (my $fh, ">", ".git/watchman-query.json");
+	# print $fh $query;
+	# close $fh;
+
+	print CHLD_IN $query;
+	close CHLD_IN;
+	my $response = do {local $/; <CHLD_OUT>};
+
+	# Uncomment for debugging the watch response
+	# open ($fh, ">", ".git/watchman-response.json");
+	# print $fh $response;
+	# close $fh;
+
+	die "Watchman: command returned no output.\n" .
+	"Falling back to scanning...\n" if $response eq "";
+	die "Watchman: command returned invalid output: $response\n" .
+	"Falling back to scanning...\n" unless $response =~ /^\{/;
+
+	return $json_pkg->new->utf8->decode($response);
+}
+
+sub is_work_tree_watched {
+	my ($output) = @_;
+	my $error = $output->{error};
+	if ($retry > 0 and $error and $error =~ m/unable to resolve root .* directory (.*) is not watched/) {
+		$retry--;
+		my $response = qx/watchman watch "$git_work_tree"/;
+		die "Failed to make watchman watch '$git_work_tree'.\n" .
+		    "Falling back to scanning...\n" if $? != 0;
+		$output = $json_pkg->new->utf8->decode($response);
+		$error = $output->{error};
+		die "Watchman: $error.\n" .
+		"Falling back to scanning...\n" if $error;
+
+		# Uncomment for debugging watchman output
+		# open (my $fh, ">", ".git/watchman-output.out");
+		# close $fh;
+
+		# Watchman will always return all files on the first query so
+		# return the fast "everything is dirty" flag to git and do the
+		# Watchman query just to get it over with now so we won't pay
+		# the cost in git to look up each individual file.
+		my $o = watchman_clock();
+		$error = $output->{error};
+
+		die "Watchman: $error.\n" .
+		"Falling back to scanning...\n" if $error;
+
+		output_result($o->{clock}, ("/"));
+		$last_update_token = $o->{clock};
+
+		eval { launch_watchman() };
+		return 0;
+	}
+
+	die "Watchman: $error.\n" .
+	"Falling back to scanning...\n" if $error;
+
+	return 1;
+}
+
+sub get_working_dir {
+	my $working_dir;
+	if ($^O =~ 'msys' || $^O =~ 'cygwin') {
+		$working_dir = Win32::GetCwd();
+		$working_dir =~ tr/\\/\//;
+	} else {
+		require Cwd;
+		$working_dir = Cwd::cwd();
+	}
+
+	return $working_dir;
+}
+</file>
+
+<file path="Edu_finder/.git/hooks/post-update.sample">
+#!/bin/sh
+#
+# An example hook script to prepare a packed repository for use over
+# dumb transports.
+#
+# To enable this hook, rename this file to "post-update".
+
+exec git update-server-info
+</file>
+
+<file path="Edu_finder/.git/hooks/pre-applypatch.sample">
+#!/bin/sh
+#
+# An example hook script to verify what is about to be committed
+# by applypatch from an e-mail message.
+#
+# The hook should exit with non-zero status after issuing an
+# appropriate message if it wants to stop the commit.
+#
+# To enable this hook, rename this file to "pre-applypatch".
+
+. git-sh-setup
+precommit="$(git rev-parse --git-path hooks/pre-commit)"
+test -x "$precommit" && exec "$precommit" ${1+"$@"}
+:
+</file>
+
+<file path="Edu_finder/.git/hooks/pre-commit.sample">
+#!/bin/sh
+#
+# An example hook script to verify what is about to be committed.
+# Called by "git commit" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+#
+# To enable this hook, rename this file to "pre-commit".
+
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+	against=HEAD
+else
+	# Initial commit: diff against an empty tree object
+	against=$(git hash-object -t tree /dev/null)
+fi
+
+# If you want to allow non-ASCII filenames set this variable to true.
+allownonascii=$(git config --type=bool hooks.allownonascii)
+
+# Redirect output to stderr.
+exec 1>&2
+
+# Cross platform projects tend to avoid non-ASCII filenames; prevent
+# them from being added to the repository. We exploit the fact that the
+# printable range starts at the space character and ends with tilde.
+if [ "$allownonascii" != "true" ] &&
+	# Note that the use of brackets around a tr range is ok here, (it's
+	# even required, for portability to Solaris 10's /usr/bin/tr), since
+	# the square bracket bytes happen to fall in the designated range.
+	test $(git diff-index --cached --name-only --diff-filter=A -z $against |
+	  LC_ALL=C tr -d '[ -~]\0' | wc -c) != 0
+then
+	cat <<\EOF
+Error: Attempt to add a non-ASCII file name.
+
+This can cause problems if you want to work with people on other platforms.
+
+To be portable it is advisable to rename the file.
+
+If you know what you are doing you can disable this check using:
+
+  git config hooks.allownonascii true
+EOF
+	exit 1
+fi
+
+# If there are whitespace errors, print the offending file names and fail.
+exec git diff-index --check --cached $against --
+</file>
+
+<file path="Edu_finder/.git/hooks/pre-merge-commit.sample">
+#!/bin/sh
+#
+# An example hook script to verify what is about to be committed.
+# Called by "git merge" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message to
+# stderr if it wants to stop the merge commit.
+#
+# To enable this hook, rename this file to "pre-merge-commit".
+
+. git-sh-setup
+test -x "$GIT_DIR/hooks/pre-commit" &&
+        exec "$GIT_DIR/hooks/pre-commit"
+:
+</file>
+
+<file path="Edu_finder/.git/hooks/pre-push.sample">
+#!/bin/sh
+
+# An example hook script to verify what is about to be pushed.  Called by "git
+# push" after it has checked the remote status, but before anything has been
+# pushed.  If this script exits with a non-zero status nothing will be pushed.
+#
+# This hook is called with the following parameters:
+#
+# $1 -- Name of the remote to which the push is being done
+# $2 -- URL to which the push is being done
+#
+# If pushing without using a named remote those arguments will be equal.
+#
+# Information about the commits which are being pushed is supplied as lines to
+# the standard input in the form:
+#
+#   <local ref> <local oid> <remote ref> <remote oid>
+#
+# This sample shows how to prevent push of commits where the log message starts
+# with "WIP" (work in progress).
+
+remote="$1"
+url="$2"
+
+zero=$(git hash-object --stdin </dev/null | tr '[0-9a-f]' '0')
+
+while read local_ref local_oid remote_ref remote_oid
+do
+	if test "$local_oid" = "$zero"
+	then
+		# Handle delete
+		:
+	else
+		if test "$remote_oid" = "$zero"
+		then
+			# New branch, examine all commits
+			range="$local_oid"
+		else
+			# Update to existing branch, examine new commits
+			range="$remote_oid..$local_oid"
+		fi
+
+		# Check for WIP commit
+		commit=$(git rev-list -n 1 --grep '^WIP' "$range")
+		if test -n "$commit"
+		then
+			echo >&2 "Found WIP commit in $local_ref, not pushing"
+			exit 1
+		fi
+	fi
+done
+
+exit 0
+</file>
+
+<file path="Edu_finder/.git/hooks/pre-rebase.sample">
+#!/bin/sh
+#
+# Copyright (c) 2006, 2008 Junio C Hamano
+#
+# The "pre-rebase" hook is run just before "git rebase" starts doing
+# its job, and can prevent the command from running by exiting with
+# non-zero status.
+#
+# The hook is called with the following parameters:
+#
+# $1 -- the upstream the series was forked from.
+# $2 -- the branch being rebased (or empty when rebasing the current branch).
+#
+# This sample shows how to prevent topic branches that are already
+# merged to 'next' branch from getting rebased, because allowing it
+# would result in rebasing already published history.
+
+publish=next
+basebranch="$1"
+if test "$#" = 2
+then
+	topic="refs/heads/$2"
+else
+	topic=`git symbolic-ref HEAD` ||
+	exit 0 ;# we do not interrupt rebasing detached HEAD
+fi
+
+case "$topic" in
+refs/heads/??/*)
+	;;
+*)
+	exit 0 ;# we do not interrupt others.
+	;;
+esac
+
+# Now we are dealing with a topic branch being rebased
+# on top of master.  Is it OK to rebase it?
+
+# Does the topic really exist?
+git show-ref -q "$topic" || {
+	echo >&2 "No such branch $topic"
+	exit 1
+}
+
+# Is topic fully merged to master?
+not_in_master=`git rev-list --pretty=oneline ^master "$topic"`
+if test -z "$not_in_master"
+then
+	echo >&2 "$topic is fully merged to master; better remove it."
+	exit 1 ;# we could allow it, but there is no point.
+fi
+
+# Is topic ever merged to next?  If so you should not be rebasing it.
+only_next_1=`git rev-list ^master "^$topic" ${publish} | sort`
+only_next_2=`git rev-list ^master           ${publish} | sort`
+if test "$only_next_1" = "$only_next_2"
+then
+	not_in_topic=`git rev-list "^$topic" master`
+	if test -z "$not_in_topic"
+	then
+		echo >&2 "$topic is already up to date with master"
+		exit 1 ;# we could allow it, but there is no point.
+	else
+		exit 0
+	fi
+else
+	not_in_next=`git rev-list --pretty=oneline ^${publish} "$topic"`
+	/usr/bin/perl -e '
+		my $topic = $ARGV[0];
+		my $msg = "* $topic has commits already merged to public branch:\n";
+		my (%not_in_next) = map {
+			/^([0-9a-f]+) /;
+			($1 => 1);
+		} split(/\n/, $ARGV[1]);
+		for my $elem (map {
+				/^([0-9a-f]+) (.*)$/;
+				[$1 => $2];
+			} split(/\n/, $ARGV[2])) {
+			if (!exists $not_in_next{$elem->[0]}) {
+				if ($msg) {
+					print STDERR $msg;
+					undef $msg;
+				}
+				print STDERR " $elem->[1]\n";
+			}
+		}
+	' "$topic" "$not_in_next" "$not_in_master"
+	exit 1
+fi
+
+<<\DOC_END
+
+This sample hook safeguards topic branches that have been
+published from being rewound.
+
+The workflow assumed here is:
+
+ * Once a topic branch forks from "master", "master" is never
+   merged into it again (either directly or indirectly).
+
+ * Once a topic branch is fully cooked and merged into "master",
+   it is deleted.  If you need to build on top of it to correct
+   earlier mistakes, a new topic branch is created by forking at
+   the tip of the "master".  This is not strictly necessary, but
+   it makes it easier to keep your history simple.
+
+ * Whenever you need to test or publish your changes to topic
+   branches, merge them into "next" branch.
+
+The script, being an example, hardcodes the publish branch name
+to be "next", but it is trivial to make it configurable via
+$GIT_DIR/config mechanism.
+
+With this workflow, you would want to know:
+
+(1) ... if a topic branch has ever been merged to "next".  Young
+    topic branches can have stupid mistakes you would rather
+    clean up before publishing, and things that have not been
+    merged into other branches can be easily rebased without
+    affecting other people.  But once it is published, you would
+    not want to rewind it.
+
+(2) ... if a topic branch has been fully merged to "master".
+    Then you can delete it.  More importantly, you should not
+    build on top of it -- other people may already want to
+    change things related to the topic as patches against your
+    "master", so if you need further changes, it is better to
+    fork the topic (perhaps with the same name) afresh from the
+    tip of "master".
+
+Let's look at this example:
+
+		   o---o---o---o---o---o---o---o---o---o "next"
+		  /       /           /           /
+		 /   a---a---b A     /           /
+		/   /               /           /
+	       /   /   c---c---c---c B         /
+	      /   /   /             \         /
+	     /   /   /   b---b C     \       /
+	    /   /   /   /             \     /
+    ---o---o---o---o---o---o---o---o---o---o---o "master"
+
+
+A, B and C are topic branches.
+
+ * A has one fix since it was merged up to "next".
+
+ * B has finished.  It has been fully merged up to "master" and "next",
+   and is ready to be deleted.
+
+ * C has not merged to "next" at all.
+
+We would want to allow C to be rebased, refuse A, and encourage
+B to be deleted.
+
+To compute (1):
+
+	git rev-list ^master ^topic next
+	git rev-list ^master        next
+
+	if these match, topic has not merged in next at all.
+
+To compute (2):
+
+	git rev-list master..topic
+
+	if this is empty, it is fully merged to "master".
+
+DOC_END
+</file>
+
+<file path="Edu_finder/.git/hooks/pre-receive.sample">
+#!/bin/sh
+#
+# An example hook script to make use of push options.
+# The example simply echoes all push options that start with 'echoback='
+# and rejects all pushes when the "reject" push option is used.
+#
+# To enable this hook, rename this file to "pre-receive".
+
+if test -n "$GIT_PUSH_OPTION_COUNT"
+then
+	i=0
+	while test "$i" -lt "$GIT_PUSH_OPTION_COUNT"
+	do
+		eval "value=\$GIT_PUSH_OPTION_$i"
+		case "$value" in
+		echoback=*)
+			echo "echo from the pre-receive-hook: ${value#*=}" >&2
+			;;
+		reject)
+			exit 1
+		esac
+		i=$((i + 1))
+	done
+fi
+</file>
+
+<file path="Edu_finder/.git/hooks/prepare-commit-msg.sample">
+#!/bin/sh
+#
+# An example hook script to prepare the commit log message.
+# Called by "git commit" with the name of the file that has the
+# commit message, followed by the description of the commit
+# message's source.  The hook's purpose is to edit the commit
+# message file.  If the hook fails with a non-zero status,
+# the commit is aborted.
+#
+# To enable this hook, rename this file to "prepare-commit-msg".
+
+# This hook includes three examples. The first one removes the
+# "# Please enter the commit message..." help message.
+#
+# The second includes the output of "git diff --name-status -r"
+# into the message, just before the "git status" output.  It is
+# commented because it doesn't cope with --amend or with squashed
+# commits.
+#
+# The third example adds a Signed-off-by line to the message, that can
+# still be edited.  This is rarely a good idea.
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+SHA1=$3
+
+/usr/bin/perl -i.bak -ne 'print unless(m/^. Please enter the commit message/..m/^#$/)' "$COMMIT_MSG_FILE"
+
+# case "$COMMIT_SOURCE,$SHA1" in
+#  ,|template,)
+#    /usr/bin/perl -i.bak -pe '
+#       print "\n" . `git diff --cached --name-status -r`
+# 	 if /^#/ && $first++ == 0' "$COMMIT_MSG_FILE" ;;
+#  *) ;;
+# esac
+
+# SOB=$(git var GIT_COMMITTER_IDENT | sed -n 's/^\(.*>\).*$/Signed-off-by: \1/p')
+# git interpret-trailers --in-place --trailer "$SOB" "$COMMIT_MSG_FILE"
+# if test -z "$COMMIT_SOURCE"
+# then
+#   /usr/bin/perl -i.bak -pe 'print "\n" if !$first_line++' "$COMMIT_MSG_FILE"
+# fi
+</file>
+
+<file path="Edu_finder/.git/hooks/push-to-checkout.sample">
+#!/bin/sh
+
+# An example hook script to update a checked-out tree on a git push.
+#
+# This hook is invoked by git-receive-pack(1) when it reacts to git
+# push and updates reference(s) in its repository, and when the push
+# tries to update the branch that is currently checked out and the
+# receive.denyCurrentBranch configuration variable is set to
+# updateInstead.
+#
+# By default, such a push is refused if the working tree and the index
+# of the remote repository has any difference from the currently
+# checked out commit; when both the working tree and the index match
+# the current commit, they are updated to match the newly pushed tip
+# of the branch. This hook is to be used to override the default
+# behaviour; however the code below reimplements the default behaviour
+# as a starting point for convenient modification.
+#
+# The hook receives the commit with which the tip of the current
+# branch is going to be updated:
+commit=$1
+
+# It can exit with a non-zero status to refuse the push (when it does
+# so, it must not modify the index or the working tree).
+die () {
+	echo >&2 "$*"
+	exit 1
+}
+
+# Or it can make any necessary changes to the working tree and to the
+# index to bring them to the desired state when the tip of the current
+# branch is updated to the new commit, and exit with a zero status.
+#
+# For example, the hook can simply run git read-tree -u -m HEAD "$1"
+# in order to emulate git fetch that is run in the reverse direction
+# with git push, as the two-tree form of git read-tree -u -m is
+# essentially the same as git switch or git checkout that switches
+# branches while keeping the local changes in the working tree that do
+# not interfere with the difference between the branches.
+
+# The below is a more-or-less exact translation to shell of the C code
+# for the default behaviour for git's push-to-checkout hook defined in
+# the push_to_deploy() function in builtin/receive-pack.c.
+#
+# Note that the hook will be executed from the repository directory,
+# not from the working tree, so if you want to perform operations on
+# the working tree, you will have to adapt your code accordingly, e.g.
+# by adding "cd .." or using relative paths.
+
+if ! git update-index -q --ignore-submodules --refresh
+then
+	die "Up-to-date check failed"
+fi
+
+if ! git diff-files --quiet --ignore-submodules --
+then
+	die "Working directory has unstaged changes"
+fi
+
+# This is a rough translation of:
+#
+#   head_has_history() ? "HEAD" : EMPTY_TREE_SHA1_HEX
+if git cat-file -e HEAD 2>/dev/null
+then
+	head=HEAD
+else
+	head=$(git hash-object -t tree --stdin </dev/null)
+fi
+
+if ! git diff-index --quiet --cached --ignore-submodules $head --
+then
+	die "Working directory has staged changes"
+fi
+
+if ! git read-tree -u -m "$commit"
+then
+	die "Could not update working tree to new HEAD"
+fi
+</file>
+
+<file path="Edu_finder/.git/hooks/sendemail-validate.sample">
+#!/bin/sh
+
+# An example hook script to validate a patch (and/or patch series) before
+# sending it via email.
+#
+# The hook should exit with non-zero status after issuing an appropriate
+# message if it wants to prevent the email(s) from being sent.
+#
+# To enable this hook, rename this file to "sendemail-validate".
+#
+# By default, it will only check that the patch(es) can be applied on top of
+# the default upstream branch without conflicts in a secondary worktree. After
+# validation (successful or not) of the last patch of a series, the worktree
+# will be deleted.
+#
+# The following config variables can be set to change the default remote and
+# remote ref that are used to apply the patches against:
+#
+#   sendemail.validateRemote (default: origin)
+#   sendemail.validateRemoteRef (default: HEAD)
+#
+# Replace the TODO placeholders with appropriate checks according to your
+# needs.
+
+validate_cover_letter () {
+	file="$1"
+	# TODO: Replace with appropriate checks (e.g. spell checking).
+	true
+}
+
+validate_patch () {
+	file="$1"
+	# Ensure that the patch applies without conflicts.
+	git am -3 "$file" || return
+	# TODO: Replace with appropriate checks for this patch
+	# (e.g. checkpatch.pl).
+	true
+}
+
+validate_series () {
+	# TODO: Replace with appropriate checks for the whole series
+	# (e.g. quick build, coding style checks, etc.).
+	true
+}
+
+# main -------------------------------------------------------------------------
+
+if test "$GIT_SENDEMAIL_FILE_COUNTER" = 1
+then
+	remote=$(git config --default origin --get sendemail.validateRemote) &&
+	ref=$(git config --default HEAD --get sendemail.validateRemoteRef) &&
+	worktree=$(mktemp --tmpdir -d sendemail-validate.XXXXXXX) &&
+	git worktree add -fd --checkout "$worktree" "refs/remotes/$remote/$ref" &&
+	git config --replace-all sendemail.validateWorktree "$worktree"
+else
+	worktree=$(git config --get sendemail.validateWorktree)
+fi || {
+	echo "sendemail-validate: error: failed to prepare worktree" >&2
+	exit 1
+}
+
+unset GIT_DIR GIT_WORK_TREE
+cd "$worktree" &&
+
+if grep -q "^diff --git " "$1"
+then
+	validate_patch "$1"
+else
+	validate_cover_letter "$1"
+fi &&
+
+if test "$GIT_SENDEMAIL_FILE_COUNTER" = "$GIT_SENDEMAIL_FILE_TOTAL"
+then
+	git config --unset-all sendemail.validateWorktree &&
+	trap 'git worktree remove -ff "$worktree"' EXIT &&
+	validate_series
+fi
+</file>
+
+<file path="Edu_finder/.git/hooks/update.sample">
+#!/bin/sh
+#
+# An example hook script to block unannotated tags from entering.
+# Called by "git receive-pack" with arguments: refname sha1-old sha1-new
+#
+# To enable this hook, rename this file to "update".
+#
+# Config
+# ------
+# hooks.allowunannotated
+#   This boolean sets whether unannotated tags will be allowed into the
+#   repository.  By default they won't be.
+# hooks.allowdeletetag
+#   This boolean sets whether deleting tags will be allowed in the
+#   repository.  By default they won't be.
+# hooks.allowmodifytag
+#   This boolean sets whether a tag may be modified after creation. By default
+#   it won't be.
+# hooks.allowdeletebranch
+#   This boolean sets whether deleting branches will be allowed in the
+#   repository.  By default they won't be.
+# hooks.denycreatebranch
+#   This boolean sets whether remotely creating branches will be denied
+#   in the repository.  By default this is allowed.
+#
+
+# --- Command line
+refname="$1"
+oldrev="$2"
+newrev="$3"
+
+# --- Safety check
+if [ -z "$GIT_DIR" ]; then
+	echo "Don't run this script from the command line." >&2
+	echo " (if you want, you could supply GIT_DIR then run" >&2
+	echo "  $0 <ref> <oldrev> <newrev>)" >&2
+	exit 1
+fi
+
+if [ -z "$refname" -o -z "$oldrev" -o -z "$newrev" ]; then
+	echo "usage: $0 <ref> <oldrev> <newrev>" >&2
+	exit 1
+fi
+
+# --- Config
+allowunannotated=$(git config --type=bool hooks.allowunannotated)
+allowdeletebranch=$(git config --type=bool hooks.allowdeletebranch)
+denycreatebranch=$(git config --type=bool hooks.denycreatebranch)
+allowdeletetag=$(git config --type=bool hooks.allowdeletetag)
+allowmodifytag=$(git config --type=bool hooks.allowmodifytag)
+
+# check for no description
+projectdesc=$(sed -e '1q' "$GIT_DIR/description")
+case "$projectdesc" in
+"Unnamed repository"* | "")
+	echo "*** Project description file hasn't been set" >&2
+	exit 1
+	;;
+esac
+
+# --- Check types
+# if $newrev is 0000...0000, it's a commit to delete a ref.
+zero=$(git hash-object --stdin </dev/null | tr '[0-9a-f]' '0')
+if [ "$newrev" = "$zero" ]; then
+	newrev_type=delete
+else
+	newrev_type=$(git cat-file -t $newrev)
+fi
+
+case "$refname","$newrev_type" in
+	refs/tags/*,commit)
+		# un-annotated tag
+		short_refname=${refname##refs/tags/}
+		if [ "$allowunannotated" != "true" ]; then
+			echo "*** The un-annotated tag, $short_refname, is not allowed in this repository" >&2
+			echo "*** Use 'git tag [ -a | -s ]' for tags you want to propagate." >&2
+			exit 1
+		fi
+		;;
+	refs/tags/*,delete)
+		# delete tag
+		if [ "$allowdeletetag" != "true" ]; then
+			echo "*** Deleting a tag is not allowed in this repository" >&2
+			exit 1
+		fi
+		;;
+	refs/tags/*,tag)
+		# annotated tag
+		if [ "$allowmodifytag" != "true" ] && git rev-parse $refname > /dev/null 2>&1
+		then
+			echo "*** Tag '$refname' already exists." >&2
+			echo "*** Modifying a tag is not allowed in this repository." >&2
+			exit 1
+		fi
+		;;
+	refs/heads/*,commit)
+		# branch
+		if [ "$oldrev" = "$zero" -a "$denycreatebranch" = "true" ]; then
+			echo "*** Creating a branch is not allowed in this repository" >&2
+			exit 1
+		fi
+		;;
+	refs/heads/*,delete)
+		# delete branch
+		if [ "$allowdeletebranch" != "true" ]; then
+			echo "*** Deleting a branch is not allowed in this repository" >&2
+			exit 1
+		fi
+		;;
+	refs/remotes/*,commit)
+		# tracking branch
+		;;
+	refs/remotes/*,delete)
+		# delete tracking branch
+		if [ "$allowdeletebranch" != "true" ]; then
+			echo "*** Deleting a tracking branch is not allowed in this repository" >&2
+			exit 1
+		fi
+		;;
+	*)
+		# Anything else (is there anything else?)
+		echo "*** Update hook: unknown type of update to ref $refname of type $newrev_type" >&2
+		exit 1
+		;;
+esac
+
+# --- Finished
+exit 0
+</file>
+
+<file path="Edu_finder/.git/info/exclude">
+# git ls-files --others --exclude-from=.git/info/exclude
+# Lines that start with '#' are comments.
+# For a project mostly in C, the following would be a good set of
+# exclude patterns (uncomment them if you want to use them):
+# *.[oa]
+# *~
+</file>
+
+<file path="Edu_finder/.git/logs/HEAD">
+0000000000000000000000000000000000000000 56ece5b3abc1d3a5257bb53c8de9ac0bc858c233 mrrobot461 <leulyohannes00@gmail.com> 1774928907 +0300	commit (initial): EDU 1
+56ece5b3abc1d3a5257bb53c8de9ac0bc858c233 0000000000000000000000000000000000000000 mrrobot461 <leulyohannes00@gmail.com> 1774928956 +0300	Branch: renamed refs/heads/master to refs/heads/main
+0000000000000000000000000000000000000000 56ece5b3abc1d3a5257bb53c8de9ac0bc858c233 mrrobot461 <leulyohannes00@gmail.com> 1774928956 +0300	Branch: renamed refs/heads/master to refs/heads/main
+56ece5b3abc1d3a5257bb53c8de9ac0bc858c233 0b80fad5d6ec9e513ae6e2681fe6e3cc3178804f mrrobot461 <leulyohannes00@gmail.com> 1775880891 +0300	commit: added supa link rm all errrors
+0b80fad5d6ec9e513ae6e2681fe6e3cc3178804f a904c9b3c4191d5d0d8b3bf4020c3af5e19f48b5 mrrobot461 <leulyohannes00@gmail.com> 1776102494 +0300	commit: fixed images
+a904c9b3c4191d5d0d8b3bf4020c3af5e19f48b5 fb408e182cbbecfb49a96f7cf2c11649492de82c mrrobot461 <leulyohannes00@gmail.com> 1776159233 +0300	commit: changed Entire UI,added Auth
+fb408e182cbbecfb49a96f7cf2c11649492de82c 56438017c0b036fbef6803399f9731d6dc807ddc mrrobot461 <leulyohannes00@gmail.com> 1778411685 +0300	commit: attempt to fix signup error after hosting, fixed .env file
+56438017c0b036fbef6803399f9731d6dc807ddc 068b6ba0a04f578a23827cb7c80a2d099be6ee1a mrrobot461 <leulyohannes00@gmail.com> 1778415419 +0300	commit: added debugging code to auth file
+068b6ba0a04f578a23827cb7c80a2d099be6ee1a 879bbb22567b4777e237ee972851ab59eedb6caa mrrobot461 <leulyohannes00@gmail.com> 1778415575 +0300	commit: added auth to main
+879bbb22567b4777e237ee972851ab59eedb6caa 9eef9816382b1878e85710c3620dceb6fe9df69b mrrobot461 <leulyohannes00@gmail.com> 1778415909 +0300	commit: Clean up: Remove debug code from auth
+9eef9816382b1878e85710c3620dceb6fe9df69b f3ce1bfe17a5368a8c7fb428180e17ee0f20a1fc mrrobot461 <leulyohannes00@gmail.com> 1778416666 +0300	commit: Fix: Replace .single() with .maybeSingle() in category detail
+f3ce1bfe17a5368a8c7fb428180e17ee0f20a1fc cc39a7a61cbb153963782c3a5a15d8f887b57554 mrrobot461 <leulyohannes00@gmail.com> 1778417224 +0300	commit: Fix: Replace .single() with .maybeSingle() in Questionnaire and coursecards
+cc39a7a61cbb153963782c3a5a15d8f887b57554 a3a5ee127802a47a19b44b999748878fc6a288f1 mrrobot461 <leulyohannes00@gmail.com> 1778417285 +0300	commit: Fix: Replace .single() with .maybeSingle() in Questionnaire and coursecards-2
+a3a5ee127802a47a19b44b999748878fc6a288f1 444dd139f22d244684067ba69964f0407b7d01db mrrobot461 <leulyohannes00@gmail.com> 1778418800 +0300	commit: Fix: Complete working auth with session persistence
+444dd139f22d244684067ba69964f0407b7d01db 6164920bbf94abb68093db8f84a2480e5fc1ea42 mrrobot461 <leulyohannes00@gmail.com> 1778418855 +0300	pull origin main: Merge made by the 'ort' strategy.
+6164920bbf94abb68093db8f84a2480e5fc1ea42 df203d8b6b9e367f4f69e72e06722ee7afb4df0e mrrobot461 <leulyohannes00@gmail.com> 1778419275 +0300	commit: Complete working auth with session persistence
+</file>
+
+<file path="Edu_finder/.git/logs/refs/heads/main">
+0000000000000000000000000000000000000000 56ece5b3abc1d3a5257bb53c8de9ac0bc858c233 mrrobot461 <leulyohannes00@gmail.com> 1774928907 +0300	commit (initial): EDU 1
+56ece5b3abc1d3a5257bb53c8de9ac0bc858c233 56ece5b3abc1d3a5257bb53c8de9ac0bc858c233 mrrobot461 <leulyohannes00@gmail.com> 1774928956 +0300	Branch: renamed refs/heads/master to refs/heads/main
+56ece5b3abc1d3a5257bb53c8de9ac0bc858c233 0b80fad5d6ec9e513ae6e2681fe6e3cc3178804f mrrobot461 <leulyohannes00@gmail.com> 1775880891 +0300	commit: added supa link rm all errrors
+0b80fad5d6ec9e513ae6e2681fe6e3cc3178804f a904c9b3c4191d5d0d8b3bf4020c3af5e19f48b5 mrrobot461 <leulyohannes00@gmail.com> 1776102494 +0300	commit: fixed images
+a904c9b3c4191d5d0d8b3bf4020c3af5e19f48b5 fb408e182cbbecfb49a96f7cf2c11649492de82c mrrobot461 <leulyohannes00@gmail.com> 1776159233 +0300	commit: changed Entire UI,added Auth
+fb408e182cbbecfb49a96f7cf2c11649492de82c 56438017c0b036fbef6803399f9731d6dc807ddc mrrobot461 <leulyohannes00@gmail.com> 1778411685 +0300	commit: attempt to fix signup error after hosting, fixed .env file
+56438017c0b036fbef6803399f9731d6dc807ddc 068b6ba0a04f578a23827cb7c80a2d099be6ee1a mrrobot461 <leulyohannes00@gmail.com> 1778415419 +0300	commit: added debugging code to auth file
+068b6ba0a04f578a23827cb7c80a2d099be6ee1a 879bbb22567b4777e237ee972851ab59eedb6caa mrrobot461 <leulyohannes00@gmail.com> 1778415575 +0300	commit: added auth to main
+879bbb22567b4777e237ee972851ab59eedb6caa 9eef9816382b1878e85710c3620dceb6fe9df69b mrrobot461 <leulyohannes00@gmail.com> 1778415909 +0300	commit: Clean up: Remove debug code from auth
+9eef9816382b1878e85710c3620dceb6fe9df69b f3ce1bfe17a5368a8c7fb428180e17ee0f20a1fc mrrobot461 <leulyohannes00@gmail.com> 1778416666 +0300	commit: Fix: Replace .single() with .maybeSingle() in category detail
+f3ce1bfe17a5368a8c7fb428180e17ee0f20a1fc cc39a7a61cbb153963782c3a5a15d8f887b57554 mrrobot461 <leulyohannes00@gmail.com> 1778417224 +0300	commit: Fix: Replace .single() with .maybeSingle() in Questionnaire and coursecards
+cc39a7a61cbb153963782c3a5a15d8f887b57554 a3a5ee127802a47a19b44b999748878fc6a288f1 mrrobot461 <leulyohannes00@gmail.com> 1778417285 +0300	commit: Fix: Replace .single() with .maybeSingle() in Questionnaire and coursecards-2
+a3a5ee127802a47a19b44b999748878fc6a288f1 444dd139f22d244684067ba69964f0407b7d01db mrrobot461 <leulyohannes00@gmail.com> 1778418800 +0300	commit: Fix: Complete working auth with session persistence
+444dd139f22d244684067ba69964f0407b7d01db 6164920bbf94abb68093db8f84a2480e5fc1ea42 mrrobot461 <leulyohannes00@gmail.com> 1778418855 +0300	pull origin main: Merge made by the 'ort' strategy.
+6164920bbf94abb68093db8f84a2480e5fc1ea42 df203d8b6b9e367f4f69e72e06722ee7afb4df0e mrrobot461 <leulyohannes00@gmail.com> 1778419275 +0300	commit: Complete working auth with session persistence
+</file>
+
+<file path="Edu_finder/.git/logs/refs/remotes/origin/main">
+0000000000000000000000000000000000000000 56ece5b3abc1d3a5257bb53c8de9ac0bc858c233 mrrobot461 <leulyohannes00@gmail.com> 1774929005 +0300	update by push
+56ece5b3abc1d3a5257bb53c8de9ac0bc858c233 a904c9b3c4191d5d0d8b3bf4020c3af5e19f48b5 mrrobot461 <leulyohannes00@gmail.com> 1776102584 +0300	update by push
+a904c9b3c4191d5d0d8b3bf4020c3af5e19f48b5 068b6ba0a04f578a23827cb7c80a2d099be6ee1a mrrobot461 <leulyohannes00@gmail.com> 1778415446 +0300	update by push
+068b6ba0a04f578a23827cb7c80a2d099be6ee1a 879bbb22567b4777e237ee972851ab59eedb6caa mrrobot461 <leulyohannes00@gmail.com> 1778415583 +0300	update by push
+879bbb22567b4777e237ee972851ab59eedb6caa 9eef9816382b1878e85710c3620dceb6fe9df69b mrrobot461 <leulyohannes00@gmail.com> 1778415928 +0300	update by push
+9eef9816382b1878e85710c3620dceb6fe9df69b f3ce1bfe17a5368a8c7fb428180e17ee0f20a1fc mrrobot461 <leulyohannes00@gmail.com> 1778416674 +0300	update by push
+f3ce1bfe17a5368a8c7fb428180e17ee0f20a1fc cc39a7a61cbb153963782c3a5a15d8f887b57554 mrrobot461 <leulyohannes00@gmail.com> 1778417234 +0300	update by push
+cc39a7a61cbb153963782c3a5a15d8f887b57554 a3a5ee127802a47a19b44b999748878fc6a288f1 mrrobot461 <leulyohannes00@gmail.com> 1778417297 +0300	update by push
+a3a5ee127802a47a19b44b999748878fc6a288f1 0d32bd48902a5e73e8cf4c37a6a3d5a7e66ede89 mrrobot461 <leulyohannes00@gmail.com> 1778418854 +0300	pull origin main: fast-forward
+0d32bd48902a5e73e8cf4c37a6a3d5a7e66ede89 6164920bbf94abb68093db8f84a2480e5fc1ea42 mrrobot461 <leulyohannes00@gmail.com> 1778418901 +0300	update by push
+6164920bbf94abb68093db8f84a2480e5fc1ea42 df203d8b6b9e367f4f69e72e06722ee7afb4df0e mrrobot461 <leulyohannes00@gmail.com> 1778419291 +0300	update by push
+</file>
+
+<file path="Edu_finder/.git/ORIG_HEAD">
+444dd139f22d244684067ba69964f0407b7d01db
+</file>
+
+<file path="Edu_finder/.git/refs/heads/main">
+df203d8b6b9e367f4f69e72e06722ee7afb4df0e
+</file>
+
+<file path="Edu_finder/.git/refs/remotes/origin/main">
+df203d8b6b9e367f4f69e72e06722ee7afb4df0e
+</file>
+
+<file path="Edu_finder/.gitignore">
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.local
+</file>
+
+<file path="Edu_finder/context.md">
 # Project Context: EduFinder (Full Specification)
 
 ## 1. Project Overview
@@ -250,261 +1308,327 @@ export default MyLearningPage;
 4.  [cite_start]**Backend & API Integration:** Node.js/Express setup and MongoDB connection[cite: 66].
 </file>
 
-<file path="metadata.json">
-{
-  "name": "EduFinder",
-  "description": "Discover thousands of free courses from Coursera, edX, Khan Academy, and FutureLearn in one place.",
-  "requestFramePermissions": []
-}
+<file path="Edu_finder/Documentation.md">
+# EduFinder – Documentation
+
+## 1. Overview
+
+**EduFinder** is a web-based platform that helps learners discover and save free online courses from multiple providers (Coursera, edX, Khan Academy, FutureLearn). It offers a questionnaire‑based personalization, category browsing, and a “My Learning” area where users can bookmark courses for later.
+
+The application is built with **React (TypeScript)** and **Supabase** as the backend (authentication + database). No internal course hosting – users are redirected to the original provider.
+
+---
+
+## 2. Features
+
+- 🔍 **Aggregated course discovery** – browse by category or search (search UI is present, backend integration can be extended).
+- 📚 **Category pages** – each category shows its own set of courses.
+- ❤️ **Save courses** – authenticated users can bookmark courses into “My Learning”.
+- 📝 **Questionnaire** – users can store learning preferences (category, skill level, goal, etc.) in their profile.
+- 🔐 **Authentication** – email/password sign‑up and sign‑in via Supabase Auth.
+- 🎨 **Modern dark‑mode UI** – Tailwind CSS + Framer Motion animations.
+
+---
+
+## 3. Tech Stack
+
+| Layer          | Technology                                                                 |
+|----------------|----------------------------------------------------------------------------|
+| Frontend       | React 19, TypeScript, Vite, Tailwind CSS 4, Framer Motion, Lucide React    |
+| Routing        | React Router DOM 7                                                         |
+| Backend (BaaS) | **Supabase** – PostgreSQL database + authentication (Row Level Security)   |
+| Icons          | Lucide React (mapped via `iconMap.ts`)                                     |
+| Build tool     | Vite 6                                                                     |
+| Package manager| npm (see `package.json`)                                                   |
+
+---
+
+## 4. Project Structure
+
+```
+EduFinder/
+├── .env.local                 # Supabase keys (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)
+├── .gitignore
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+├── index.html
+├── metadata.json              # AI Studio metadata
+├── context.md                 # Original project spec (can be ignored)
+├── README.md                  # Original placeholder
+│
+└── src/
+    ├── main.tsx               # Entry point, wraps App with AuthProvider
+    ├── App.tsx                # Routes + Navbar + Footer
+    ├── index.css              # Global Tailwind + custom CSS variables
+    ├── types.ts               # Course, Category interfaces
+    │
+    ├── lib/
+    │   ├── supabase.ts        # Supabase client initialisation
+    │   └── iconMap.ts         # Maps category icon names to Lucide components
+    │
+    ├── contexts/
+    │   └── AuthContext.tsx    # Supabase auth state provider (useAuth hook)
+    │
+    ├── components/
+    │   ├── Navbar.tsx
+    │   ├── CategoryCard.tsx
+    │   └── CourseCard.tsx     # Includes save/un‑save heart button
+    │
+    └── pages/
+        ├── HomePage.tsx       # Hero, featured categories, popular courses
+        ├── CategoriesPage.tsx # List all categories with tabs
+        ├── CategoryDetailPage.tsx  # Courses filtered by category
+        ├── MyLearningPage.tsx      # Saved courses for authenticated user
+        ├── Questionnaire.tsx       # Learning preferences form (Upsert to user_profiles)
+        └── AuthPage.tsx            # Sign in / Sign up
+```
+
+---
+
+## 5. Database Schema (Supabase)
+
+Based on the code, the following tables are expected:
+
+### `categories`
+| Column       | Type      | Description                       |
+|--------------|-----------|-----------------------------------|
+| `id`         | text (PK) | e.g., 'tech', 'business'          |
+| `name`       | text      | Display name                      |
+| `description`| text      | Short description                 |
+| `icon_name`  | text      | Maps to Lucide icon via iconMap.ts|
+
+### `courses`
+| Column        | Type      | Description                         |
+|---------------|-----------|-------------------------------------|
+| `id`          | text (PK) | Course identifier                   |
+| `title`       | text      |                                     |
+| `provider`    | text      | e.g., 'Coursera'                    |
+| `duration`    | text      | e.g., '24h total'                   |
+| `level`       | text      | 'Beginner' / 'Intermediate' / 'Advanced' |
+| `description` | text      |                                     |
+| `image`       | text      | Unsplash / external URL             |
+| `url`         | text      | Direct link to course               |
+| `category_id` | text (FK) | References `categories.id`          |
+
+### `saved_courses` (many‑to‑many between users and courses)
+| Column        | Type      | Description                         |
+|---------------|-----------|-------------------------------------|
+| `id`          | (optional, can be composite) |   |
+| `user_id`     | uuid (FK) | References `auth.users`             |
+| `course_id`   | text (FK) | References `courses.id`             |
+| `created_at`  | timestamp | Default `now()`                     |
+
+> *Note: The code uses `user_id` and `course_id` without an explicit `id` column – Supabase automatically adds a primary key if not defined.*
+
+### `user_profiles` (store questionnaire answers)
+| Column          | Type      | Description                         |
+|-----------------|-----------|-------------------------------------|
+| `user_id`       | uuid (PK) | References `auth.users`             |
+| `category`      | text      | e.g., 'tech'                        |
+| `skill_level`   | text      | 'Beginner' / 'Intermediate' / 'Advanced' |
+| `reason`        | text      | 'Employment' / 'Supplement' / 'General' |
+| `weekly_hours`  | integer   |                                     |
+| `goal`          | text      | free text                           |
+| `experience`    | text      | 'None' / 'Minor' / 'Familiar' / 'Expert' |
+| `updated_at`    | timestamp |                                     |
+
+---
+
+## 6. Environment Variables
+
+Create a `.env.local` file in the root:
+
+```env
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+```
+
+> The current configuration (from the provided files) points to a specific Supabase instance. For a new deployment, replace with your own Supabase project keys.
+
+---
+
+## 7. Setup & Installation
+
+### Prerequisites
+- Node.js (v18+)
+- npm
+
+### Steps
+
+1. **Clone the repository**
+   ```bash
+   git clone <repo-url>
+   cd EduFinder
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up Supabase**
+   - Create a new Supabase project.
+   - Run the SQL schema (see below) in the Supabase SQL editor.
+   - Copy your project URL and anon key into `.env.local`.
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+   The app will be available at `http://localhost:3000`.
+
+---
+
+## 8. Database Setup SQL (Run once in Supabase)
+
+```sql
+-- Create tables
+CREATE TABLE IF NOT EXISTS categories (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  description TEXT NOT NULL,
+  icon_name TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS courses (
+  id TEXT PRIMARY KEY,
+  title TEXT NOT NULL,
+  provider TEXT NOT NULL,
+  duration TEXT NOT NULL,
+  level TEXT NOT NULL,
+  description TEXT NOT NULL,
+  image TEXT NOT NULL,
+  url TEXT NOT NULL,
+  category_id TEXT REFERENCES categories(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS saved_courses (
+  id BIGSERIAL PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  course_id TEXT REFERENCES courses(id) ON DELETE CASCADE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+  UNIQUE(user_id, course_id)
+);
+
+CREATE TABLE IF NOT EXISTS user_profiles (
+  user_id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  category TEXT,
+  skill_level TEXT,
+  reason TEXT,
+  weekly_hours INTEGER,
+  goal TEXT,
+  experience TEXT,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT now()
+);
+
+-- Insert sample categories (12 entries from your script)
+INSERT INTO categories (id, name, icon_name, description) VALUES
+  ('tech', 'Tech', 'Terminal', 'Coding, AI, Cybersecurity, and Cloud Computing.'),
+  ('business', 'Business', 'Briefcase', 'Entrepreneurship, Finance, and Management.'),
+  ('science', 'Science', 'FlaskConical', 'Physics, Biology, Chemistry, and Astronomy.'),
+  ('design', 'Design', 'Palette', 'UI/UX, Graphic Design, and Motion Graphics.'),
+  ('languages', 'Languages', 'Languages', 'Spanish, French, Mandarin, and more.'),
+  ('arts', 'Arts', 'Theater', 'History, Literature, and Philosophy.'),
+  ('marketing', 'Marketing', 'Megaphone', 'Digital Marketing, SEO, and Brand Strategy.'),
+  ('health', 'Health', 'Heart', 'Nutrition, Fitness, and Mental Wellness.'),
+  ('personal-dev', 'Personal Dev', 'User', 'Productivity, Leadership, and Soft Skills.'),
+  ('math', 'Math', 'Calculator', 'Calculus, Statistics, and Discrete Math.'),
+  ('music', 'Music', 'Music', 'Theory, Production, and Instrument Mastery.'),
+  ('photography', 'Photography', 'Camera', 'Composition, Lighting, and Post-Processing.')
+ON CONFLICT (id) DO NOTHING;
+
+-- Insert a few sample courses (you can add more from your original INSERT script)
+INSERT INTO courses (id, title, provider, duration, level, description, image, url, category_id) VALUES
+  ('1','Neural Networks 101','Coursera','24h total','Intermediate','Master the fundamentals of deep learning...','https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80','https://www.coursera.org/learn/neural-networks-deep-learning','tech'),
+  ('2','Python for Data Science','Coursera','30h total','Beginner','Start your journey into data analysis...','https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80','https://www.coursera.org/learn/python-for-applied-data-science','tech')
+ON CONFLICT (id) DO NOTHING;
+```
+
+> **Important**: Enable Row Level Security (RLS) and create policies for `saved_courses` and `user_profiles` so that users can only access their own rows. Example policy:
+> ```sql
+> CREATE POLICY "Users can manage their own saved courses"
+>   ON saved_courses FOR ALL USING (auth.uid() = user_id);
+> ```
+
+---
+
+## 9. Available Scripts
+
+| Command          | Description                                      |
+|------------------|--------------------------------------------------|
+| `npm run dev`    | Starts Vite dev server on port 3000              |
+| `npm run build`  | Builds the production bundle to `dist/`          |
+| `npm run preview`| Serves the production build locally              |
+| `npm run lint`   | Runs TypeScript type checking without emitting   |
+| `npm run clean`  | Deletes the `dist/` folder                       |
+
+---
+
+## 10. Key Implementation Details
+
+### Authentication Flow
+- `AuthContext` provides `user`, `session`, and `signOut`.
+- Protected routes (e.g., `/my-learning`, `/questionnaire`) check `user` and show a login prompt if not authenticated.
+
+### Save/Unsave Courses
+- `CourseCard` fetches saved status for the current user using a `saved_courses` query.
+- Clicking the heart toggles insertion/deletion in `saved_courses`.
+
+### Questionnaire Persistence
+- On page load, the questionnaire reads existing data from `user_profiles`.
+- On submit, it performs an `upsert` (insert or update) based on `user_id`.
+
+### Icon Mapping
+- `iconMap.ts` maps database `icon_name` (e.g., `'Terminal'`) to a Lucide React component.
+- Fallback is `HelpCircle`.
+
+---
+
+## 11. Deployment
+
+The project is ready to be deployed on **Netlify**, **Vercel**, or any static host that supports single‑page apps (SPA).
+
+### Deploy to Netlify
+1. Build the project: `npm run build`
+2. Deploy the `dist/` folder.
+3. Set environment variables `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in Netlify’s UI.
+4. Configure redirects for client‑side routing: create a `_redirects` file in `public/` with:
+   ```
+   /* /index.html 200
+   ```
+
+### Deploy to Vercel
+- Connect the Git repository – Vercel automatically detects Vite and sets the build command.
+
+---
+
+## 12. Future Improvements (from original spec)
+
+- Full‑text search across courses (currently only a UI placeholder).
+- Recommendation engine based on questionnaire answers.
+- Integration with external course APIs (Coursera, edX) to keep data fresh.
+- Progress tracking and completion certificates.
+
+---
+
+## 13. Troubleshooting
+
+| Error                                   | Solution                                                         |
+|-----------------------------------------|------------------------------------------------------------------|
+| `relation "categories" already exists`  | Use `CREATE TABLE IF NOT EXISTS` or drop tables first (see SQL above). |
+| `saved_courses` or `user_profiles` missing | Create the tables using the provided schema.                  |
+| User cannot save courses (RLS error)    | Enable RLS and add policies that allow `auth.uid() = user_id`.   |
+| Environment variables not loaded        | Ensure `.env.local` exists and variables are prefixed with `VITE_`. |
+
+---
+
+## 14. License
+
+This project is for educational/demo purposes. All external course links and provider trademarks are property of their respective owners.
 </file>
 
-<file path="README.md">
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
-
-# Run and deploy your AI Studio app
-
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/4f02ea99-4a29-4d73-93e0-7f430a354365
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
-</file>
-
-<file path="src/contexts/AuthContext.tsx">
-// src/contexts/AuthContext.tsx
-import { createContext, useContext, useEffect, useState } from 'react';
-import { Session, User } from '@supabase/supabase-js';
-import { supabase } from '../lib/supabase';
-
-// Define what data our context will hold
-interface AuthContextType {
-  session: Session | null;
-  user: User | null;
-  signOut: () => Promise<void>;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [session, setSession] = useState<Session | null>(null);
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    // 1. Get the session when the app loads
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-    });
-
-    // 2. Listen for changes (like when a user logs in or out)
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-    });
-
-    // Cleanup the listener when the app closes
-    return () => subscription.unsubscribe();
-  }, []);
-
-  const signOut = async () => {
-    await supabase.auth.signOut();
-  };
-
-  return (
-    <AuthContext.Provider value={{ session, user, signOut }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
-
-// Custom hook to easily use this context in other files
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
-</file>
-
-<file path="src/pages/AuthPage.tsx">
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { supabase } from '../lib/supabase';
-
-const AuthPage = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
-
-  const handleAuth = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    try {
-      if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-        navigate('/');
-      } else {
-        const { error } = await supabase.auth.signUp({ email, password });
-        if (error) throw error;
-        alert('Success! Check your email for a confirmation link.');
-      }
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="section-block"
-    >
-      <div className="layout-container max-w-md mx-auto">
-        <div className="card">
-          <h1 className="text-3xl font-semibold text-primary text-center mb-6">
-            {isLogin ? 'Welcome Back' : 'Create Account'}
-          </h1>
-
-          {error && (
-            <div className="mb-6 rounded-xl border border-red-500/20 bg-[#621e1e] p-4 text-sm text-red-300">
-              {error}
-            </div>
-          )}
-
-          <form onSubmit={handleAuth} className="space-y-6">
-            <div>
-              <label className="block text-sm font-semibold text-primary mb-2">Email</label>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input-field"
-                placeholder="you@example.com"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-primary mb-2">Password</label>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input-field"
-                placeholder="••••••••"
-              />
-            </div>
-
-            <button type="submit" disabled={loading} className="btn-primary w-full">
-              {loading ? 'Processing...' : isLogin ? 'Sign In' : 'Sign Up'}
-            </button>
-          </form>
-
-          <div className="mt-6 text-center">
-            <button
-              type="button"
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-secondary text-sm hover:text-primary transition-colors"
-            >
-              {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
-            </button>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-export default AuthPage;
-</file>
-
-<file path="src/types.ts">
-export interface Course {
-  id: string;
-  title: string;
-  provider: string;
-  duration: string;
-  level: 'Beginner' | 'Intermediate' | 'Advanced';
-  description: string;
-  image: string;
-  categoryId: string;
-  url: string;
-}
-
-export interface Category {
-  id: string;
-  name: string;
-  icon: React.ElementType;
-  description: string;
-}
-</file>
-
-<file path="vite.config.ts">
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
-import {defineConfig, loadEnv} from 'vite';
-
-export default defineConfig(({mode}) => {
-  const env = loadEnv(mode, '.', '');
-  return {
-    plugins: [react(), tailwindcss()],
-    define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-    },
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
-    },
-    server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
-      hmr: process.env.DISABLE_HMR !== 'true',
-    },
-  };
-});
-</file>
-
-<file path=".env.local">
-VITE_SUPABASE_URL="https://eilkqecvhedgqeqhioza.supabase.co"
-VITE_SUPABASE_ANON_KEY="sb_publishable_7saIdAzBaEmLvpMXYsns7g_Vs_zsIIM"
-</file>
-
-<file path=".gitignore">
-node_modules/
-build/
-dist/
-coverage/
-.DS_Store
-*.log
-.env*
-!.env.local
-</file>
-
-<file path="index.html">
+<file path="Edu_finder/index.html">
 <!doctype html>
 <html lang="en">
   <head>
@@ -519,7 +1643,128 @@ coverage/
 </html>
 </file>
 
-<file path="src/components/CategoryCard.tsx">
+<file path="Edu_finder/metadata.json">
+{
+  "name": "EduFinder",
+  "description": "Discover thousands of free courses from Coursera, edX, Khan Academy, and FutureLearn in one place.",
+  "requestFramePermissions": []
+}
+</file>
+
+<file path="Edu_finder/package.json">
+{
+  "name": "react-example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "clean": "rm -rf dist",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^1.29.0",
+    "@supabase/supabase-js": "^2.103.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.13.2",
+    "vite": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.4.21",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}
+</file>
+
+<file path="Edu_finder/README.md">
+
+</file>
+
+<file path="Edu_finder/src/App.tsx">
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import Navbar from './components/Navbar';
+import HomePage from './pages/HomePage';
+import CategoriesPage from './pages/CategoriesPage';
+import CategoryDetailPage from './pages/CategoryDetailPage';
+import QuestionnairePage from './pages/Questionaire';
+import AuthPage from './pages/AuthPage';
+import MyLearningPage from './pages/MyLearningPage';
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-main text-primary">
+        <Navbar />
+
+        <main className="pt-24">
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/categories" element={<CategoriesPage />} />
+              <Route path="/category/:id" element={<CategoryDetailPage />} />
+              <Route path="/questionnaire" element={<QuestionnairePage />} />
+              <Route path="/auth" element={<AuthPage />} />
+              <Route path="/my-learning" element={<MyLearningPage />} />
+            </Routes>
+          </AnimatePresence>
+        </main>
+
+        <footer className="bg-main border-t border-border-subtle py-20">
+          <div className="layout-container flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+              <Link to="/" className="text-xl font-semibold text-primary tracking-tight">
+                EduFinder
+              </Link>
+              <p className="text-muted text-xs uppercase tracking-[0.2em] mt-2">
+                © 2026 EduFinder • Built for focused learning
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-6 text-sm text-secondary">
+              <Link to="/categories" className="nav-link">
+                Categories
+              </Link>
+              <Link to="/my-learning" className="nav-link">
+                My Courses
+              </Link>
+              <Link to="/" className="nav-link">
+                About
+              </Link>
+              <Link to="/questionnaire" className='nav-link'>
+                Questionnaire
+              </Link>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </BrowserRouter>
+  );
+}
+</file>
+
+<file path="Edu_finder/src/components/CategoryCard.tsx">
 // src/components/CategoryCard.tsx
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -551,7 +1796,7 @@ const CategoryCard = ({ category }: { category: Category }) => {
 export default CategoryCard;
 </file>
 
-<file path="src/components/CourseCard.tsx">
+<file path="Edu_finder/src/components/CourseCard.tsx">
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Clock, Heart } from 'lucide-react';
@@ -574,7 +1819,7 @@ const CourseCard = ({ course }: { course: Course }) => {
         .select('id')
         .eq('user_id', user.id)
         .eq('course_id', course.id)
-        .single();
+        .maybeSingle();
       
       if (data) setIsSaved(true);
     };
@@ -678,18 +1923,15 @@ const CourseCard = ({ course }: { course: Course }) => {
 export default CourseCard;
 </file>
 
-<file path="src/components/Navbar.tsx">
-// src/components/Navbar.tsx
+<file path="Edu_finder/src/components/Navbar.tsx">
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 const NAV_LINKS = [
   { label: 'Explore', to: '/' },
   { label: 'Categories', to: '/categories' },
-  { label: 'My learning', to: '/my-learning'},
-  { label: 'Questionnaire', to: '/questionnaire'},
-  { label: 'About', to: '/' }
-  
+  { label: 'My Learning', to: '/my-learning' },
+  { label: 'Questionnaire', to: '/questionnaire' },
 ];
 
 const Navbar = () => {
@@ -727,9 +1969,9 @@ const Navbar = () => {
               <Link to="/auth" className="nav-link">
                 Sign in
               </Link>
-             <Link to="/auth?mode=signup" className="btn-primary">
-  Get Started
-</Link>
+              <Link to="/auth" className="btn-primary">
+                Get Started
+              </Link>
             </>
           ) : (
             <div className="flex items-center gap-3">
@@ -750,252 +1992,351 @@ const Navbar = () => {
 export default Navbar;
 </file>
 
-<file path="src/index.css">
+<file path="Edu_finder/src/contexts/AuthContext.tsx">
+// src/contexts/AuthContext.tsx
+import { createContext, useContext, useEffect, useState } from 'react';
+import { Session, User } from '@supabase/supabase-js';
+import { supabase } from '../lib/supabase';
+
+// Define what data our context will hold
+interface AuthContextType {
+  session: Session | null;
+  user: User | null;
+  signOut: () => Promise<void>;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    // 1. Get the session when the app loads
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+    });
+
+    // 2. Listen for changes (like when a user logs in or out)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+    });
+
+    // Cleanup the listener when the app closes
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+  };
+
+  return (
+    <AuthContext.Provider value={{ session, user, signOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+// Custom hook to easily use this context in other files
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+</file>
+
+<file path="Edu_finder/src/index.css">
 @import "tailwindcss";
 
-:root {
-  --bg-main: #0B0F14;
-  --bg-surface: #12171D;
-  --bg-elevated: #171C23;
-  --border-subtle: #252B33;
-
-  --text-primary: #E5E7EB;
-  --text-secondary: #9CA3AF;
-  --text-muted: #6B7280;
-
-  --accent: #4F46E5;
-  --accent-hover: #4338CA;
+@theme {
+  --color-surface-dim: #060e20;
+  --color-surface-bright: #1f2b49;
+  --color-surface-container-lowest: #000000;
+  --color-surface-container-low: #091328;
+  --color-surface-container: #0f1930;
+  --color-surface-container-high: #141f38;
+  --color-surface-container-highest: #192540;
+  
+  --color-on-surface: #dee5ff;
+  --color-on-surface-variant: #a3aac4;
+  
+  --color-primary: #85adff;
+  --color-primary-dim: #699cff;
+  --color-primary-container: #6e9fff;
+  --color-on-primary: #002c66;
+  
+  --color-secondary: #8097ff;
+  --color-secondary-container: #213da1;
+  --color-on-secondary-container: #c5ceff;
+  
+  --color-tertiary: #fbabff;
+  --color-outline: #6d758c;
+  --color-outline-variant: #40485d;
 
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 16px;
+@layer utilities {
+  .glass-nav {
+    background: rgba(6, 14, 32, 0.6);
+    backdrop-filter: blur(24px);
+  }
+  
+  .editorial-shadow {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+  
+  .ghost-border {
+    outline: 1px solid rgba(64, 72, 93, 0.15);
+  }
+  
+  .primary-gradient {
+    background: linear-gradient(135deg, #85adff 0%, #6e9fff 100%);
+  }
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: var(--bg-main);
-  color: var(--text-primary);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
+  @apply bg-surface-dim text-on-surface font-sans antialiased selection:bg-primary-container selection:text-on-primary;
 }
 
-::selection {
-  background-color: var(--accent);
-  color: white;
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.layout-container {
-  width: min(1100px, 100%);
-  margin: 0 auto;
-  padding: 0 24px;
+::-webkit-scrollbar-track {
+  @apply bg-surface-dim;
 }
 
-.section-block {
-  padding-top: 64px;
-  padding-bottom: 64px;
+::-webkit-scrollbar-thumb {
+  @apply bg-surface-container-highest rounded-full hover:bg-outline/50 transition-colors;
 }
 
-.card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 14px;
-  padding: 20px;
-}
-
-.card-hover {
-  transition: transform 150ms ease, border-color 150ms ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-2px);
-  border-color: #313942;
-}
-
-.bg-main {
-  background: var(--bg-main);
-}
-
-.bg-surface {
-  background: var(--bg-surface);
-}
-
-.bg-elevated {
-  background: var(--bg-elevated);
-}
-
-.text-primary {
-  color: var(--text-primary);
-}
-
-.text-accent {
-  color: var(--accent);
-}
-
-.border-border-subtle {
-  border-color: var(--border-subtle);
-}
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--accent);
-  color: white;
-  border-radius: 10px;
-  padding: 10px 16px;
-  border: none;
-  cursor: pointer;
-  transition: background 150ms ease, transform 150ms ease;
-}
-
-.btn-primary:hover,
-.btn-primary:focus-visible {
-  background: var(--accent-hover);
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+::-webkit-scrollbar-corner {
   background: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
-  padding: 10px 16px;
-  cursor: pointer;
-  transition: background 150ms ease, transform 150ms ease;
-}
-
-.input-field {
-  width: 100%;
-  background: #0F141A;
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
-  padding: 10px 14px;
-  color: var(--text-primary);
-  font-size: 1rem;
-  transition: border-color 150ms ease;
-}
-
-.input-field:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-
-.tab-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: transparent;
-  color: var(--text-secondary);
-  border: 1px solid transparent;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: background 150ms ease, color 150ms ease;
-}
-
-.tab-pill-active {
-  background: var(--bg-elevated);
-  color: var(--text-primary);
-}
-
-.breadcrumb {
-  color: var(--text-muted);
-  font-size: 14px;
-}
-
-.navbar {
-  height: 64px;
-  background: var(--bg-main);
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.nav-link {
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: color 150ms ease;
-}
-
-.nav-link:hover,
-.nav-link.active {
-  color: var(--text-primary);
-}
-
-h1 {
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 1.05;
-  margin: 0;
-}
-
-h2 {
-  font-size: 28px;
-  font-weight: 600;
-  margin: 0;
-}
-
-h3 {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0;
-}
-
-p,
-label,
-button,
-input,
-select,
-textarea {
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.text-secondary {
-  color: var(--text-secondary);
-}
-
-.text-muted {
-  color: var(--text-muted);
 }
 </file>
 
-<file path="src/lib/supabase.ts">
+<file path="Edu_finder/src/lib/iconMap.ts">
+// src/lib/iconMap.ts
+import { 
+  Terminal, 
+  Briefcase, 
+  FlaskConical, 
+  Palette, 
+  Languages, 
+  Theater, 
+  Megaphone, 
+  Heart, 
+  User, 
+  Calculator, 
+  Music, 
+  Camera, 
+  HelpCircle,
+  Code,
+  Activity,
+  Globe,
+  TrendingUp,
+  Type
+} from 'lucide-react';
+
+const icons: Record<string, React.ComponentType<any>> = {
+  terminal: Terminal,
+  tech: Code,
+  business: Briefcase,
+  science: FlaskConical,
+  design: Palette,
+  languages: Languages,
+  marketing: TrendingUp,
+  health: Activity,
+  math: Calculator,
+  arts: Type,
+  default: HelpCircle
+};
+
+export const getIconComponent = (iconName: string | null | undefined) => {
+  if (!iconName) return HelpCircle;
+  return icons[iconName.toLowerCase()] || HelpCircle;
+};
+
+export default getIconComponent;
+</file>
+
+<file path="Edu_finder/src/lib/supabase.ts">
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+    storage: localStorage,
+  },
+});
+
+// Log auth events for debugging (remove later)
+supabase.auth.onAuthStateChange((event, session) => {
+  console.log('🔐 Supabase Auth Event:', event, session?.user?.email);
+});
 </file>
 
-<file path="src/main.tsx">
-// src/main.tsx
+<file path="Edu_finder/src/main.tsx">
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
-import { AuthProvider } from './contexts/AuthContext.tsx'; // ADD THIS
+import { AuthProvider } from './contexts/AuthContext.tsx';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AuthProvider> {/* WRAP APP WITH THIS */}
+    <AuthProvider>
       <App />
     </AuthProvider>
   </StrictMode>,
 );
 </file>
 
-<file path="src/pages/CategoriesPage.tsx">
-// src/pages/CategoriesPage.tsx
+<file path="Edu_finder/src/pages/AuthPage.tsx">
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { supabase } from '../lib/supabase';
+
+const AuthPage = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleAuth = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      if (isLogin) {
+        // Clear any existing session first
+        await supabase.auth.signOut();
+        
+        // Sign in
+        const { error } = await supabase.auth.signInWithPassword({ 
+          email, 
+          password 
+        });
+        
+        if (error) throw error;
+        
+        // Force hard reload to home page
+        window.location.href = '/';
+        
+      } else {
+        // Sign up
+        const { error } = await supabase.auth.signUp({ 
+          email, 
+          password,
+          options: { 
+            emailRedirectTo: window.location.origin 
+          }
+        });
+        
+        if (error) throw error;
+        
+        alert('Check your email for the confirmation link!');
+        setEmail('');
+        setPassword('');
+      }
+    } catch (err: any) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="pt-48 pb-32 px-4"
+    >
+      <div className="max-w-md mx-auto">
+        <div className="bg-surface-container-high rounded-2xl p-8 shadow-xl border border-outline/20">
+          <h1 className="text-3xl font-bold text-center mb-8">
+            {isLogin ? 'Welcome Back' : 'Create Account'}
+          </h1>
+
+          {error && (
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleAuth} className="space-y-5">
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-surface-container-highest border border-outline/20 focus:outline-none focus:border-primary transition-colors"
+                placeholder="you@example.com"
+                disabled={loading}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                Password
+              </label>
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-surface-container-highest border border-outline/20 focus:outline-none focus:border-primary transition-colors"
+                placeholder="••••••••"
+                disabled={loading}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? 'Processing...' : isLogin ? 'Sign In' : 'Sign Up'}
+            </button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <button
+              type="button"
+              onClick={() => setIsLogin(!isLogin)}
+              className="text-sm text-primary hover:underline transition-all"
+              disabled={loading}
+            >
+              {isLogin 
+                ? "Don't have an account? Sign up" 
+                : "Already have an account? Sign in"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default AuthPage;
+</file>
+
+<file path="Edu_finder/src/pages/CategoriesPage.tsx">
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -1004,19 +2345,20 @@ import { supabase } from '../lib/supabase';
 import { Category } from '../types';
 import CategoryCard from '../components/CategoryCard';
 
-const TABS = ["All", "Tech", "Business", "Design", "Health"];
-
 const CategoriesPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [activeTab, setActiveTab] = useState("All");
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    // Fetch categories from Supabase!
     const fetchCategories = async () => {
       const { data, error } = await supabase.from('categories').select('*');
+      if (error) {
+        console.error('Categories fetch failed', error);
+        setError(error.message);
+      }
       if (data) setCategories(data);
       setLoading(false);
     };
@@ -1028,44 +2370,36 @@ const CategoriesPage = () => {
     return <div className="pt-48 flex justify-center"><Loader2 className="animate-spin w-8 h-8 text-primary" /></div>;
   }
 
-  const filteredCategories = activeTab === "All" 
-    ? categories 
-    : categories.filter(cat => 
-        cat.name.toLowerCase().includes(activeTab.toLowerCase())
-      );
+  if (error) {
+    return (
+      <div className="pt-48 flex justify-center px-8 text-center">
+        <div className="max-w-xl rounded-3xl border border-red-500/20 bg-[#2a1c1c] p-10 text-red-200">
+          <h2 className="text-2xl font-bold mb-3">Unable to load categories</h2>
+          <p>{error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="pt-48 pb-32 px-8 max-w-7xl mx-auto"
+      className="pt-48 pb-32 px-8 max-w-7xl mx-auto min-h-screen"
     >
       <div className="mb-16">
         <Link to="/" className="text-primary hover:underline flex items-center gap-2 mb-6 font-semibold">
           <ArrowLeft className="w-5 h-5" /> Back to Home
         </Link>
         <h1 className="text-6xl font-bold tracking-tight mb-4">All Categories</h1>
-        
-        <div className="flex gap-4 mt-8 overflow-x-auto pb-2">
-          {TABS.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2 rounded-full border transition-all whitespace-nowrap ${
-                activeTab === tab 
-                  ? "bg-primary text-on-primary border-primary" 
-                  : "border-outline hover:bg-surface-container-high"
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
+        <p className="text-xl text-on-surface-variant max-w-2xl">
+          Explore our complete catalog of free educational resources across every major discipline.
+        </p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {filteredCategories.map((cat) => (
+        {categories.map((cat) => (
           <CategoryCard key={cat.id} category={cat} />
         ))}
       </div>
@@ -1076,7 +2410,7 @@ const CategoriesPage = () => {
 export default CategoriesPage;
 </file>
 
-<file path="src/pages/CategoryDetailPage.tsx">
+<file path="Edu_finder/src/pages/CategoryDetailPage.tsx">
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -1091,6 +2425,7 @@ const CategoryDetailPage = () => {
   const [category, setCategory] = useState<Category | null>(null);
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1100,20 +2435,28 @@ const CategoryDetailPage = () => {
       if (!id) return;
 
       // Fetch the single category
-      const { data: catData } = await supabase
+      const { data: catData, error: catError } = await supabase
         .from('categories')
         .select('*')
         .eq('id', id)
-        .single();
+        .maybeSingle();
       
+      if (catError) {
+        console.error('Category fetch failed', catError);
+        setError(catError.message);
+      }
       if (catData) setCategory(catData);
 
       // Fetch courses WHERE category_id matches!
-      const { data: courseData } = await supabase
+      const { data: courseData, error: courseError } = await supabase
         .from('courses')
         .select('*')
         .eq('category_id', id);
         
+      if (courseError) {
+        console.error('Category courses fetch failed', courseError);
+        setError(courseError.message);
+      }
       if (courseData) setCourses(courseData);
       
       setLoading(false);
@@ -1126,6 +2469,17 @@ const CategoryDetailPage = () => {
     return (
       <div className="pt-48 flex justify-center min-h-screen">
         <Loader2 className="animate-spin w-10 h-10 text-primary" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="pt-48 flex justify-center px-8 text-center min-h-screen">
+        <div className="max-w-xl rounded-3xl border border-red-500/20 bg-[#2a1c1c] p-10 text-red-200">
+          <h2 className="text-2xl font-bold mb-3">Unable to load this category</h2>
+          <p>{error}</p>
+        </div>
       </div>
     );
   }
@@ -1189,37 +2543,83 @@ const CategoryDetailPage = () => {
 export default CategoryDetailPage;
 </file>
 
-<file path="src/pages/HomePage.tsx">
+<file path="Edu_finder/src/pages/HomePage.tsx">
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search, ShieldCheck, Layout, ChevronRight, Loader2 } from 'lucide-react';
+import { Search, ShieldCheck, Layout, ChevronRight, Loader2, Sparkles } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 import { Category, Course } from '../types';
 import CategoryCard from '../components/CategoryCard';
 import CourseCard from '../components/CourseCard';
 
 const HomePage = () => {
+  const { user } = useAuth();
   const [categories, setCategories] = useState<Category[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
+  const [recommendedCourses, setRecommendedCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  
+  // Search State
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
-      // Fetch data from our Supabase tables
+      // 1. Fetch Categories and Courses
       const [catResponse, courseResponse] = await Promise.all([
         supabase.from('categories').select('*').limit(6),
-        supabase.from('courses').select('*').limit(4)
+        supabase.from('courses').select('*') // Fetches all so we can search them
       ]);
 
+      if (catResponse.error) {
+        console.error('Categories fetch failed', catResponse.error);
+        setError(catResponse.error.message);
+      }
+      if (courseResponse.error) {
+        console.error('Courses fetch failed', courseResponse.error);
+        setError(courseResponse.error.message);
+      }
       if (catResponse.data) setCategories(catResponse.data);
       if (courseResponse.data) setCourses(courseResponse.data);
-      
+
+      // 2. PHASE 6: Recommendation Engine
+      if (user) {
+        const { data: profile, error: profileError } = await supabase
+          .from('user_profiles')
+          .select('category, skill_level')
+          .eq('user_id', user.id)
+          .single();
+
+        if (profileError) {
+          console.error('Profile fetch failed', profileError);
+          setError(profileError.message);
+        }
+
+        if (profile && profile.category) {
+          let query = supabase.from('courses').select('*').eq('category_id', profile.category);
+          if (profile.skill_level) query = query.eq('level', profile.skill_level);
+          
+          const { data: recommendations, error: recommendationsError } = await query.limit(4);
+          if (recommendationsError) {
+            console.error('Recommendations fetch failed', recommendationsError);
+            setError(recommendationsError.message);
+          }
+          if (recommendations) setRecommendedCourses(recommendations);
+        }
+      }
       setLoading(false);
     };
 
     fetchData();
-  }, []);
+  }, [user]);
+
+  // Search Filter Logic
+  const filteredCourses = courses.filter(course => 
+    course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    course.provider.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   if (loading) {
     return (
@@ -1229,18 +2629,24 @@ const HomePage = () => {
     );
   }
 
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-8 text-center">
+        <div className="max-w-xl rounded-3xl border border-red-500/20 bg-[#2a1c1c] p-12 text-red-200">
+          <h2 className="text-2xl font-bold mb-4">Unable to load courses</h2>
+          <p className="text-sm text-red-100/90">{error}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       {/* Hero Section */}
       <section className="pt-48 pb-32 px-8 max-w-7xl mx-auto text-center">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
           className="text-5xl md:text-8xl font-bold tracking-tight mb-8 max-w-5xl mx-auto leading-[0.95]"
         >
           Find the Best Free Courses, Fast
@@ -1249,150 +2655,94 @@ const HomePage = () => {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
           className="text-lg md:text-2xl text-on-surface-variant max-w-2xl mx-auto mb-12 leading-relaxed"
         >
           Discover thousands of free courses from Coursera, edX, Khan Academy, and FutureLearn in one place.
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-16 text-left"
-        >
-          <div className="flex gap-4 items-start">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-              <Search className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <h4 className="font-bold text-on-surface text-sm mb-1 uppercase tracking-wider">Aggregated Search</h4>
-              <p className="text-on-surface-variant text-sm leading-relaxed">One query searches all major platforms simultaneously, saving you hours of manual browsing.</p>
-            </div>
-          </div>
-          <div className="flex gap-4 items-start">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-              <ShieldCheck className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <h4 className="font-bold text-on-surface text-sm mb-1 uppercase tracking-wider">Verified Free</h4>
-              <p className="text-on-surface-variant text-sm leading-relaxed">We filter out hidden costs and "audit-only" traps to ensure you only see truly free learning content.</p>
-            </div>
-          </div>
-          <div className="flex gap-4 items-start">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-              <Layout className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <h4 className="font-bold text-on-surface text-sm mb-1 uppercase tracking-wider">Curated Paths</h4>
-              <p className="text-on-surface-variant text-sm leading-relaxed">Expert-picked course sequences designed to take you from zero to job-ready in high-demand fields.</p>
-            </div>
-          </div>
-        </motion.div>
-
+        {/* Working Search Bar */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3 }}
           className="max-w-3xl mx-auto relative group"
         >
           <div className="flex items-center bg-surface-container-highest rounded-2xl p-2 ghost-border group-focus-within:ring-2 group-focus-within:ring-primary/30 transition-all duration-300 editorial-shadow">
             <Search className="ml-4 w-6 h-6 text-on-surface-variant" />
             <input
               type="text"
-              placeholder="What do you want to learn today?"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search for Python, UX Design, Marketing..."
               className="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-on-surface-variant/40 py-5 px-4 text-xl outline-none"
             />
-            <button className="hidden md:block px-10 py-4 rounded-xl primary-gradient text-on-primary font-bold active:scale-95 transition-all duration-200 whitespace-nowrap mr-1">
-              Find Courses
-            </button>
           </div>
-          <button className="md:hidden w-full mt-4 px-8 py-5 rounded-xl primary-gradient text-on-primary font-bold active:scale-95 transition-all duration-200">
-            Find Courses
-          </button>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.4 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          className="mt-24 flex flex-wrap justify-center gap-x-16 gap-y-8 grayscale"
-        >
-          <span className="font-bold text-2xl tracking-tighter">Coursera</span>
-          <span className="font-bold text-2xl tracking-tighter">edX</span>
-          <span className="font-bold text-2xl tracking-tighter">Khan Academy</span>
-          <span className="font-bold text-2xl tracking-tighter">FutureLearn</span>
         </motion.div>
       </section>
 
-      {/* Categories Section */}
-      <section className="bg-surface-container-low py-32">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="flex items-end justify-between mb-16">
+      {/* Recommended Section (PHASE 6) - ONLY shows if logged in AND has profile */}
+      {user && recommendedCourses.length > 0 && !searchQuery && (
+        <section className="py-16 max-w-7xl mx-auto px-8">
+          <div className="mb-12 flex items-center justify-between bg-primary/10 p-8 rounded-3xl border border-primary/20">
             <div>
-              <span className="text-[0.75rem] uppercase tracking-[0.1em] text-primary font-bold mb-3 block">
-                Curated Pathways
-              </span>
-              <h2 className="text-4xl font-bold tracking-tight">Explore by Category</h2>
+              <div className="flex items-center gap-2 mb-3">
+                <Sparkles className="w-5 h-5 text-primary" />
+                <span className="text-[0.75rem] uppercase tracking-[0.1em] text-primary font-bold">
+                  Just For You
+                </span>
+              </div>
+              <h2 className="text-4xl font-bold tracking-tight text-primary-container">Your Recommended Path</h2>
             </div>
-            <Link to="/categories" className="text-primary hover:underline flex items-center gap-2 group font-semibold">
-              See all categories
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <Link to="/questionnaire" className="px-6 py-3 rounded-xl bg-surface-container-highest border border-primary/20 text-primary font-medium hover:bg-primary/20 transition-all">
+              Update Preferences
             </Link>
           </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {categories.map((cat) => (
-              <CategoryCard key={cat.id} category={cat} />
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {recommendedCourses.map((course) => <CourseCard key={course.id} course={course} />)}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* Popular Courses Section */}
-      <section className="py-32 max-w-7xl mx-auto px-8">
-        <div className="mb-16">
-          <span className="text-[0.75rem] uppercase tracking-[0.1em] text-primary font-bold mb-3 block">
-            Most Popular
-          </span>
-          <h2 className="text-5xl font-bold tracking-tight">Popular Free Courses</h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {courses.map((course) => (
-            <CourseCard key={course.id} course={course} />
-          ))}
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="max-w-7xl mx-auto px-8 pb-32">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="bg-surface-container-high rounded-[3rem] p-12 md:p-24 relative overflow-hidden border border-outline-variant/10 text-center"
-        >
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-tertiary/10 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
-
-          <div className="relative z-10">
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tight">
-              Start your learning journey for $0
-            </h2>
-            <p className="text-on-surface-variant text-xl mb-16 max-w-2xl mx-auto leading-relaxed">
-              Join millions of learners indexing the world's knowledge. No credit card required, ever.
-            </p>
-            <div className="flex flex-col md:flex-row gap-6 justify-center">
-              <Link to="/auth" className="px-12 py-5 rounded-2xl primary-gradient text-on-primary font-bold text-lg active:scale-95 transition-all editorial-shadow">
-                Create Free Account
-              </Link>
-              <Link to="/categories" className="px-12 py-5 rounded-2xl bg-surface-container-highest border border-outline/20 text-on-surface font-bold text-lg hover:bg-surface-bright transition-all inline-flex items-center justify-center">
-                Browse All Categories
+      {/* Categories Section - Hides when searching */}
+      {!searchQuery && (
+        <section className="bg-surface-container-low py-32">
+          <div className="max-w-7xl mx-auto px-8">
+            <div className="flex items-end justify-between mb-16">
+              <div>
+                <h2 className="text-4xl font-bold tracking-tight">Explore by Category</h2>
+              </div>
+              <Link to="/categories" className="text-primary hover:underline flex items-center gap-2 group font-semibold">
+                See all categories
+                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+              {categories.map((cat) => <CategoryCard key={cat.id} category={cat} />)}
+            </div>
           </div>
-        </motion.div>
+        </section>
+      )}
+
+      {/* Courses Section (Updates based on search!) */}
+      <section className="py-32 max-w-7xl mx-auto px-8">
+        <div className="mb-16">
+          <h2 className="text-5xl font-bold tracking-tight">
+            {searchQuery ? `Search Results for "${searchQuery}"` : "Popular Free Courses"}
+          </h2>
+        </div>
+
+        {filteredCourses.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {filteredCourses.slice(0, 8).map((course) => (
+              <CourseCard key={course.id} course={course} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20 text-on-surface-variant">
+            {/* HERE IS THE LINE THAT WAS BROKEN! IT NOW HAS THE CLOSING TAG properly -> /> */}
+            <Search className="w-12 h-12 mx-auto mb-4 opacity-20" />
+            <p className="text-xl">No courses found matching "{searchQuery}"</p>
+          </div>
+        )}
       </section>
     </motion.div>
   );
@@ -1401,7 +2751,121 @@ const HomePage = () => {
 export default HomePage;
 </file>
 
-<file path="src/pages/Questionaire.tsx">
+<file path="Edu_finder/src/pages/MyLearningPage.tsx">
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Loader2, Bookmark, Lock } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
+import { Course } from '../types';
+import CourseCard from '../components/CourseCard';
+
+const MyLearningPage = () => {
+  const { user } = useAuth();
+  const [savedCourses, setSavedCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    const fetchSavedCourses = async () => {
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+
+      // Pro-trick: We query the 'saved_courses' table, but ask Supabase to 
+      // automatically bring along the actual course data from the 'courses' table!
+      const { data, error } = await supabase
+        .from('saved_courses')
+        .select(`
+          course_id,
+          courses (*)
+        `)
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Saved courses fetch failed', error);
+        setError(error.message);
+      }
+      if (data) {
+        // Extract just the course objects from the joined data
+        const courses = data.map((row: any) => row.courses);
+        setSavedCourses(courses);
+      }
+      
+      setLoading(false);
+    };
+
+    fetchSavedCourses();
+  }, [user]);
+
+  if (loading) return <div className="pt-48 min-h-screen flex justify-center"><Loader2 className="animate-spin w-10 h-10 text-primary" /></div>;
+
+  if (error) {
+    return (
+      <div className="pt-48 flex justify-center px-8 text-center min-h-screen">
+        <div className="max-w-xl rounded-3xl border border-red-500/20 bg-[#2a1c1c] p-10 text-red-200">
+          <h2 className="text-2xl font-bold mb-3">Unable to load saved courses</h2>
+          <p>{error}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Protect the route!
+  if (!user) {
+    return (
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-48 pb-32 px-8 max-w-2xl mx-auto text-center min-h-screen">
+        <div className="bg-surface-container-high rounded-3xl p-12 shadow-xl border border-outline-variant/20">
+          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Lock className="w-8 h-8 text-primary" />
+          </div>
+          <h2 className="text-3xl font-bold mb-4 text-on-surface">Sign in to view saved courses</h2>
+          <Link to="/auth" className="px-8 py-4 rounded-xl primary-gradient text-on-primary font-bold active:scale-95 transition-all inline-block mt-4">
+            Sign In / Sign Up
+          </Link>
+        </div>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-48 pb-32 px-8 max-w-7xl mx-auto min-h-screen">
+      <div className="mb-16">
+        <h1 className="text-5xl font-bold tracking-tight mb-4">My Learning</h1>
+        <p className="text-xl text-on-surface-variant max-w-2xl">
+          Your personal library of saved courses and learning paths.
+        </p>
+      </div>
+
+      {savedCourses.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {savedCourses.map((course) => (
+            <CourseCard key={course.id} course={course} />
+          ))}
+        </div>
+      ) : (
+        <div className="bg-surface-container-high rounded-3xl p-20 text-center border border-outline/10 mt-8">
+          <Bookmark className="w-12 h-12 text-primary/40 mx-auto mb-6" />
+          <h3 className="text-2xl font-bold mb-2">No saved courses yet</h3>
+          <p className="text-on-surface-variant mb-8">Start exploring and click the heart icon on any course to save it here.</p>
+          <Link to="/categories" className="px-8 py-3 rounded-xl primary-gradient text-on-primary font-bold inline-block">
+            Explore Courses
+          </Link>
+        </div>
+      )}
+    </motion.div>
+  );
+};
+
+export default MyLearningPage;
+</file>
+
+<file path="Edu_finder/src/pages/Questionaire.tsx">
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -1446,7 +2910,7 @@ const QuestionnairePage = () => {
         .from('user_profiles')
         .select('*')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
 
       if (data) {
         // Map database snake_case back to our frontend camelCase
@@ -1675,7 +3139,29 @@ const QuestionnairePage = () => {
 export default QuestionnairePage;
 </file>
 
-<file path="tsconfig.json">
+<file path="Edu_finder/src/types.ts">
+// src/types.ts
+export interface Course {
+  id: string;
+  title: string;
+  provider: string;
+  duration: string;
+  level: 'Beginner' | 'Intermediate' | 'Advanced';
+  description: string;
+  image: string;
+  category_id: string; // Changed from categoryId to match DB
+  url: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  icon_name: string; // Changed from icon to icon_name
+  description: string;
+}
+</file>
+
+<file path="Edu_finder/tsconfig.json">
 {
   "compilerOptions": {
     "target": "ES2022",
@@ -1705,114 +3191,31 @@ export default QuestionnairePage;
 }
 </file>
 
-<file path="package.json">
-{
-  "name": "react-example",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
-    "preview": "vite preview",
-    "clean": "rm -rf dist",
-    "lint": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@google/genai": "^1.29.0",
-    "@supabase/supabase-js": "^2.103.0",
-    "@tailwindcss/vite": "^4.1.14",
-    "@vitejs/plugin-react": "^5.0.4",
-    "dotenv": "^17.2.3",
-    "express": "^4.21.2",
-    "lucide-react": "^0.546.0",
-    "motion": "^12.23.24",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^7.13.2",
-    "vite": "^6.2.0"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/node": "^22.14.0",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "autoprefixer": "^10.4.21",
-    "tailwindcss": "^4.1.14",
-    "tsx": "^4.21.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
-  }
-}
-</file>
+<file path="Edu_finder/vite.config.ts">
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import {defineConfig, loadEnv} from 'vite';
 
-<file path="src/App.tsx">
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import Navbar from './components/Navbar';
-import HomePage from './pages/HomePage';
-import CategoriesPage from './pages/CategoriesPage';
-import CategoryDetailPage from './pages/CategoryDetailPage';
-import QuestionnairePage from './pages/Questionaire';
-import AuthPage from './pages/AuthPage';
-
-export default function App() {
-  return (
-    <BrowserRouter>
-      <div className="min-h-screen bg-main text-primary">
-        <Navbar />
-
-        <main className="pt-24">
-          <AnimatePresence mode="wait">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/categories" element={<CategoriesPage />} />
-              <Route path="/category/:id" element={<CategoryDetailPage />} />
-              <Route path="/questionnaire" element={<QuestionnairePage />} />
-              <Route path="/auth" element={<AuthPage />} />
-            </Routes>
-          </AnimatePresence>
-        </main>
-
-        <footer className="bg-main border-t border-border-subtle py-20">
-          <div className="layout-container flex flex-col md:flex-row justify-between items-center gap-6">
-            <div>
-              <Link to="/" className="text-xl font-semibold text-primary tracking-tight">
-                EduFinder
-              </Link>
-              <p className="text-muted text-xs uppercase tracking-[0.2em] mt-2">
-                © 2026 EduFinder • Built for focused learning
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-6 text-sm text-secondary">
-              <Link to="/categories" className="nav-link">
-                Categories
-              </Link>
-              <Link to="/categories" className="nav-link">
-                My Courses
-              </Link>
-              <Link to="/" className="nav-link">
-                About
-              </Link>
-              <Link to="/questionnaire" className='nav-link'>
-                Questionnaire
-              </Link>
-            </div>
-
-
-            
-          </div>
-        </footer>
-      </div>
-    </BrowserRouter>
-  );
-}
+export default defineConfig(({mode}) => {
+  const env = loadEnv(mode, '.', '');
+  return {
+    plugins: [react(), tailwindcss()],
+    define: {
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, '.'),
+      },
+    },
+    server: {
+      // HMR is disabled in AI Studio via DISABLE_HMR env var.
+      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
+      hmr: process.env.DISABLE_HMR !== 'true',
+    },
+  };
+});
 </file>
 
 </files>
