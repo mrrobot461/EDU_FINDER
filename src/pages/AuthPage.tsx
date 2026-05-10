@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { supabase } from '../lib/supabase';
 
@@ -9,7 +8,6 @@ const AuthPage = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,17 +16,34 @@ const AuthPage = () => {
 
     try {
       if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        // Sign In
+        const { error } = await supabase.auth.signInWithPassword({ 
+          email, 
+          password 
+        });
+        
         if (error) throw error;
-        navigate('/');
+        
+        // Force full page reload to ensure session is picked up by AuthContext
+        window.location.href = '/';
+        
       } else {
+        // Sign Up
         const { error } = await supabase.auth.signUp({ 
           email, 
           password,
-          options: { emailRedirectTo: window.location.origin }
+          options: { 
+            emailRedirectTo: window.location.origin 
+          }
         });
+        
         if (error) throw error;
-        alert('Check your email for confirmation link!');
+        
+        alert('Check your email for the confirmation link!');
+        
+        // Clear form after successful signup
+        setEmail('');
+        setPassword('');
       }
     } catch (err: any) {
       setError(err.message);
@@ -57,7 +72,9 @@ const AuthPage = () => {
 
           <form onSubmit={handleAuth} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium mb-2">Email</label>
+              <label className="block text-sm font-medium mb-2">
+                Email
+              </label>
               <input
                 type="email"
                 required
@@ -65,11 +82,14 @@ const AuthPage = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-surface-container-highest border border-outline/20 focus:outline-none focus:border-primary transition-colors"
                 placeholder="you@example.com"
+                disabled={loading}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Password</label>
+              <label className="block text-sm font-medium mb-2">
+                Password
+              </label>
               <input
                 type="password"
                 required
@@ -77,13 +97,14 @@ const AuthPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-surface-container-highest border border-outline/20 focus:outline-none focus:border-primary transition-colors"
                 placeholder="••••••••"
+                disabled={loading}
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 transition-all disabled:opacity-50"
+              className="w-full py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Processing...' : isLogin ? 'Sign In' : 'Sign Up'}
             </button>
@@ -93,9 +114,12 @@ const AuthPage = () => {
             <button
               type="button"
               onClick={() => setIsLogin(!isLogin)}
-              className="text-sm text-primary hover:underline"
+              className="text-sm text-primary hover:underline transition-all"
+              disabled={loading}
             >
-              {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
+              {isLogin 
+                ? "Don't have an account? Sign up" 
+                : "Already have an account? Sign in"}
             </button>
           </div>
         </div>
