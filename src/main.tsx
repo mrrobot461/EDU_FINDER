@@ -7,7 +7,7 @@ import './index.css';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AuthProvider>
-      <App />  {/* App already has BrowserRouter inside */}
+      <App />
     </AuthProvider>
   </StrictMode>,
 );

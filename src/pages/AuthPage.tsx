@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 import { supabase } from '../lib/supabase';
 
 const AuthPage = () => {
-  console.log('✅ AuthPage component loaded');
-  
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,45 +13,25 @@ const AuthPage = () => {
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    e.stopPropagation();
-    
-    console.log('🟡 handleAuth called!', { isLogin, email });
-    alert('Form submitted! Check console.');
-    
     setLoading(true);
     setError(null);
 
     try {
       if (isLogin) {
-        console.log('🟡 Attempting login...');
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-        
-        if (error) {
-          console.error('🔴 Login error:', error);
-          throw error;
-        }
-        
-        console.log('🟢 Login successful!', data);
-        alert('Login successful!');
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
         navigate('/');
-        
       } else {
-        console.log('🟡 Attempting signup...');
-        const { data, error } = await supabase.auth.signUp({ 
+        const { error } = await supabase.auth.signUp({ 
           email, 
           password,
           options: { emailRedirectTo: window.location.origin }
         });
-        
         if (error) throw error;
-        
-        console.log('🟢 Signup successful!', data);
-        alert('Check your email for confirmation!');
+        alert('Check your email for confirmation link!');
       }
     } catch (err: any) {
-      console.error('🔴 Auth error:', err);
       setError(err.message);
-      alert('Error: ' + err.message);
     } finally {
       setLoading(false);
     }
@@ -65,13 +43,6 @@ const AuthPage = () => {
       animate={{ opacity: 1, y: 0 }}
       className="pt-48 pb-32 px-4"
     >
-      {/* DEBUG BANNER */}
-      <div className="max-w-md mx-auto mb-4">
-        <div className="bg-red-600 text-white p-3 rounded-lg text-center font-bold">
-          🐛 DEBUG MODE - {new Date().toLocaleTimeString()} - VERCEL DEPLOYMENT
-        </div>
-      </div>
-
       <div className="max-w-md mx-auto">
         <div className="bg-surface-container-high rounded-2xl p-8 shadow-xl border border-outline/20">
           <h1 className="text-3xl font-bold text-center mb-8">
