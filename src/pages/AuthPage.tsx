@@ -24,7 +24,7 @@ const AuthPage = () => {
       } else {
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
-        alert('Success! Check your email for a confirmation link.');
+        navigate('/');
       }
     } catch (err: any) {
       setError(err.message);
@@ -34,62 +34,63 @@ const AuthPage = () => {
   };
 
   return (
-    <motion.div
+    <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="section-block"
+      className="pt-48 pb-32 px-8 max-w-md mx-auto min-h-screen"
     >
-      <div className="layout-container max-w-md mx-auto">
-        <div className="card">
-          <h1 className="text-3xl font-semibold text-primary text-center mb-6">
-            {isLogin ? 'Welcome Back' : 'Create Account'}
-          </h1>
+      <div className="bg-surface-container-high rounded-3xl p-8 shadow-xl border border-outline-variant/20 editorial-shadow">
+        <h2 className="text-3xl font-bold mb-6 text-center text-on-surface">
+          {isLogin ? 'Welcome Back' : 'Create Account'}
+        </h2>
 
-          {error && (
-            <div className="mb-6 rounded-xl border border-red-500/20 bg-[#621e1e] p-4 text-sm text-red-300">
-              {error}
-            </div>
-          )}
-
-          <form onSubmit={handleAuth} className="space-y-6">
-            <div>
-              <label className="block text-sm font-semibold text-primary mb-2">Email</label>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input-field"
-                placeholder="you@example.com"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-primary mb-2">Password</label>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input-field"
-                placeholder="••••••••"
-              />
-            </div>
-
-            <button type="submit" disabled={loading} className="btn-primary w-full">
-              {loading ? 'Processing...' : isLogin ? 'Sign In' : 'Sign Up'}
-            </button>
-          </form>
-
-          <div className="mt-6 text-center">
-            <button
-              type="button"
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-secondary text-sm hover:text-primary transition-colors"
-            >
-              {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
-            </button>
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/50 text-red-400 p-3 rounded-lg mb-6 text-sm">
+            {error}
           </div>
+        )}
+
+        <form onSubmit={handleAuth} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1 text-on-surface-variant">Email</label>
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+              placeholder="you@example.com"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium mb-1 text-on-surface-variant">Password</label>
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3 rounded-xl primary-gradient text-on-primary font-bold active:scale-95 transition-all duration-200 mt-4 disabled:opacity-50"
+          >
+            {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Sign Up')}
+          </button>
+        </form>
+
+        <div className="mt-6 text-center">
+          <button
+            onClick={() => setIsLogin(!isLogin)}
+            className="text-primary text-sm hover:underline"
+          >
+            {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
+          </button>
         </div>
       </div>
     </motion.div>

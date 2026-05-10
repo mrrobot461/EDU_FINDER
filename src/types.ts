@@ -1,3 +1,4 @@
+// src/types.ts
 export interface Course {
   id: string;
   title: string;
@@ -6,13 +7,13 @@ export interface Course {
   level: 'Beginner' | 'Intermediate' | 'Advanced';
   description: string;
   image: string;
-  categoryId: string;
+  category_id: string; // Changed from categoryId to match DB
   url: string;
 }
 
 export interface Category {
   id: string;
   name: string;
-  icon: React.ElementType;
+  icon_name: string; // Changed from icon to icon_name
   description: string;
 }

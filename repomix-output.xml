@@ -40,7 +40,7 @@ The content is organized as follows:
 </file_summary>
 
 <directory_structure>
-.env.example
+.env.local
 .gitignore
 context.md
 index.html
@@ -51,21 +51,167 @@ src/App.tsx
 src/components/CategoryCard.tsx
 src/components/CourseCard.tsx
 src/components/Navbar.tsx
-src/constants.ts
+src/contexts/AuthContext.tsx
 src/index.css
+src/lib/iconMap.ts
+src/lib/supabase.ts
 src/main.tsx
+src/pages/AuthPage.tsx
 src/pages/CategoriesPage.tsx
 src/pages/CategoryDetailPage.tsx
 src/pages/HomePage.tsx
+src/pages/MyLearningPage.tsx
 src/pages/Questionaire.tsx
 src/types.ts
-TODO.md
 tsconfig.json
 vite.config.ts
 </directory_structure>
 
 <files>
 This section contains the contents of the repository's files.
+
+<file path="src/lib/iconMap.ts">
+// src/lib/iconMap.ts
+import { 
+  Terminal, 
+  Briefcase, 
+  FlaskConical, 
+  Palette, 
+  Languages, 
+  Theater, 
+  Megaphone, 
+  Heart, 
+  User, 
+  Calculator, 
+  Music, 
+  Camera, 
+  HelpCircle,
+  Code,
+  Activity,
+  Globe,
+  TrendingUp,
+  Type
+} from 'lucide-react';
+
+const icons: Record<string, React.ComponentType<any>> = {
+  terminal: Terminal,
+  tech: Code,
+  business: Briefcase,
+  science: FlaskConical,
+  design: Palette,
+  languages: Languages,
+  marketing: TrendingUp,
+  health: Activity,
+  math: Calculator,
+  arts: Type,
+  default: HelpCircle
+};
+
+export const getIconComponent = (iconName: string | null | undefined) => {
+  if (!iconName) return HelpCircle;
+  return icons[iconName.toLowerCase()] || HelpCircle;
+};
+
+export default getIconComponent;
+</file>
+
+<file path="src/pages/MyLearningPage.tsx">
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Loader2, Bookmark, Lock } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
+import { Course } from '../types';
+import CourseCard from '../components/CourseCard';
+
+const MyLearningPage = () => {
+  const { user } = useAuth();
+  const [savedCourses, setSavedCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    const fetchSavedCourses = async () => {
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+
+      // Pro-trick: We query the 'saved_courses' table, but ask Supabase to 
+      // automatically bring along the actual course data from the 'courses' table!
+      const { data, error } = await supabase
+        .from('saved_courses')
+        .select(`
+          course_id,
+          courses (*)
+        `)
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (data) {
+        // Extract just the course objects from the joined data
+        const courses = data.map((row: any) => row.courses);
+        setSavedCourses(courses);
+      }
+      
+      setLoading(false);
+    };
+
+    fetchSavedCourses();
+  }, [user]);
+
+  if (loading) return <div className="pt-48 min-h-screen flex justify-center"><Loader2 className="animate-spin w-10 h-10 text-primary" /></div>;
+
+  // Protect the route!
+  if (!user) {
+    return (
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-48 pb-32 px-8 max-w-2xl mx-auto text-center min-h-screen">
+        <div className="bg-surface-container-high rounded-3xl p-12 shadow-xl border border-outline-variant/20">
+          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Lock className="w-8 h-8 text-primary" />
+          </div>
+          <h2 className="text-3xl font-bold mb-4 text-on-surface">Sign in to view saved courses</h2>
+          <Link to="/auth" className="px-8 py-4 rounded-xl primary-gradient text-on-primary font-bold active:scale-95 transition-all inline-block mt-4">
+            Sign In / Sign Up
+          </Link>
+        </div>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-48 pb-32 px-8 max-w-7xl mx-auto min-h-screen">
+      <div className="mb-16">
+        <h1 className="text-5xl font-bold tracking-tight mb-4">My Learning</h1>
+        <p className="text-xl text-on-surface-variant max-w-2xl">
+          Your personal library of saved courses and learning paths.
+        </p>
+      </div>
+
+      {savedCourses.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {savedCourses.map((course) => (
+            <CourseCard key={course.id} course={course} />
+          ))}
+        </div>
+      ) : (
+        <div className="bg-surface-container-high rounded-3xl p-20 text-center border border-outline/10 mt-8">
+          <Bookmark className="w-12 h-12 text-primary/40 mx-auto mb-6" />
+          <h3 className="text-2xl font-bold mb-2">No saved courses yet</h3>
+          <p className="text-on-surface-variant mb-8">Start exploring and click the heart icon on any course to save it here.</p>
+          <Link to="/categories" className="px-8 py-3 rounded-xl primary-gradient text-on-primary font-bold inline-block">
+            Explore Courses
+          </Link>
+        </div>
+      )}
+    </motion.div>
+  );
+};
+
+export default MyLearningPage;
+</file>
 
 <file path="context.md">
 # Project Context: EduFinder (Full Specification)
@@ -104,13 +250,286 @@ This section contains the contents of the repository's files.
 4.  [cite_start]**Backend & API Integration:** Node.js/Express setup and MongoDB connection[cite: 66].
 </file>
 
+<file path="metadata.json">
+{
+  "name": "EduFinder",
+  "description": "Discover thousands of free courses from Coursera, edX, Khan Academy, and FutureLearn in one place.",
+  "requestFramePermissions": []
+}
+</file>
+
+<file path="README.md">
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
+
+# Run and deploy your AI Studio app
+
+This contains everything you need to run your app locally.
+
+View your app in AI Studio: https://ai.studio/apps/4f02ea99-4a29-4d73-93e0-7f430a354365
+
+## Run Locally
+
+**Prerequisites:**  Node.js
+
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
+</file>
+
+<file path="src/contexts/AuthContext.tsx">
+// src/contexts/AuthContext.tsx
+import { createContext, useContext, useEffect, useState } from 'react';
+import { Session, User } from '@supabase/supabase-js';
+import { supabase } from '../lib/supabase';
+
+// Define what data our context will hold
+interface AuthContextType {
+  session: Session | null;
+  user: User | null;
+  signOut: () => Promise<void>;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    // 1. Get the session when the app loads
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+    });
+
+    // 2. Listen for changes (like when a user logs in or out)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+    });
+
+    // Cleanup the listener when the app closes
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+  };
+
+  return (
+    <AuthContext.Provider value={{ session, user, signOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+// Custom hook to easily use this context in other files
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+</file>
+
+<file path="src/pages/AuthPage.tsx">
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { supabase } from '../lib/supabase';
+
+const AuthPage = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const handleAuth = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      if (isLogin) {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        navigate('/');
+      } else {
+        const { error } = await supabase.auth.signUp({ email, password });
+        if (error) throw error;
+        alert('Success! Check your email for a confirmation link.');
+      }
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="section-block"
+    >
+      <div className="layout-container max-w-md mx-auto">
+        <div className="card">
+          <h1 className="text-3xl font-semibold text-primary text-center mb-6">
+            {isLogin ? 'Welcome Back' : 'Create Account'}
+          </h1>
+
+          {error && (
+            <div className="mb-6 rounded-xl border border-red-500/20 bg-[#621e1e] p-4 text-sm text-red-300">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleAuth} className="space-y-6">
+            <div>
+              <label className="block text-sm font-semibold text-primary mb-2">Email</label>
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="input-field"
+                placeholder="you@example.com"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-primary mb-2">Password</label>
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input-field"
+                placeholder="••••••••"
+              />
+            </div>
+
+            <button type="submit" disabled={loading} className="btn-primary w-full">
+              {loading ? 'Processing...' : isLogin ? 'Sign In' : 'Sign Up'}
+            </button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <button
+              type="button"
+              onClick={() => setIsLogin(!isLogin)}
+              className="text-secondary text-sm hover:text-primary transition-colors"
+            >
+              {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
+            </button>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default AuthPage;
+</file>
+
+<file path="src/types.ts">
+export interface Course {
+  id: string;
+  title: string;
+  provider: string;
+  duration: string;
+  level: 'Beginner' | 'Intermediate' | 'Advanced';
+  description: string;
+  image: string;
+  categoryId: string;
+  url: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  icon: React.ElementType;
+  description: string;
+}
+</file>
+
+<file path="vite.config.ts">
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import {defineConfig, loadEnv} from 'vite';
+
+export default defineConfig(({mode}) => {
+  const env = loadEnv(mode, '.', '');
+  return {
+    plugins: [react(), tailwindcss()],
+    define: {
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, '.'),
+      },
+    },
+    server: {
+      // HMR is disabled in AI Studio via DISABLE_HMR env var.
+      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
+      hmr: process.env.DISABLE_HMR !== 'true',
+    },
+  };
+});
+</file>
+
+<file path=".env.local">
+VITE_SUPABASE_URL="https://eilkqecvhedgqeqhioza.supabase.co"
+VITE_SUPABASE_ANON_KEY="sb_publishable_7saIdAzBaEmLvpMXYsns7g_Vs_zsIIM"
+</file>
+
+<file path=".gitignore">
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.local
+</file>
+
+<file path="index.html">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edu-finder</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+</file>
+
 <file path="src/components/CategoryCard.tsx">
+// src/components/CategoryCard.tsx
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Category } from '../types';
+import { getIconComponent } from '../lib/iconMap';
 
 const CategoryCard = ({ category }: { category: Category }) => {
-  const Icon = category.icon;
+  // Convert the string from the database into a real Icon component
+  const Icon = getIconComponent(category.icon_name); 
+
   return (
     <Link to={`/category/${category.id}`}>
       <motion.div
@@ -133,20 +552,74 @@ export default CategoryCard;
 </file>
 
 <file path="src/components/CourseCard.tsx">
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Clock } from 'lucide-react';
+import { Clock, Heart } from 'lucide-react';
 import { Course } from '../types';
+import { useAuth } from '../contexts/AuthContext';
+import { supabase } from '../lib/supabase';
 
 const CourseCard = ({ course }: { course: Course }) => {
+  const { user } = useAuth();
+  const [isSaved, setIsSaved] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // Check if the user has already saved this course when the card loads
+  useEffect(() => {
+    if (!user) return;
+
+    const checkSavedStatus = async () => {
+      const { data } = await supabase
+        .from('saved_courses')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('course_id', course.id)
+        .single();
+      
+      if (data) setIsSaved(true);
+    };
+
+    checkSavedStatus();
+  }, [user, course.id]);
+
+  const toggleSave = async (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevents the click from triggering anything else
+    
+    if (!user) {
+      alert("Please sign in to save courses!");
+      return;
+    }
+
+    setLoading(true);
+
+    if (isSaved) {
+      // Remove from saved_courses
+      await supabase
+        .from('saved_courses')
+        .delete()
+        .eq('user_id', user.id)
+        .eq('course_id', course.id);
+      setIsSaved(false);
+    } else {
+      // Add to saved_courses
+      await supabase
+        .from('saved_courses')
+        .insert({ user_id: user.id, course_id: course.id });
+      setIsSaved(true);
+    }
+
+    setLoading(false);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       whileHover={{ y: -8 }}
-      className="bg-surface-container-highest rounded-2xl overflow-hidden ghost-border group transition-all duration-300 editorial-shadow"
+      className="bg-surface-container-highest rounded-2xl overflow-hidden ghost-border group transition-all duration-300 editorial-shadow relative flex flex-col h-full"
     >
-      <div className="aspect-video relative overflow-hidden">
+      <div className="aspect-video relative overflow-hidden shrink-0">
         <img
           src={course.image}
           alt={course.title}
@@ -154,13 +627,24 @@ const CourseCard = ({ course }: { course: Course }) => {
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute top-4 left-4">
-          <span className="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[0.6875rem] uppercase tracking-wider font-bold">
+          <span className="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[0.6875rem] uppercase tracking-wider font-bold shadow-md">
             {course.level}
           </span>
         </div>
+        
+        {/* THE NEW HEART BUTTON */}
+        <button 
+          onClick={toggleSave}
+          disabled={loading}
+          className="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface-container-lowest/50 backdrop-blur-md flex items-center justify-center hover:bg-surface-container-lowest transition-colors shadow-md disabled:opacity-50"
+        >
+          <Heart 
+            className={`w-5 h-5 transition-colors ${isSaved ? 'fill-red-500 text-red-500' : 'text-white'}`} 
+          />
+        </button>
       </div>
 
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-grow">
         <div className="flex items-center justify-between mb-4">
           <span className="text-[0.6875rem] uppercase tracking-[0.05em] text-primary font-bold">
             {course.provider}
@@ -174,7 +658,7 @@ const CourseCard = ({ course }: { course: Course }) => {
         <h3 className="text-xl font-bold mb-3 leading-tight text-on-surface group-hover:text-primary transition-colors">
           {course.title}
         </h3>
-        <p className="text-sm text-on-surface-variant mb-6 line-clamp-2 leading-relaxed">
+        <p className="text-sm text-on-surface-variant mb-6 line-clamp-2 leading-relaxed flex-grow">
           {course.description}
         </p>
 
@@ -182,7 +666,7 @@ const CourseCard = ({ course }: { course: Course }) => {
           href={course.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full py-3 rounded-xl bg-surface-container-high border border-outline/20 text-primary font-bold hover:bg-primary hover:text-on-primary transition-all duration-200 block text-center"
+          className="w-full py-3 rounded-xl bg-surface-container-high border border-outline/20 text-primary font-bold hover:bg-primary hover:text-on-primary transition-all duration-200 block text-center mt-auto"
         >
           View Course
         </a>
@@ -195,52 +679,68 @@ export default CourseCard;
 </file>
 
 <file path="src/components/Navbar.tsx">
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+// src/components/Navbar.tsx
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+
+const NAV_LINKS = [
+  { label: 'Explore', to: '/' },
+  { label: 'Categories', to: '/categories' },
+  { label: 'My learning', to: '/my-learning'},
+  { label: 'Questionnaire', to: '/questionnaire'},
+  { label: 'About', to: '/' }
+  
+];
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
 
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   return (
-    <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'glass-nav py-3 shadow-lg' : 'bg-transparent py-5'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-8 flex items-center justify-between">
-        <Link to="/" className="text-2xl font-bold tracking-tighter text-on-surface">
+    <header className="navbar fixed top-0 left-0 right-0 z-50">
+      <div className="layout-container flex items-center justify-between gap-6">
+        <Link to="/" className="text-primary font-semibold text-lg">
           EduFinder
         </Link>
 
-        <nav className="hidden md:flex items-center gap-10">
-          <Link to="/" className={`font-medium relative group ${location.pathname === '/' ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}>
-            Explore
-            {location.pathname === '/' && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full" />}
-          </Link>
-          <Link to="/categories" className={`font-medium relative group ${location.pathname === '/categories' ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}>
-            Categories
-            {location.pathname === '/categories' && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full" />}
-          </Link>
-          <Link to="/questionnaire" className={`font-medium relative group ${location.pathname === '/questionnaire' ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}>
-            Questionnaire
-            {location.pathname === '/questionnaire' && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full" />}
-          </Link>
-          <a href="#" className="text-on-surface-variant hover:text-on-surface transition-colors font-medium">
-            My Learning
-          </a>
+        <nav className="hidden md:flex items-center gap-6">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.label}
+              to={link.to}
+              className={`nav-link ${location.pathname === link.to ? 'active' : ''}`}
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        <div className="flex items-center gap-4">
-          <button className="px-6 py-2.5 rounded-xl primary-gradient text-on-primary font-bold active:scale-95 transition-all duration-200 editorial-shadow">
-            Sign In
-          </button>
+        <div className="flex items-center gap-3">
+          {!user ? (
+            <>
+              <Link to="/auth" className="nav-link">
+                Sign in
+              </Link>
+             <Link to="/auth?mode=signup" className="btn-primary">
+  Get Started
+</Link>
+            </>
+          ) : (
+            <div className="flex items-center gap-3">
+              <span className="text-secondary hidden md:block text-sm">
+                {user.email}
+              </span>
+              <button type="button" onClick={handleSignOut} className="btn-secondary">
+                Sign Out
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </header>
@@ -250,163 +750,289 @@ const Navbar = () => {
 export default Navbar;
 </file>
 
-<file path="src/constants.ts">
-import { Terminal, Briefcase, FlaskConical, Palette, Languages, Theater, Megaphone, Heart, User, Calculator, Music, Camera } from 'lucide-react';
-import { Category, Course } from './types';
+<file path="src/index.css">
+@import "tailwindcss";
 
-export const CATEGORIES: Category[] = [
-  { id: 'tech', name: 'Tech', icon: Terminal, description: 'Coding, AI, Cybersecurity, and Cloud Computing.' },
-  { id: 'business', name: 'Business', icon: Briefcase, description: 'Entrepreneurship, Finance, and Management.' },
-  { id: 'science', name: 'Science', icon: FlaskConical, description: 'Physics, Biology, Chemistry, and Astronomy.' },
-  { id: 'design', name: 'Design', icon: Palette, description: 'UI/UX, Graphic Design, and Motion Graphics.' },
-  { id: 'languages', name: 'Languages', icon: Languages, description: 'Spanish, French, Mandarin, and more.' },
-  { id: 'arts', name: 'Arts', icon: Theater, description: 'History, Literature, and Philosophy.' },
-  { id: 'marketing', name: 'Marketing', icon: Megaphone, description: 'Digital Marketing, SEO, and Brand Strategy.' },
-  { id: 'health', name: 'Health', icon: Heart, description: 'Nutrition, Fitness, and Mental Wellness.' },
-  { id: 'personal-dev', name: 'Personal Dev', icon: User, description: 'Productivity, Leadership, and Soft Skills.' },
-  { id: 'math', name: 'Math', icon: Calculator, description: 'Calculus, Statistics, and Discrete Math.' },
-  { id: 'music', name: 'Music', icon: Music, description: 'Theory, Production, and Instrument Mastery.' },
-  { id: 'photography', name: 'Photography', icon: Camera, description: 'Composition, Lighting, and Post-Processing.' },
-];
+:root {
+  --bg-main: #0B0F14;
+  --bg-surface: #12171D;
+  --bg-elevated: #171C23;
+  --border-subtle: #252B33;
 
-export const POPULAR_COURSES: Course[] = [
-  {
-    id: '1',
-    title: 'Neural Networks 101',
-    provider: 'Coursera',
-    duration: '24h total',
-    level: 'Intermediate',
-    description: 'Master the fundamentals of deep learning and backpropagation from industry experts.',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800',
-    categoryId: 'tech',
-    url: 'https://www.coursera.org/learn/neural-networks-deep-learning',
-  },
-  {
-    id: '2',
-    title: 'UX Design Principles',
-    provider: 'edX',
-    duration: '12h total',
-    level: 'Beginner',
-    description: 'Learn how to create user-centric experiences through research and rapid prototyping.',
-    image: 'https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&q=80&w=800',
-    categoryId: 'design',
-    url: 'https://www.edx.org/learn/user-experience-design',
-  },
-  {
-    id: '3',
-    title: 'Microeconomics Masterclass',
-    provider: 'Khan Academy',
-    duration: '40h total',
-    level: 'Advanced',
-    description: 'A deep dive into supply, demand, and market equilibrium for serious students.',
-    image: 'https://images.unsplash.com/photo-1611974717537-484418a4122a?auto=format&fit=crop&q=80&w=800',
-    categoryId: 'business',
-    url: 'https://www.khanacademy.org/economics-finance-domain/microeconomics',
-  },
-  {
-    id: '4',
-    title: 'Creative Writing 101',
-    provider: 'FutureLearn',
-    duration: '8h total',
-    level: 'Beginner',
-    description: 'Unlock your storytelling potential through guided exercises and peer feedback.',
-    image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=800',
-    categoryId: 'arts',
-    url: 'https://www.futurelearn.com/courses/creative-writing',
-  },
-  {
-    id: '5',
-    title: 'Python for Data Science',
-    provider: 'Coursera',
-    duration: '30h total',
-    level: 'Beginner',
-    description: 'Start your journey into data analysis with Python, NumPy, and Pandas.',
-    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=800',
-    categoryId: 'tech',
-    url: 'https://www.coursera.org/learn/python-for-applied-data-science',
-  },
-  {
-    id: '6',
-    title: 'Digital Marketing Strategy',
-    provider: 'Google',
-    duration: '15h total',
-    level: 'Beginner',
-    description: 'Learn the core pillars of digital marketing: SEO, SEM, and Social Media.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
-    categoryId: 'marketing',
-    url: 'https://grow.google/certificates/digital-marketing-ecommerce/',
-  },
-  {
-    id: '7',
-    title: 'Introduction to Astronomy',
-    provider: 'edX',
-    duration: '20h total',
-    level: 'Beginner',
-    description: 'Explore the wonders of the universe, from planets to distant galaxies.',
-    image: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=800',
-    categoryId: 'science',
-    url: 'https://www.edx.org/learn/astronomy',
-  },
-  {
-    id: '8',
-    title: 'Financial Markets',
-    provider: 'Yale University',
-    duration: '35h total',
-    level: 'Intermediate',
-    description: 'An overview of the ideas, methods, and institutions that permit human society to manage risks.',
-    image: 'https://images.unsplash.com/photo-1611974717537-484418a4122a?auto=format&fit=crop&q=80&w=800',
-    categoryId: 'business',
-    url: 'https://www.coursera.org/learn/financial-markets-global',
-  },
-  {
-    id: '9',
-    title: 'Cloud Computing Fundamentals',
-    provider: 'AWS',
-    duration: '10h total',
-    level: 'Beginner',
-    description: 'Learn the basics of cloud computing, storage, and networking on AWS.',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800',
-    categoryId: 'tech',
-    url: 'https://aws.amazon.com/training/digital/cloud-practitioner-essentials/',
-  },
-  {
-    id: '10',
-    title: 'Cybersecurity for Everyone',
-    provider: 'IBM',
-    duration: '18h total',
-    level: 'Beginner',
-    description: 'Protect yourself and your organization from cyber threats with this comprehensive guide.',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800',
-    categoryId: 'tech',
-    url: 'https://www.coursera.org/specializations/cybersecurity',
-  },
-  {
-    id:'11',
-    title: 'Computer architecture',
-    provider: 'IBM',
-    duration: '20h total',
-    level: 'Beginner',
-    description: 'indepth understanding of computer systems',
-    image: 'https://images.unsplash.com/photo-1760539165425-f76a6da1e50e?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    categoryId: 'tech',
-    url: ''
+  --text-primary: #E5E7EB;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
 
-  }
-];
+  --accent: #4F46E5;
+  --accent-hover: #4338CA;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: white;
+}
+
+.layout-container {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-block {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.card-hover {
+  transition: transform 150ms ease, border-color 150ms ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  border-color: #313942;
+}
+
+.bg-main {
+  background: var(--bg-main);
+}
+
+.bg-surface {
+  background: var(--bg-surface);
+}
+
+.bg-elevated {
+  background: var(--bg-elevated);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.border-border-subtle {
+  border-color: var(--border-subtle);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: white;
+  border-radius: 10px;
+  padding: 10px 16px;
+  border: none;
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--accent-hover);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.input-field {
+  width: 100%;
+  background: #0F141A;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border-color 150ms ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.tab-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.tab-pill-active {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+.breadcrumb {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.navbar {
+  height: 64px;
+  background: var(--bg-main);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.05;
+  margin: 0;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+p,
+label,
+button,
+input,
+select,
+textarea {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+</file>
+
+<file path="src/lib/supabase.ts">
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+</file>
+
+<file path="src/main.tsx">
+// src/main.tsx
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import { AuthProvider } from './contexts/AuthContext.tsx'; // ADD THIS
+import './index.css';
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <AuthProvider> {/* WRAP APP WITH THIS */}
+      <App />
+    </AuthProvider>
+  </StrictMode>,
+);
 </file>
 
 <file path="src/pages/CategoriesPage.tsx">
-import { useEffect } from 'react';
+// src/pages/CategoriesPage.tsx
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
-import { CATEGORIES } from '../constants';
+import { ArrowLeft, Loader2 } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+import { Category } from '../types';
 import CategoryCard from '../components/CategoryCard';
 
+const TABS = ["All", "Tech", "Business", "Design", "Health"];
+
 const CategoriesPage = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [activeTab, setActiveTab] = useState("All");
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Fetch categories from Supabase!
+    const fetchCategories = async () => {
+      const { data, error } = await supabase.from('categories').select('*');
+      if (data) setCategories(data);
+      setLoading(false);
+    };
+
+    fetchCategories();
   }, []);
+
+  if (loading) {
+    return <div className="pt-48 flex justify-center"><Loader2 className="animate-spin w-8 h-8 text-primary" /></div>;
+  }
+
+  const filteredCategories = activeTab === "All" 
+    ? categories 
+    : categories.filter(cat => 
+        cat.name.toLowerCase().includes(activeTab.toLowerCase())
+      );
 
   return (
     <motion.div
@@ -417,17 +1043,29 @@ const CategoriesPage = () => {
     >
       <div className="mb-16">
         <Link to="/" className="text-primary hover:underline flex items-center gap-2 mb-6 font-semibold">
-          <ArrowLeft className="w-5 h-5" />
-          Back to Home
+          <ArrowLeft className="w-5 h-5" /> Back to Home
         </Link>
         <h1 className="text-6xl font-bold tracking-tight mb-4">All Categories</h1>
-        <p className="text-xl text-on-surface-variant max-w-2xl">
-          Explore our complete catalog of free educational resources across every major discipline.
-        </p>
+        
+        <div className="flex gap-4 mt-8 overflow-x-auto pb-2">
+          {TABS.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-6 py-2 rounded-full border transition-all whitespace-nowrap ${
+                activeTab === tab 
+                  ? "bg-primary text-on-primary border-primary" 
+                  : "border-outline hover:bg-surface-container-high"
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {CATEGORIES.map((cat) => (
+        {filteredCategories.map((cat) => (
           <CategoryCard key={cat.id} category={cat} />
         ))}
       </div>
@@ -439,41 +1077,76 @@ export default CategoriesPage;
 </file>
 
 <file path="src/pages/CategoryDetailPage.tsx">
-import { useEffect, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Sparkles } from 'lucide-react';
-import { CATEGORIES, POPULAR_COURSES } from '../constants';
-import CategoryCard from '../components/CategoryCard';
+import { ArrowLeft, Sparkles, Loader2 } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+import { Category, Course } from '../types';
+import { getIconComponent } from '../lib/iconMap';
 import CourseCard from '../components/CourseCard';
 
 const CategoryDetailPage = () => {
   const { id } = useParams<{ id: string }>();
+  const [category, setCategory] = useState<Category | null>(null);
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setLoading(true); // Reset loading when ID changes
+    
+    const fetchCategoryAndCourses = async () => {
+      if (!id) return;
+
+      // Fetch the single category
+      const { data: catData } = await supabase
+        .from('categories')
+        .select('*')
+        .eq('id', id)
+        .single();
+      
+      if (catData) setCategory(catData);
+
+      // Fetch courses WHERE category_id matches!
+      const { data: courseData } = await supabase
+        .from('courses')
+        .select('*')
+        .eq('category_id', id);
+        
+      if (courseData) setCourses(courseData);
+      
+      setLoading(false);
+    };
+
+    fetchCategoryAndCourses();
   }, [id]);
 
-  const category = useMemo(() => CATEGORIES.find(c => c.id === id), [id]);
-  const courses = useMemo(() => POPULAR_COURSES.filter(c => c.categoryId === id), [id]);
+  if (loading) {
+    return (
+      <div className="pt-48 flex justify-center min-h-screen">
+        <Loader2 className="animate-spin w-10 h-10 text-primary" />
+      </div>
+    );
+  }
 
   if (!category) {
     return (
-      <div className="pt-48 pb-32 px-8 text-center">
+      <div className="pt-48 pb-32 px-8 text-center min-h-screen">
         <h1 className="text-4xl font-bold mb-4">Category not found</h1>
         <Link to="/categories" className="text-primary hover:underline">View all categories</Link>
       </div>
     );
   }
 
-  const Icon = category.icon;
+  const Icon = getIconComponent(category.icon_name);
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="pt-48 pb-32 px-8 max-w-7xl mx-auto"
+      className="pt-48 pb-32 px-8 max-w-7xl mx-auto min-h-screen"
     >
       <div className="mb-16">
         <Link to="/categories" className="text-primary hover:underline flex items-center gap-2 mb-6 font-semibold">
@@ -504,7 +1177,7 @@ const CategoryDetailPage = () => {
           <Sparkles className="w-12 h-12 text-primary/40 mx-auto mb-6" />
           <h3 className="text-2xl font-bold mb-2">More courses coming soon</h3>
           <p className="text-on-surface-variant mb-8">We're currently indexing the best free {category.name} courses for you.</p>
-          <Link to="/categories" className="px-8 py-3 rounded-xl primary-gradient text-on-primary font-bold inline-block">
+          <Link to="/categories" className="px-8 py-3 rounded-xl primary-gradient text-on-primary font-bold inline-block hover:opacity-90 transition-opacity">
             Explore Other Categories
           </Link>
         </div>
@@ -517,14 +1190,45 @@ export default CategoryDetailPage;
 </file>
 
 <file path="src/pages/HomePage.tsx">
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search, ShieldCheck, Layout, ChevronRight } from 'lucide-react';
-import { CATEGORIES, POPULAR_COURSES } from '../constants';
+import { Search, ShieldCheck, Layout, ChevronRight, Loader2 } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+import { Category, Course } from '../types';
 import CategoryCard from '../components/CategoryCard';
 import CourseCard from '../components/CourseCard';
 
 const HomePage = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Fetch data from our Supabase tables
+      const [catResponse, courseResponse] = await Promise.all([
+        supabase.from('categories').select('*').limit(6),
+        supabase.from('courses').select('*').limit(4)
+      ]);
+
+      if (catResponse.data) setCategories(catResponse.data);
+      if (courseResponse.data) setCourses(courseResponse.data);
+      
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="animate-spin w-10 h-10 text-primary" />
+      </div>
+    );
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -597,7 +1301,7 @@ const HomePage = () => {
             <input
               type="text"
               placeholder="What do you want to learn today?"
-              className="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-on-surface-variant/40 py-5 px-4 text-xl"
+              className="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-on-surface-variant/40 py-5 px-4 text-xl outline-none"
             />
             <button className="hidden md:block px-10 py-4 rounded-xl primary-gradient text-on-primary font-bold active:scale-95 transition-all duration-200 whitespace-nowrap mr-1">
               Find Courses
@@ -638,7 +1342,7 @@ const HomePage = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {CATEGORIES.slice(0, 6).map((cat) => (
+            {categories.map((cat) => (
               <CategoryCard key={cat.id} category={cat} />
             ))}
           </div>
@@ -655,7 +1359,7 @@ const HomePage = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {POPULAR_COURSES.slice(0, 4).map((course) => (
+          {courses.map((course) => (
             <CourseCard key={course.id} course={course} />
           ))}
         </div>
@@ -680,9 +1384,9 @@ const HomePage = () => {
               Join millions of learners indexing the world's knowledge. No credit card required, ever.
             </p>
             <div className="flex flex-col md:flex-row gap-6 justify-center">
-              <button className="px-12 py-5 rounded-2xl primary-gradient text-on-primary font-bold text-lg active:scale-95 transition-all editorial-shadow">
+              <Link to="/auth" className="px-12 py-5 rounded-2xl primary-gradient text-on-primary font-bold text-lg active:scale-95 transition-all editorial-shadow">
                 Create Free Account
-              </button>
+              </Link>
               <Link to="/categories" className="px-12 py-5 rounded-2xl bg-surface-container-highest border border-outline/20 text-on-surface font-bold text-lg hover:bg-surface-bright transition-all inline-flex items-center justify-center">
                 Browse All Categories
               </Link>
@@ -701,6 +1405,9 @@ export default HomePage;
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Loader2, Lock } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 
 interface SurveyAnswers {
   category: string;
@@ -710,8 +1417,6 @@ interface SurveyAnswers {
   goal: string;
   experience: 'None' | 'Minor' | 'Familiar' | 'Expert' | '';
 }
-
-const STORAGE_KEY = 'edufinder_questionnaire';
 
 const defaultAnswers: SurveyAnswers = {
   category: '',
@@ -723,31 +1428,101 @@ const defaultAnswers: SurveyAnswers = {
 };
 
 const QuestionnairePage = () => {
+  const { user } = useAuth(); // Get the logged-in user!
   const [answers, setAnswers] = useState<SurveyAnswers>(defaultAnswers);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
+  // Fetch existing profile data when the page loads
   useEffect(() => {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      try {
-        setAnswers(JSON.parse(raw));
-      } catch {
-        localStorage.removeItem(STORAGE_KEY);
+    const fetchProfile = async () => {
+      if (!user) {
+        setLoading(false);
+        return;
       }
-    }
-  }, []);
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+      const { data, error } = await supabase
+        .from('user_profiles')
+        .select('*')
+        .eq('user_id', user.id)
+        .single();
+
+      if (data) {
+        // Map database snake_case back to our frontend camelCase
+        setAnswers({
+          category: data.category || '',
+          skillLevel: data.skill_level || '',
+          reason: data.reason || '',
+          weeklyHours: data.weekly_hours || 5,
+          goal: data.goal || '',
+          experience: data.experience || '',
+        });
+      }
+      setLoading(false);
+    };
+
+    fetchProfile();
+  }, [user]);
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
-    setSaved(true);
+    if (!user) return;
+
+    setSaving(true);
+    setSaved(false);
+
+    // Upsert means: "Insert if it doesn't exist, Update if it does"
+    const { error } = await supabase.from('user_profiles').upsert({
+      user_id: user.id,
+      category: answers.category,
+      skill_level: answers.skillLevel,
+      reason: answers.reason,
+      weekly_hours: answers.weeklyHours,
+      goal: answers.goal,
+      experience: answers.experience,
+      updated_at: new Date().toISOString(),
+    });
+
+    setSaving(false);
+    
+    if (!error) {
+      setSaved(true);
+      // Hide the "Saved!" message after 3 seconds
+      setTimeout(() => setSaved(false), 3000);
+    } else {
+      alert('Error saving preferences: ' + error.message);
+    }
   };
 
   const reset = () => {
     setAnswers(defaultAnswers);
-    localStorage.removeItem(STORAGE_KEY);
     setSaved(false);
   };
+
+  if (loading) {
+    return <div className="pt-48 min-h-screen flex justify-center"><Loader2 className="animate-spin w-10 h-10 text-primary" /></div>;
+  }
+
+  // Protect the route: Don't let them fill it out if they aren't logged in
+  if (!user) {
+    return (
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-48 pb-32 px-8 max-w-2xl mx-auto text-center min-h-screen">
+        <div className="bg-surface-container-high rounded-3xl p-12 shadow-xl border border-outline-variant/20">
+          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Lock className="w-8 h-8 text-primary" />
+          </div>
+          <h2 className="text-3xl font-bold mb-4 text-on-surface">Sign in to save your path</h2>
+          <p className="text-on-surface-variant mb-8 leading-relaxed">
+            Create a free account to take the questionnaire and receive personalized course recommendations tailored to your goals.
+          </p>
+          <Link to="/auth" className="px-8 py-4 rounded-xl primary-gradient text-on-primary font-bold active:scale-95 transition-all inline-block">
+            Sign In / Sign Up
+          </Link>
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -773,7 +1548,7 @@ const QuestionnairePage = () => {
             id="category"
             value={answers.category}
             onChange={(e) => setAnswers((prev) => ({ ...prev, category: e.target.value }))}
-            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface"
+            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
             required
           >
             <option value="">Select a category</option>
@@ -795,7 +1570,7 @@ const QuestionnairePage = () => {
             id="skillLevel"
             value={answers.skillLevel}
             onChange={(e) => setAnswers((prev) => ({ ...prev, skillLevel: e.target.value as SurveyAnswers['skillLevel'] }))}
-            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface"
+            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
             required
           >
             <option value="">Select level</option>
@@ -814,17 +1589,18 @@ const QuestionnairePage = () => {
             onChange={(e) => setAnswers((prev) => ({ ...prev, weeklyHours: Number(e.target.value) }))}
             min={1}
             max={40}
-            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface"
+            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
             required
           />
         </div>
-          <div>
+          
+        <div>
           <label className="block text-sm font-bold mb-2" htmlFor="reason">Reason for learning</label>
           <select
             id="reason"
             value={answers.reason}
             onChange={(e) => setAnswers((prev) => ({ ...prev, reason: e.target.value as SurveyAnswers['reason'] }))}
-            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface"
+            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
             required
           >
             <option value="">Select reason</option>
@@ -834,13 +1610,13 @@ const QuestionnairePage = () => {
           </select>
         </div>
          
-         <div>
+        <div>
           <label className="block text-sm font-bold mb-2" htmlFor="experience">Experience level</label>
           <select
             id="experience"
             value={answers.experience}
             onChange={(e) => setAnswers((prev) => ({ ...prev, experience: e.target.value as SurveyAnswers['experience'] }))}
-            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface"
+            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
             required
           >
             <option value="">Select experience</option>
@@ -851,10 +1627,6 @@ const QuestionnairePage = () => {
           </select>
         </div>
 
-
-
- 
-
         <div>
           <label className="block text-sm font-bold mb-2" htmlFor="goal">Learning goal</label>
           <textarea
@@ -862,329 +1634,45 @@ const QuestionnairePage = () => {
             value={answers.goal}
             onChange={(e) => setAnswers((prev) => ({ ...prev, goal: e.target.value }))}
             rows={4}
-            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface"
+            className="w-full rounded-xl border border-outline/20 p-3 bg-surface-container-highest text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
             placeholder="e.g. build a portfolio project, land a job, improve data analytics"
             required
           />
         </div>
 
-        <div className="flex flex-col md:flex-row gap-3">
-          <button type="submit" className="px-6 py-3 rounded-xl primary-gradient text-on-primary font-bold transition-all hover:opacity-95">
-            Save Answers
+        <div className="flex flex-col md:flex-row items-center gap-4 pt-4">
+          <button 
+            type="submit" 
+            disabled={saving}
+            className="w-full md:w-auto px-8 py-3 rounded-xl primary-gradient text-on-primary font-bold transition-all hover:opacity-95 disabled:opacity-70 flex items-center justify-center min-w-[160px]"
+          >
+            {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Save Answers'}
           </button>
-          <button type="button" onClick={reset} className="px-6 py-3 rounded-xl bg-surface-container-high border border-outline/20 text-on-surface font-medium hover:bg-surface-bright">
-            Reset
+          
+          <button 
+            type="button" 
+            onClick={reset} 
+            className="w-full md:w-auto px-8 py-3 rounded-xl bg-surface-container-highest border border-outline/20 text-on-surface font-medium hover:bg-surface-bright transition-all"
+          >
+            Clear Form
           </button>
+
+          {saved && (
+            <motion.span 
+              initial={{ opacity: 0, x: -10 }} 
+              animate={{ opacity: 1, x: 0 }} 
+              className="text-sm text-primary font-bold flex items-center gap-2"
+            >
+              🎉 Profile updated successfully!
+            </motion.span>
+          )}
         </div>
-
-        {saved && (
-          <p className="text-sm text-primary font-medium">Saved! Your preferences are now stored and ready for recommendations.</p>
-        )}
       </form>
-      
-
     </motion.div>
   );
 };
 
 export default QuestionnairePage;
-</file>
-
-<file path="src/types.ts">
-export interface Course {
-  id: string;
-  title: string;
-  provider: string;
-  duration: string;
-  level: 'Beginner' | 'Intermediate' | 'Advanced';
-  description: string;
-  image: string;
-  categoryId: string;
-  url: string;
-}
-
-export interface Category {
-  id: string;
-  name: string;
-  icon: React.ElementType;
-  description: string;
-}
-</file>
-
-<file path=".env.example">
-# GEMINI_API_KEY: Required for Gemini AI API calls.
-# AI Studio automatically injects this at runtime from user secrets.
-# Users configure this via the Secrets panel in the AI Studio UI.
-GEMINI_API_KEY="MY_GEMINI_API_KEY"
-
-# APP_URL: The URL where this applet is hosted.
-# AI Studio automatically injects this at runtime with the Cloud Run service URL.
-# Used for self-referential links, OAuth callbacks, and API endpoints.
-APP_URL="MY_APP_URL"
-</file>
-
-<file path=".gitignore">
-node_modules/
-build/
-dist/
-coverage/
-.DS_Store
-*.log
-.env*
-!.env.example
-</file>
-
-<file path="index.html">
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
-</file>
-
-<file path="metadata.json">
-{
-  "name": "EduFinder",
-  "description": "Discover thousands of free courses from Coursera, edX, Khan Academy, and FutureLearn in one place.",
-  "requestFramePermissions": []
-}
-</file>
-
-<file path="package.json">
-{
-  "name": "react-example",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
-    "preview": "vite preview",
-    "clean": "rm -rf dist",
-    "lint": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@google/genai": "^1.29.0",
-    "@tailwindcss/vite": "^4.1.14",
-    "@vitejs/plugin-react": "^5.0.4",
-    "dotenv": "^17.2.3",
-    "express": "^4.21.2",
-    "lucide-react": "^0.546.0",
-    "motion": "^12.23.24",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^7.13.2",
-    "vite": "^6.2.0"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/node": "^22.14.0",
-    "@types/react": "^19.2.14",
-    "autoprefixer": "^10.4.21",
-    "tailwindcss": "^4.1.14",
-    "tsx": "^4.21.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
-  }
-}
-</file>
-
-<file path="README.md">
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
-
-# Run and deploy your AI Studio app
-
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/4f02ea99-4a29-4d73-93e0-7f430a354365
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
-</file>
-
-<file path="src/App.tsx">
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import { Globe, Share2 } from 'lucide-react';
-import Navbar from './components/Navbar';
-import HomePage from './pages/HomePage';
-import CategoriesPage from './pages/CategoriesPage';
-import CategoryDetailPage from './pages/CategoryDetailPage';
-import QuestionnairePage from './pages/Questionaire';
-
-export default function App() {
-  return (
-    <BrowserRouter>
-      <div className="min-h-screen">
-        <Navbar />
-
-        <main>
-          <AnimatePresence mode="wait">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/categories" element={<CategoriesPage />} />
-              <Route path="/category/:id" element={<CategoryDetailPage />} />
-              <Route path="/questionnaire" element={<QuestionnairePage />} />
-            </Routes>
-          </AnimatePresence>
-        </main>
-
-        {/* Footer */}
-        <footer className="bg-surface-container-low border-t border-outline-variant/10 py-20 px-8">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-            <div className="text-center md:text-left">
-              <Link to="/" className="text-xl font-bold text-on-surface mb-3 tracking-tighter block">EduFinder</Link>
-              <p className="text-on-surface-variant/50 text-[0.75rem] uppercase tracking-[0.1em] font-medium">
-                © 2026 EduFinder • Built with Passion
-              </p>
-            </div>
-
-            <div className="flex gap-16 font-medium text-[0.75rem] uppercase tracking-[0.15em]">
-              <a href="#" className="text-on-surface-variant/60 hover:text-on-surface transition-colors">About</a>
-              <Link to="/categories" className="text-on-surface-variant/60 hover:text-on-surface transition-colors">Categories</Link>
-              <a href="#" className="text-on-surface-variant/60 hover:text-on-surface transition-colors">Privacy</a>
-            </div>
-
-            <div className="flex gap-4">
-              <button className="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-dim hover:bg-primary hover:text-on-primary transition-all duration-300">
-                <Globe className="w-5 h-5" />
-              </button>
-              <button className="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-dim hover:bg-primary hover:text-on-primary transition-all duration-300">
-                <Share2 className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </footer>
-      </div>
-    </BrowserRouter>
-  );
-}
-</file>
-
-<file path="src/index.css">
-@import "tailwindcss";
-
-@theme {
-  --color-surface-dim: #060e20;
-  --color-surface-bright: #1f2b49;
-  --color-surface-container-lowest: #000000;
-  --color-surface-container-low: #091328;
-  --color-surface-container: #0f1930;
-  --color-surface-container-high: #141f38;
-  --color-surface-container-highest: #192540;
-  
-  --color-on-surface: #dee5ff;
-  --color-on-surface-variant: #a3aac4;
-  
-  --color-primary: #85adff;
-  --color-primary-dim: #699cff;
-  --color-primary-container: #6e9fff;
-  --color-on-primary: #002c66;
-  
-  --color-secondary: #8097ff;
-  --color-secondary-container: #213da1;
-  --color-on-secondary-container: #c5ceff;
-  
-  --color-tertiary: #fbabff;
-  --color-outline: #6d758c;
-  --color-outline-variant: #40485d;
-
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-}
-
-@layer utilities {
-  .glass-nav {
-    background: rgba(6, 14, 32, 0.6);
-    backdrop-filter: blur(24px);
-  }
-  
-  .editorial-shadow {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  }
-  
-  .ghost-border {
-    outline: 1px solid rgba(64, 72, 93, 0.15);
-  }
-  
-  .primary-gradient {
-    background: linear-gradient(135deg, #85adff 0%, #6e9fff 100%);
-  }
-}
-
-body {
-  @apply bg-surface-dim text-on-surface font-sans antialiased selection:bg-primary-container selection:text-on-primary;
-}
-
-/* Custom scrollbar for a premium feel */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-surface-dim;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-surface-container-highest rounded-full hover:bg-outline/50 transition-colors;
-}
-</file>
-
-<file path="src/main.tsx">
-import {StrictMode} from 'react';
-import {createRoot} from 'react-dom/client';
-import App from './App.tsx';
-import './index.css';
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-);
-</file>
-
-<file path="TODO.md">
-# EduFinder Project Roadmap
-
-## 🚀 Immediate Tasks
-- [ ] **Tech Category**: Add 5+ more courses to reach a full grid.
-- [ ] **Data Fix**: Update Course ID `11` (Computer architecture) with a valid provider URL.
-- [ ] **Empty Categories**: Add placeholder courses for "Health", "Math", and "Music" to remove the "coming soon" state.
-
-## 🛠️ Feature Backlog
-- [ ] **Search Logic**: Implement the filter function in `HomePage` to make the search bar functional.
-- [ ] **Favorites System**: Allow users to "Heart" a course and save it to `localStorage`.
-- [ ] **Course Sharing**: Use the Web Share API on the `Share2` icon in the footer/cards.
-
-## 🧹 Refactoring & Code Quality
-- [ ] **Data Separation**: Move `POPULAR_COURSES` and `CATEGORIES` from `App.tsx` to `src/data/courses.ts` to keep the main file clean.
-- [ ] **Componentization**: Move `Navbar`, `CourseCard`, and `CategoryCard` into a `src/components/` directory.
-- [ ] **Image Optimization**: Implement lazy loading for course images to improve performance as the list grows.
-
-## 📝 Notes
-- Always use `target="_blank"` and `rel="noopener noreferrer"` for external course links.
-- Maintain consistent image aspect ratios (16:9) for the `CourseCard` thumbnails.
 </file>
 
 <file path="tsconfig.json">
@@ -1205,6 +1693,7 @@ createRoot(document.getElementById('root')!).render(
     "moduleDetection": "force",
     "allowJs": true,
     "jsx": "react-jsx",
+    "types": ["vite/client"],
     "paths": {
       "@/*": [
         "./*"
@@ -1216,31 +1705,114 @@ createRoot(document.getElementById('root')!).render(
 }
 </file>
 
-<file path="vite.config.ts">
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
-import {defineConfig, loadEnv} from 'vite';
+<file path="package.json">
+{
+  "name": "react-example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "clean": "rm -rf dist",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^1.29.0",
+    "@supabase/supabase-js": "^2.103.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.13.2",
+    "vite": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.4.21",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}
+</file>
 
-export default defineConfig(({mode}) => {
-  const env = loadEnv(mode, '.', '');
-  return {
-    plugins: [react(), tailwindcss()],
-    define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
-    },
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
-    },
-    server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
-      hmr: process.env.DISABLE_HMR !== 'true',
-    },
-  };
-});
+<file path="src/App.tsx">
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import Navbar from './components/Navbar';
+import HomePage from './pages/HomePage';
+import CategoriesPage from './pages/CategoriesPage';
+import CategoryDetailPage from './pages/CategoryDetailPage';
+import QuestionnairePage from './pages/Questionaire';
+import AuthPage from './pages/AuthPage';
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-main text-primary">
+        <Navbar />
+
+        <main className="pt-24">
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/categories" element={<CategoriesPage />} />
+              <Route path="/category/:id" element={<CategoryDetailPage />} />
+              <Route path="/questionnaire" element={<QuestionnairePage />} />
+              <Route path="/auth" element={<AuthPage />} />
+            </Routes>
+          </AnimatePresence>
+        </main>
+
+        <footer className="bg-main border-t border-border-subtle py-20">
+          <div className="layout-container flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+              <Link to="/" className="text-xl font-semibold text-primary tracking-tight">
+                EduFinder
+              </Link>
+              <p className="text-muted text-xs uppercase tracking-[0.2em] mt-2">
+                © 2026 EduFinder • Built for focused learning
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-6 text-sm text-secondary">
+              <Link to="/categories" className="nav-link">
+                Categories
+              </Link>
+              <Link to="/categories" className="nav-link">
+                My Courses
+              </Link>
+              <Link to="/" className="nav-link">
+                About
+              </Link>
+              <Link to="/questionnaire" className='nav-link'>
+                Questionnaire
+              </Link>
+            </div>
+
+
+            
+          </div>
+        </footer>
+      </div>
+    </BrowserRouter>
+  );
+}
 </file>
 
 </files>
