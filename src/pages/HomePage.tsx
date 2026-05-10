@@ -44,7 +44,7 @@ const HomePage = () => {
           .from('user_profiles')
           .select('category, skill_level')
           .eq('user_id', user.id)
-          .single();
+          .maybeSingle();
 
         if (profileError) {
           console.error('Profile fetch failed', profileError);
